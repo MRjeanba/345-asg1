@@ -1,7 +1,7 @@
 # COMP 345 ASSIGNMENT 1
 
 ## project structure:
-- Driver.cpp
+- driver.cpp
   
 - Models/
   * (our model classes here e.g:character,item,item container etc...)
