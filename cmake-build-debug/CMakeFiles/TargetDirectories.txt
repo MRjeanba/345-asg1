@@ -1,0 +1,3 @@
+C:/Users/jeanb/OneDrive/Bureau/JB's stuff/University/Winter 2024/COMP 345 - C++/345-asg1/cmake-build-debug/CMakeFiles/345_asg1.dir
+C:/Users/jeanb/OneDrive/Bureau/JB's stuff/University/Winter 2024/COMP 345 - C++/345-asg1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/jeanb/OneDrive/Bureau/JB's stuff/University/Winter 2024/COMP 345 - C++/345-asg1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
