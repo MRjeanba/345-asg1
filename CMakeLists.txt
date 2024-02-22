@@ -3,4 +3,6 @@ project(345_asg1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(345_asg1 main.cpp)
+add_executable(345_asg1 main.cpp
+        Models/Item.cpp
+        Models/Item.h)
