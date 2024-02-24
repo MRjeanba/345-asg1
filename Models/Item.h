@@ -4,11 +4,18 @@
 
 #ifndef ITEM_H
 #define ITEM_H
-
-
-
-class Item {
-
+#include "EnchantmentInfo.h"
+/**
+ * \brief Contains just class definition and method signature of Item class, see Item.cpp for implementation
+ */
+class Item
+{
+private:
+ EnchantmentInfo enchantmentDetails{};
+public:
+ Item();
+ EnchantmentInfo getEnchantmentInfo();
+ void outputInfos();
 };
 
 
