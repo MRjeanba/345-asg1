@@ -9,7 +9,18 @@
 
 class Armor: Item {
 public:
+    /**
+     * \brief 
+     * \param enchantmentType 
+     * \return 
+     */
     static Armor createArmor(const std::string& enchantmentType);
+    
+
+    /**
+     * \brief 
+     * \param enchantmentType
+     */
     explicit Armor(const std::string& enchantmentType);
 };
 

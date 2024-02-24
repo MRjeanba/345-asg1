@@ -17,7 +17,7 @@ using std::invalid_argument;
  * \param enchantmentType the enchantment provided for this helmet
  * \return a new instance of a helmet
  */
-Helmet Helmet::CreateHelmet(string enchantmentType) {
+Helmet Helmet::CreateHelmet(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"Intelligence","Wisdom","ArmorClass"};
 
     // we search in the validEnchantmentTypes vector list if we have the value given as param (enchantmentType)

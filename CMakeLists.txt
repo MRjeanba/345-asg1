@@ -12,4 +12,8 @@ add_executable(345_asg1 driver.cpp
         Models/Helmet.h
         Models/Helmet.h
         Models/Armor.cpp
-        Models/Armor.h)
+        Models/Armor.h
+        Models/Shield.cpp
+        Models/Shield.h
+        Models/Ring.cpp
+        Models/Ring.h)

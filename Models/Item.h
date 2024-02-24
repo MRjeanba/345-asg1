@@ -5,8 +5,9 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include "EnchantmentInfo.h"
+
 /**
- * \brief Contains just class definition and method signature of Item class, see Item.cpp for implementation
+ * \brief
  */
 class Item
 {

@@ -12,7 +12,7 @@
 class Helmet: Item {
 public:
     explicit Helmet(const std::string& enchantmentType);
-    static Helmet CreateHelmet(std::string enchantmentType);
+    static Helmet CreateHelmet(const std::string& enchantmentType);
 };
 
 
