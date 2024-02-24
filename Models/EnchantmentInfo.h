@@ -4,6 +4,7 @@
 
 #ifndef ENCHANTMENTINFO_H
 #define ENCHANTMENTINFO_H
+#include <map>
 
 enum enchantmentTypes {
     ArmorClass,
@@ -15,6 +16,18 @@ enum enchantmentTypes {
     Dexterity,
     AttackBonus,
     DamageBonus
+};
+
+inline std::pmr::map<std::string,enchantmentTypes> stringToEnchantmentInt= {
+    {"ArmorClass",ArmorClass},
+    {"Wisdom",Wisdom},
+    {"Intelligence",Intelligence},
+    {"Strength",Strengh},
+    {"Constitution",Constitution},
+    {"Charisma",Charisma},
+    {"Dexterity",Dexterity},
+    {"AttackBonus",AttackBonus},
+    {"DamageBonus",DamageBonus},
 };
 
 /**
