@@ -13,7 +13,7 @@ class Item
 private:
  EnchantmentInfo enchantmentDetails{};
 public:
- explicit Item(std::string eType);
+ explicit Item(const std::string& eType);
  EnchantmentInfo getEnchantmentInfo();
  void outputInfos();
 };

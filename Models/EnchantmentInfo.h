@@ -18,6 +18,9 @@ enum enchantmentTypes {
     DamageBonus
 };
 
+/**
+ * \brief Helper Hashmap that provide us a way to map a string enchantment type to the corresponding enum
+ */
 inline std::pmr::map<std::string,enchantmentTypes> stringToEnchantmentInt= {
     {"ArmorClass",ArmorClass},
     {"Wisdom",Wisdom},

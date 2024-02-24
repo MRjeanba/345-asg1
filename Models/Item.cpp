@@ -19,7 +19,7 @@ void Item::outputInfos() {
             ToString(enchantmentDetails.enchantmentType) << endl;
 }
 
-Item::Item(string enchantmentType) {
+Item::Item(const string& enchantmentType) {
     std::cout << "creating Item" << endl;
     this->enchantmentDetails = {2, stringToEnchantmentInt[enchantmentType]};
     std::cout << "Item created, here are the details: ";

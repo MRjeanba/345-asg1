@@ -9,9 +9,9 @@
 #include "Item.h"
 
 
-class Helmet : Item {
+class Helmet: Item {
 public:
-    explicit Helmet(std::string enchantmentType);
+    explicit Helmet(const std::string& enchantmentType);
     static Helmet CreateHelmet(std::string enchantmentType);
 };
 
