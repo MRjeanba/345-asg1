@@ -20,4 +20,6 @@ add_executable(345_asg1 driver.cpp
         Models/Belt.cpp
         Models/Belt.h
         Models/Boots.cpp
-        Models/Boots.h)
+        Models/Boots.h
+        Models/Weapon.cpp
+        Models/Weapon.h)
