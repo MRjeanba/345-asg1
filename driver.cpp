@@ -1,8 +1,15 @@
 #include <iostream>
 #include "Models/Dice.cpp"
 
+#include "Models/Armor.h"
+#include "Models/Belt.h"
+#include "Models/Item.h"
+#include "Models/Helmet.h"
+#include "Models/Shield.h"
+
 int main()
 {
+    Belt test = Belt::createBelt("Constitution");
     std::cout << "Hello, World!" << std::endl;
     // TEST CASES
     Dice d;

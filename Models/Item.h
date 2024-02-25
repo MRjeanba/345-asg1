@@ -4,11 +4,19 @@
 
 #ifndef ITEM_H
 #define ITEM_H
+#include "EnchantmentInfo.h"
 
-
-
-class Item {
-
+/**
+ * \brief
+ */
+class Item
+{
+private:
+ EnchantmentInfo enchantmentDetails{};
+public:
+ explicit Item(const std::string& eType);
+ EnchantmentInfo getEnchantmentInfo();
+ void outputInfos();
 };
 
 

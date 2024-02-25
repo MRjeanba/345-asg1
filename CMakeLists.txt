@@ -5,4 +5,21 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(345_asg1 driver.cpp
         Models/Item.cpp
-        Models/Item.h)
+        Models/Item.h
+        Models/EnchantmentInfo.h
+        Models/Helmet.cpp
+        Models/Helmet.h
+        Models/Helmet.h
+        Models/Helmet.h
+        Models/Armor.cpp
+        Models/Armor.h
+        Models/Shield.cpp
+        Models/Shield.h
+        Models/Ring.cpp
+        Models/Ring.h
+        Models/Belt.cpp
+        Models/Belt.h
+        Models/Boots.cpp
+        Models/Boots.h
+        Models/Weapon.cpp
+        Models/Weapon.h)

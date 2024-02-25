@@ -36,5 +36,8 @@
 cmake-build-*
 cmake-build-debug/Testing*
 
-driver 
+driver
 driver.exe
+
+# Vs code files
+.vscode*
