@@ -9,7 +9,7 @@ using std::vector;
 using std::string;
 using std::invalid_argument;
 
-Ring Ring::createRing(const string &enchantmentType) {
+Ring Ring::createRing(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"ArmorClass","Strength","Constitution","Wisdom","Charisma"};
 
     bool isValidEnchantmentType = (std::find(
