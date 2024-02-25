@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Models/Dice.cpp"
-
 #include "Models/Armor.h"
 #include "Models/Belt.h"
 #include "Models/Item.h"
