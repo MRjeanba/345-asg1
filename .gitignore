@@ -36,8 +36,11 @@
 cmake-build-*
 cmake-build-debug/Testing*
 
+# remove exe files
 driver
 driver.exe
 
 # Vs code files
 .vscode*
+
+dice
