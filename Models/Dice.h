@@ -2,8 +2,7 @@
 #define DICE_H
 #include <string>
 #include <random>
-
-using namespace std;
+using std::string;
 
 class Dice
 {
