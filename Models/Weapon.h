@@ -13,17 +13,15 @@ public:
     /**
      * \brief Safely create an instance of Weapon if the provided enchantmentType is valid for the class.
      * \param enchantmentType the provided enchantmentType that we want for the weapon.
-     * \return an instance of the Belt class if the enchantmentType was valid.
+     * \return an instance of the Weapon class if the enchantmentType was valid.
      */
     static Weapon createWeapon(const string& enchantmentType);
 
     /**
-     * \brief Simply instantiate a Belt with the valid enchantment type.
+     * \brief Simply instantiate a Weapon with the valid enchantment type.
      * \param enchantmentType the valid enchantment type to forward.
      */
     explicit Weapon(const string& enchantmentType);
 };
-
-
 
 #endif //WEAPON_H

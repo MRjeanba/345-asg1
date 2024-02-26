@@ -9,10 +9,6 @@
 
 using namespace std;
 
-/**
- * \brief Implementation of the @Item class
- */
-
 void Item::outputInfos() {
     cout <<  enchantmentDetails.enchantmentBonus <<
         " and here is enchantment type: " <<

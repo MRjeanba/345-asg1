@@ -7,7 +7,9 @@
 
 
 #include "ItemContainer.h"
-
+/**
+ * To implement later in the project
+ */
 class TreasureChest: ItemContainer {
 
 };

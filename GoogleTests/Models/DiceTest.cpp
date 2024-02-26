@@ -4,6 +4,9 @@
 #include <gtest/gtest.h>
 #include "../../Models/Dice.h"
 
+/**
+ * Set up the subject under test and tear down the subject after the test
+ */
 class DiceClassTest : public ::testing::Test
 {
 protected:
@@ -22,39 +25,42 @@ protected:
     Dice *dice;
 };
 
-//// Test for rolling the dice
-//TEST_F(DiceClassTest, RollDiceValidResult)
-//{
-//    // Test case for a valid expression
-//    int result = dice->rollDice("2d6 + 3");
-//
-//    // Assuming the result should be between 5 and 15 (inclusive)
-//    EXPECT_GE(result, 5);  // Greater than or equal to 5
-//    EXPECT_LE(result, 15); // Less than or equal to 15
-//}
-
-// Tests to check if it returns true or false depending on the expression
-//TEST_F(DiceClassTest, isValidExpressionValidExpression)
-//{
-//    EXPECT_TRUE(dice->isValidExpression("2d6 + 3"));
-//};
+/**
+ * Test the correctness of the expression given as parameter
+ */
 TEST_F(DiceClassTest, isValidExpressionInvalidExpression)
 {
     EXPECT_FALSE(dice->isValidExpression("InvalidExpression"));
 };
+
+/**
+ * Test the correctness of the expression given as parameter
+ */
 TEST_F(DiceClassTest, isValidExpressionNoPlusOperator)
 {
     EXPECT_FALSE(dice->isValidExpression("3d6 4"));
 };
+
+/**
+ * Test the correctness of the expression given as parameter
+ */
 TEST_F(DiceClassTest, isValidExpressionInvalidFormat)
 {
     EXPECT_FALSE(dice->isValidExpression("3d6 b"));
 };
+
+/**
+ * Test the correctness of the expression given as parameter
+ */
 TEST_F(DiceClassTest, IsValidExpressionEmptyString)
 {
 
     EXPECT_FALSE(dice->isValidExpression(""));
 };
+
+/**
+ * Test the correctness of the expression given as parameter
+ */
 TEST_F(DiceClassTest, IsValidExpressionNoValidTypeDice)
 {
     EXPECT_FALSE(dice->isValidExpression("4d40+9"));
