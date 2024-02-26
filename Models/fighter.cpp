@@ -12,8 +12,9 @@ int fighter::generateRandomNum()
     return num;
 }
 
-fighter::fighter(int level_) : level(level_)
+fighter::fighter(int level_)
 {
+    setLevel(level_)
     generateAbilities(); 
     calculateHitPoints(); 
     calculateArmorClass(); 
@@ -39,7 +40,6 @@ void fighter::setLevel(int level_)
         //set the default to 1
         level = 1; 
     }
-    
 }
 
 int fighter::getStrength() 

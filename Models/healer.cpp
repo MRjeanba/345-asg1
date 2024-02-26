@@ -6,6 +6,12 @@
 #include "healer.h"
 using namespace std;
 
+healer::healer(int level) : fighter(level)
+{
+    setPower(level);
+    setHp(level);
+}
+
 vector<string> healer::getPower()
 {
     return power;
@@ -26,11 +32,6 @@ void healer::setHp(int level)
     hp = hpLevel[level];
 }
 
-healer::healer(int level) : fighter(level)
-{
-    setPower(level);
-    setHp(level);
-}
 
 void healer::displayCharacter()
 {

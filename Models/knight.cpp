@@ -37,7 +37,7 @@ void knight::setCompanionAnimal(int level)
 {
     string companions[5] = {"dog", "horse", "falcon", "lion", "dragon"};
     //there was an error here
-    companionAnimal =  companions[level];
+    companionAnimal =  companions[level - 1];
 }
 
 string knight::getKnightWeapon()
@@ -61,7 +61,7 @@ void knight::setKnightWeapon(int level)
     knightWeapon = weapons[level][param2];
 }
 
-// must be overriden
+
 void knight::displayCharacter()
 {
     cout<< "Display of the knight: "<< endl; 
