@@ -7,19 +7,19 @@
 #include <string>
 #include "Item.h"
 
-class Armor: Item {
+class Armor: public Item {
 public:
     /**
-     * \brief 
-     * \param enchantmentType 
-     * \return 
+     * \brief safely create an Armor item if the given enchantment type is valid
+     * \param enchantmentType the wanted enchantmentType for the Armor Item
+     * \return an instance of an Armor item if the provided enchantmentType was valid
      */
     static Armor createArmor(const std::string& enchantmentType);
     
 
     /**
-     * \brief 
-     * \param enchantmentType
+     * \brief Calls the parent constructor Item before creating an instance of Armor
+     * \param enchantmentType the enchantmentType wanted for the Armor item
      */
     explicit Armor(const std::string& enchantmentType);
 };

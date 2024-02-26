@@ -99,6 +99,7 @@ set(unitTestFiles
         GoogleTests/Models/ShieldTest.cpp
         Models/Shield.h
         Models/Shield.cpp
+        GoogleTests/Models/ShieldTest.cpp
 )
 add_executable(UnitTests ${unitTestFiles}) # add this executables
 

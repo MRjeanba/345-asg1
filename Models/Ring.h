@@ -9,18 +9,18 @@
 #include "Item.h"
 using std::string;
 
-class Ring: Item {
+class Ring: public Item {
 public:
     /**
-     * \brief 
-     * \param enchantmentType
-     * \return 
+     * \brief Safely create an instance of the Ring class
+     * \param enchantmentType the enchantmentType wanted for the Ring
+     * \return an instance of the Ring class if the given parameter was valid
      */
     static Ring createRing(const string& enchantmentType);
 
     /**
-     * \brief 
-     * \param enchantmentType
+     * \brief Calls the Base constructor Item to create the Ring Item
+     * \param enchantmentType the enchantmentType to apply to the Ring instance
      */
     explicit Ring(const string& enchantmentType);
 };

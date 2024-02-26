@@ -1,6 +1,10 @@
 #include <gtest/gtest.h>
 #include "../../Models/Map.h"
 
+
+/**
+ * Set up the subject under test and tear down the subject after the test
+ */
 class MapTest : public ::testing::Test
 {
 protected:

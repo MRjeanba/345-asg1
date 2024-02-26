@@ -8,10 +8,20 @@
 #include "Item.h"
 using std::string;
 
-class Helmet: Item {
+class Helmet: public Item {
 public:
-    explicit Helmet(const string& enchantmentType);
+    /**
+     * \brief safely instantiate a Helmet object if the provided enchantmentType is valid
+     * \param enchantmentType the provided enchantmentType that we want for the Helmet.
+     * \return an instance of Helmet if the enchantment type is valid
+     */
     static Helmet createHelmet(const string& enchantmentType);
+
+    /**
+     * \brief instantiate an Object of the Helmet class by calling the parent class
+     * \param enchantmentType the valid enchantment type for the Helmet class
+     */
+    explicit Helmet(const string& enchantmentType);
 };
 
 

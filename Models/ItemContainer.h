@@ -19,14 +19,22 @@ public:
      * \return The Item located at the given position
      */
     Item getItemAtPosition(int& position);
+
+    /**
+     * Get the size of the container
+     * @return an integer value representing the size of the container
+     */
     int getSizeOfContainer();
 
     virtual /**
-     * \brief 
-     * \param itemToAdd
+     * \brief Add the given item to the container
+     * \param itemToAdd the item we want to add to the container
      */
     void addItemToContainer(Item& itemToAdd);
 
+    /**
+     * Base constructor to create a container
+     */
     explicit ItemContainer();
 };
 

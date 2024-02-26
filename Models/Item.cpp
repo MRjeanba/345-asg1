@@ -1,17 +1,13 @@
 //
 // Created by jeanb on 22/02/2024.
-// TODO: IMPLEMENT IT
 //
 #include <iostream>
 #include <utility>
 #include "Item.h"
 #include "EnchantmentInfo.h"
-
+#include <cstdlib>
+#include <ctime>
 using namespace std;
-
-/**
- * \brief Implementation of the @Item class
- */
 
 void Item::outputInfos() {
     cout <<  enchantmentDetails.enchantmentBonus <<
@@ -21,7 +17,9 @@ void Item::outputInfos() {
 
 Item::Item(const string& enchantmentType) {
     std::cout << "creating Item" << endl;
-    this->enchantmentDetails = {2, stringToEnchantmentInt[enchantmentType]};
+    // to have more random number
+    srand((unsigned int)time(NULL));
+    this->enchantmentDetails = {rand() % 6, stringToEnchantmentInt[enchantmentType]};
     std::cout << "Item created, here are the details: ";
     this->outputInfos();
 }

@@ -10,7 +10,9 @@
 #include <string>
 #include "ItemContainer.h"
 #include "EnchantmentInfo.h"
-
+/**
+ * To implement later in the project
+ */
 class CharacterWornItems: ItemContainer {
 
 };

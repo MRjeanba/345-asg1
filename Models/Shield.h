@@ -8,7 +8,7 @@
 #include "Item.h"
 using std::string;
 
-class Shield: Item {
+class Shield: public Item {
 public:
     /**
      * \brief safely create a Shield item if the given enchantment type is valide
