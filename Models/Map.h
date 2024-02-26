@@ -39,6 +39,9 @@ public:
     // Give the type to any cell
     void setCellType(int i, int j, CellType type);
 
+    // Get the cell type
+    CellType getCellType(int i, int j) const;
+
     // Verify the validity of the map
     bool isValidMap(int begin_i, int begin_j, int end_i, int end_j) const;
 };

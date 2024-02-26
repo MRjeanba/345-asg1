@@ -29,6 +29,15 @@ void Map::setCellType(int i, int j, CellType type)
     }
 }
 
+CellType Map::getCellType(int i, int j) const
+{
+    if (i >= 0 && i < width && j >= 0 && j < height)
+    {
+        return grid[i][j].getType();
+    }
+    throw std::out_of_range("Coordinates out of range");
+}
+
 bool Map::isValidMap(int begin_i, int begin_j, int end_i, int end_j) const
 {
     // Use BFS to check for path
