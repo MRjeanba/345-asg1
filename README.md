@@ -1,4 +1,10 @@
-# COMP 345 ASSIGNMENT 1
+# COMP 345 ASSIGNMENT 1 Pointer Masters 
+**Team Members: **
+Jean-Baptiste Garibo 40223491
+Sarah Amaniss 40213883
+Steven Lam 40226649
+Marilyne Nguyen 40228396
+
 ## project requirement
 - IDE preferred: CLionNova or CLion  
 - Compiler MinGW bundled from CLion  
