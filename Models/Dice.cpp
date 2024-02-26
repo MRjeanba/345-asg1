@@ -6,7 +6,7 @@ using namespace std;
 // Definition of the method isValid to check if the expression follows the expected format
 bool Dice::isValidExpression(string expression)
 {
-    regex pattern("\\d+d\\d+\\+\\d+");
+    regex pattern("\\d*[1-9]\\d*d(4|6|8|10|12|20|100)\\+\\d+");
     return regex_match(expression, pattern);
 };
 
@@ -28,7 +28,7 @@ int Dice::rollDice(string expression)
         for (int i = 0; i < numberOfRolls; i++)
         {
             // random number depends on the diceType d4, d6, d8, d10, d12, d20, d100
-            int random = rand() % diceType + 1;
+            int random = rand() % (diceType - 1) + 1;
             result += random; // adding the number to the result
         }
 
@@ -46,23 +46,3 @@ int Dice::rollDice(string expression)
         return 0;
     }
 };
-
-// int main()
-// {
-//     // TEST CASES
-//     Dice d;
-//     d.rollDice("5d6+30");
-//     cout << endl;
-//     d.rollDice("4d20+100");
-//     cout << endl;
-//     d.rollDice("2d12+4");
-//     cout << endl;
-//     d.rollDice("12d4+31");
-//     cout << endl;
-//     // TESTING when the expression is invalid -> should return an error message
-//     d.rollDice("12dd4+31");
-//     d.rollDice("1s1d4e+31");
-//     d.rollDice("13d4-31");
-
-//     return 0;
-// }
