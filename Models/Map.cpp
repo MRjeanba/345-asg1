@@ -6,13 +6,21 @@
 // SingleCell constructor
 SingleCell::SingleCell() : type(CellType::Empty) {}
 
-// SingleCell Set Member function
+/**
+ * @brief Sets the type of the cell.
+ *
+ * @param givenType The type of the cell.
+ */
 void SingleCell::setType(CellType givenType)
 {
     type = givenType;
 }
 
-// SingleCell Get Member function
+/**
+ * @brief Gets the type of the cell.
+ *
+ * @return The type of the cell.
+ */
 CellType SingleCell::getType() const
 {
     return type;
@@ -21,7 +29,13 @@ CellType SingleCell::getType() const
 // Map constructor
 Map::Map(int w, int h) : width(w), height(h), grid(h, std::vector<SingleCell>(w)) {}
 
-// Map Member Function
+/**
+ * @brief Sets the type of the cell at the given coordinates.
+ *
+ * @param i The x-coordinate of the cell.
+ * @param j The y-coordinate of the cell.
+ * @param type The type of the cell.
+ */
 void Map::setCellType(int i, int j, CellType type)
 {
     if (i >= 0 && i < width && j >= 0 && j < height)
@@ -30,6 +44,14 @@ void Map::setCellType(int i, int j, CellType type)
     }
 }
 
+/**
+ * @brief Gets the type of the cell at the given coordinates.
+ *
+ * @param i The x-coordinate of the cell.
+ * @param j The y-coordinate of the cell.
+ * @return The type of the cell.
+ * @throw std::out_of_range If the coordinates are out of range.
+ */
 CellType Map::getCellType(int i, int j) const
 {
     if (i >= 0 && i < width && j >= 0 && j < height)
@@ -39,6 +61,17 @@ CellType Map::getCellType(int i, int j) const
     throw std::out_of_range("Coordinates out of range");
 }
 
+/**
+ * @brief Validates the map to ensure there is a clear path between the specified start and end cells.
+ *
+ * Uses breadth-first search (BFS) to search for a clear path.
+ *
+ * @param begin_i The x-coordinate of the start cell.
+ * @param begin_j The y-coordinate of the start cell.
+ * @param end_i The x-coordinate of the end cell.
+ * @param end_j The y-coordinate of the end cell.
+ * @return True if a clear path exists, false otherwise.
+ */
 bool Map::isValidMap(int begin_i, int begin_j, int end_i, int end_j) const
 {
     // Use BFS to check for path
