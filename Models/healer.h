@@ -1,29 +1,58 @@
 #ifndef HEALER_H
 #define HEALER_H
 
-using namespace std; 
+using namespace std;
 #include <string>
 #include <vector>
 #include "fighter.h"
 
-
+/**
+ * Healer class, child of fighter
+ * included vector librairies, because for its attacks ajustable array are needed
+ */
 class healer : public fighter
 {
-    protected:
-        vector<string> power;
+protected:
+    vector<string> power;
 
+public:
+    /**
+      * Getter for powers that the healer can do
+      @return vector <string> of the powers
+      */
+    vector<string> getPower();
 
-    public:
-        vector<string> getPower();
+    /**
+      * Setter for the powers that the healer can do
+      * The more the healer is advanced, the more powers are accessible to him
+      @param int level (between 1 to 5)
+      @return void
+      */
+    void setPower(int level);
 
-        void setPower(int level);
-        void setHp(int level) override;
+    /**
+    *Setter for the HP of the Healer depending on its level
+    Override the base's class method
+    @param int level(between 1 to 5)
+    @return void
+    */
+    void setHp(int level) override;
 
-        healer(int level);
-        void displayCharacter() override;
+    /**
+     * Healer's constructor
+     * Child of Fighter class
+     * inheriting the base's class properties
+     * setting the healer's power and the hp
+    @param param1 int level (between 1 to 5)
+    */
+    healer(int level);
 
-
-       
+    /**
+     * displayCharacter() displays the characteristics of the healer such as powers, etc.
+     * Overriding the base's class displayCharacter
+    @return void
+    */
+    void displayCharacter() override;
 };
 
 #endif
