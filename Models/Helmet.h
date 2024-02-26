@@ -8,7 +8,7 @@
 #include "Item.h"
 using std::string;
 
-class Helmet: Item {
+class Helmet: public Item {
 public:
     /**
      * \brief safely instantiate a Helmet object if the provided enchantmentType is valid

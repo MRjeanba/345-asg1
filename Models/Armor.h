@@ -7,7 +7,7 @@
 #include <string>
 #include "Item.h"
 
-class Armor: Item {
+class Armor: public Item {
 public:
     /**
      * \brief safely create an Armor item if the given enchantment type is valid

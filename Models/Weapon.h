@@ -8,7 +8,7 @@
 #include "Item.h"
 using std::string;
 
-class Weapon: Item {
+class Weapon: public Item {
 public:
     /**
      * \brief Safely create an instance of Weapon if the provided enchantmentType is valid for the class.

@@ -9,7 +9,7 @@
 #include "Item.h"
 using std::string;
 
-class Ring: Item {
+class Ring: public Item {
 public:
     /**
      * \brief Safely create an instance of the Ring class
