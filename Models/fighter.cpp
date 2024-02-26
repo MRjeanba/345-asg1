@@ -14,7 +14,7 @@ int fighter::generateRandomNum()
 
 fighter::fighter(int level_)
 {
-    setLevel(level_)
+    setLevel(level_);
     generateAbilities(); 
     calculateHitPoints(); 
     calculateArmorClass(); 

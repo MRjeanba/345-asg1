@@ -5,11 +5,15 @@
 #include "Models/Item.h"
 #include "Models/Helmet.h"
 #include "Models/Shield.h"
+#include "Models/ItemContainer.h"
 
 int main()
 {
     Belt test = Belt::createBelt("Constitution");
-    std::cout << "Hello, World!" << std::endl;
+    ItemContainer container;
+    container.addItemToContainer(test);
+
+    cout <<"size of container after add opearation: " << container.getSizeOfContainer() << endl;
     // TEST CASES
     Dice d;
     d.rollDice("5d6+30");

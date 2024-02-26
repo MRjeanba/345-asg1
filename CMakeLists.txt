@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27)
 project(345_asg1)
 
 set(CMAKE_CXX_STANDARD 17)
-CXXFLAGS += -std=c++17
 
 add_executable(345_asg1 driver.cpp
         Models/Item.cpp
@@ -23,7 +22,13 @@ add_executable(345_asg1 driver.cpp
         Models/Weapon.cpp
         Models/Weapon.h
         Models/ItemContainer.cpp
-        Models/ItemContainer.h)
+        Models/ItemContainer.h
+        Models/CharacterBackpack.cpp
+        Models/CharacterBackpack.h
+        Models/TreasureChest.cpp
+        Models/TreasureChest.h
+        Models/CharacterWornItems.cpp
+        Models/CharacterWornItems.h)
 
 #enable_testing() #to  discover tests in test explorer
 #add_subdirectory(GoogleTests/lib/googletest)
@@ -73,9 +78,30 @@ set(unitTestFiles
         GoogleTests/Models/ArmorTest.cpp
         Models/Armor.cpp
         Models/Armor.h
+        GoogleTests/Models/FighterTest.cpp
+        Models/fighter.cpp
+        Models/fighter.h
+        GoogleTests/Models/DiceTest.cpp
+        Models/Dice.h
+        Models/Dice.cpp
+        GoogleTests/Models/BeltTest.cpp
+        Models/Belt.cpp
+        Models/Belt.h
+        GoogleTests/Models/MapTest.cpp
+        Models/Map.cpp
+        Models/Map.h
+        GoogleTests/Models/BootsTest.cpp
+        Models/Boots.cpp
+        Models/Boots.h
+        GoogleTests/Models/WeaponTest.cpp
+        Models/Weapon.cpp
+        Models/Weapon.h
+        GoogleTests/Models/ShieldTest.cpp
+        Models/Shield.h
+        Models/Shield.cpp
 )
 add_executable(UnitTests ${unitTestFiles}) # add this executables
 
 target_link_libraries(UnitTests PRIVATE gtest) # link google test to this executable
-include(GoogleTest)
+include(googletest)
 gtest_discover_tests(UnitTests) # discovers tests by asking the compiled test executable to enumerate its tests

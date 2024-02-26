@@ -19,15 +19,15 @@ public:
      * \return The Item located at the given position
      */
     Item getItemAtPosition(int& position);
+    int getSizeOfContainer();
 
-    /**
+    virtual /**
      * \brief 
      * \param itemToAdd
-     * \return 
      */
-    bool addItemToContainer(Item& itemToAdd);
+    void addItemToContainer(Item& itemToAdd);
 
-    explicit ItemContainer(int& sizeOfContainer);
+    explicit ItemContainer();
 };
 
 

@@ -8,3 +8,7 @@
         EXPECT_THROW(Ring::createRing("DamageBonus"),std::invalid_argument);
         EXPECT_THROW(Ring::createRing("AHHHHHHHH"),std::invalid_argument);
     }
+TEST(RingCreation, GivenValidArgumentShouldNotThrow) {
+    EXPECT_NO_THROW(Ring::createRing("ArmorClass"));
+    EXPECT_NO_THROW(Ring::createRing("Wisdom"));
+}

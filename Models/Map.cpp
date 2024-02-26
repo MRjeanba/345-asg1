@@ -1,6 +1,7 @@
 // Importations
 #include "Map.h"
 #include <queue>
+#include <stdexcept>
 
 // SingleCell constructor
 SingleCell::SingleCell() : type(CellType::Empty) {}

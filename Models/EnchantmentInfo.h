@@ -5,12 +5,15 @@
 #ifndef ENCHANTMENTINFO_H
 #define ENCHANTMENTINFO_H
 #include <map>
+#include <string>
+
+using std::string;
 
 enum enchantmentTypes {
     ArmorClass,
     Wisdom,
     Intelligence,
-    Strengh,
+    Strength,
     Constitution,
     Charisma,
     Dexterity,
@@ -25,7 +28,7 @@ inline std::pmr::map<std::string,enchantmentTypes> stringToEnchantmentInt= {
     {"ArmorClass",ArmorClass},
     {"Wisdom",Wisdom},
     {"Intelligence",Intelligence},
-    {"Strength",Strengh},
+    {"Strength",Strength},
     {"Constitution",Constitution},
     {"Charisma",Charisma},
     {"Dexterity",Dexterity},
@@ -45,7 +48,7 @@ inline const char* ToString(enchantmentTypes e)
         case ArmorClass:   return "ArmorClass";
         case Wisdom:   return "Wisdom";
         case Intelligence: return "Intelligence";
-        case Strengh: return "Strengh";
+        case Strength: return "Strengh";
         case Constitution: return "Constitution";
         case Charisma: return "Charisma";
         case Dexterity: return "Dexterity";

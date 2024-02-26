@@ -8,7 +8,7 @@
 #include "Item.h"
 using std::string;
 
-class Belt: Item {
+class Belt: public Item {
 public:
 
     /**

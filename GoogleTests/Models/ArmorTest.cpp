@@ -10,4 +10,4 @@
     }
     TEST(ArmorCreation, GivenValidArgumentShouldNotThrow) {
             EXPECT_NO_THROW(Armor::createArmor("ArmorClass"));
-        }
+    }
