@@ -30,7 +30,7 @@ public:
  * Create an instance of a map class, and use the saveMapToFile method to save the newly created map.
  * @return a boolean indicating if the map has been saved correctly.
  */
- bool createMap();
+ void createMap();
 
  /**
   *
@@ -42,9 +42,9 @@ public:
  /**
   * 
   * @param mapToSave The instance of the map to save.
-  * @return a boolean value indicating if the save operation executed successfully or not.
+  * @param fileName The name of the file in which we want to save the given mapToSave
   */
- bool saveMapToFile(Map& mapToSave);
+ void saveMapToFile(Map& mapToSave,const std::string& fileName);
 
  /**
   * 

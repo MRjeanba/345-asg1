@@ -43,11 +43,17 @@ public:
      * @return The type of the cell.
      */
     CellType getType() const;
- template<class Archive>
- void serialize(Archive & archive)
- {
-  archive( type ); // serialize things by passing them to the archive
- }
+
+    /**
+     * 
+     * @tparam Archive The data type in which we want to store the data
+     * @param archive the actual archive used for serialization
+     */
+    template<class Archive>
+    void serialize(Archive & archive)
+    {
+     archive( type ); // serialize type by passing it to the archive
+    }
 };
 
 /**
@@ -106,28 +112,21 @@ public:
     bool isValidMap(int begin_i, int begin_j, int end_i, int end_j) const;
 
    int getHeight();
- // This method lets cereal know which data members to serialize
- template<class Archive>
- void serialize(Archive & archive)
- {
-  archive( height, width, grid ); // serialize things by passing them to the archive
- }
+   // This method lets cereal know which data members to serialize
+   template<class Archive>
+   void serialize(Archive & archive)
+   {
+    archive( height, width, grid ); // serialize members of class by passing them to the archive
+   }
 
 };
 
-inline void saveMap(Map& m, const std::string& filename) {
- std::ofstream os(std::filesystem::current_path() / "../" / filename);
- cereal::XMLOutputArchive archive(os);
-
- archive( m ); // store the current instance
-}
-
 inline void loadMap(Map& mapToFill, const std::string& filename) {
- std::ifstream is(std::filesystem::current_path() / "../" / filename);
+ const std::string completeFileName = filename + ".xml";
+ std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
  cereal::XMLInputArchive archive(is);
  archive(mapToFill);
 }
-
 
 
 #endif
