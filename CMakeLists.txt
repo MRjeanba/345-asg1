@@ -30,7 +30,10 @@ add_executable(345_asg1 driver.cpp
         Models/TreasureChest.cpp
         Models/TreasureChest.h
         Models/CharacterWornItems.cpp
-        Models/CharacterWornItems.h)
+        Models/CharacterWornItems.h
+        Controllers/MapEditorController.cpp
+        Controllers/MapEditorController.h
+)
 
 
 include(FetchContent)
