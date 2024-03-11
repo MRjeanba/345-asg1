@@ -21,6 +21,8 @@ add_executable(345_asg1 driver.cpp
         Models/Boots.h
         Models/Weapon.cpp
         Models/Weapon.h
+        Models/Map.h
+        Models/Map.cpp
         Models/ItemContainer.cpp
         Models/ItemContainer.h
         Models/CharacterBackpack.cpp
@@ -30,29 +32,6 @@ add_executable(345_asg1 driver.cpp
         Models/CharacterWornItems.cpp
         Models/CharacterWornItems.h)
 
-#enable_testing() #to  discover tests in test explorer
-#add_subdirectory(GoogleTests/lib/googletest)
-#include_directories(GoogleTests/lib/googletest/include) # this is so we can #include <gtest/gtest.h>
-
-#set(unitTestFiles
-#        Models/Helmet.h
-#        GoogleTests/driverTest.cpp
-#        Models/Helmet.cpp
-#        Models/Item.h
-#        Models/Item.cpp
-#        GoogleTests/Models/HelmetTest.cpp
-#        GoogleTests/Models/RingTest.cpp
-#        Models/Ring.h
-#        Models/Ring.cpp
-#        GoogleTests/Models/ArmorTest.cpp
-#        Models/Armor.cpp
-#        Models/Armor.h
-#)
-#add_executable(UnitTests ${unitTestFiles}) # add this executables
-#
-#target_link_libraries(UnitTests PRIVATE gtest) # link google test to this executable
-#include(GoogleTest)
-#gtest_discover_tests(UnitTests) # discovers tests by asking the compiled test executable to enumerate its tests
 
 include(FetchContent)
 FetchContent_Declare(
@@ -106,3 +85,6 @@ add_executable(UnitTests ${unitTestFiles}) # add this executables
 target_link_libraries(UnitTests PRIVATE gtest) # link google test to this executable
 include(googletest)
 gtest_discover_tests(UnitTests) # discovers tests by asking the compiled test executable to enumerate its tests
+
+# include cereal library to serialize some classes
+include_directories(Cereal/include)
