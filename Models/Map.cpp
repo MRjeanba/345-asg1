@@ -1,5 +1,7 @@
 // Importations
 #include "Map.h"
+
+#include <iostream>
 #include <queue>
 #include <stdexcept>
 
@@ -29,6 +31,9 @@ CellType SingleCell::getType() const
 // Map constructor
 Map::Map(int w, int h) : width(w), height(h), grid(h, std::vector<SingleCell>(w)) {}
 
+ Map::Map() {
+}
+
 /**
  * @brief Sets the type of the cell at the given coordinates.
  *
@@ -56,7 +61,7 @@ CellType Map::getCellType(int i, int j) const
 {
     if (i >= 0 && i < width && j >= 0 && j < height)
     {
-        return grid[i][j].getType();
+        return  grid[i][j].getType();
     }
     throw std::out_of_range("Coordinates out of range");
 }
@@ -111,4 +116,9 @@ bool Map::isValidMap(int begin_i, int begin_j, int end_i, int end_j) const
     }
 
     return false; // No path between begin and end cell
+}
+
+int Map::getHeight() {
+    std::cout << height << std::endl;
+    return this->height;
 }

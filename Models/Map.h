@@ -2,7 +2,11 @@
 #define MAP_H
 
 // Import libraries
+#include <fstream>
+#include <map>
 #include <vector>
+#include <cereal/archives/xml.hpp>
+#include <cereal/types/vector.hpp>
 
 // Define Cell Types
 enum class CellType
@@ -39,6 +43,11 @@ public:
      * @return The type of the cell.
      */
     CellType getType() const;
+ template<class Archive>
+ void serialize(Archive & archive)
+ {
+  archive( type ); // serialize things by passing them to the archive
+ }
 };
 
 /**
@@ -61,6 +70,8 @@ public:
      * @param h The height of the map.
      */
     Map(int w, int h);
+
+ explicit Map();
 
     /**
      * @brief Sets the type of the cell at the given coordinates.
@@ -93,6 +104,30 @@ public:
      * @return True if a clear path exists, false otherwise.
      */
     bool isValidMap(int begin_i, int begin_j, int end_i, int end_j) const;
+
+   int getHeight();
+ // This method lets cereal know which data members to serialize
+ template<class Archive>
+ void serialize(Archive & archive)
+ {
+  archive( height, width, grid ); // serialize things by passing them to the archive
+ }
+
 };
+
+inline void saveMap(Map& m, const std::string& filename) {
+ std::ofstream os(std::filesystem::current_path() / "../" / filename);
+ cereal::XMLOutputArchive archive(os);
+
+ archive( m ); // store the current instance
+}
+
+inline void loadMap(Map& mapToFill, const std::string& filename) {
+ std::ifstream is(std::filesystem::current_path() / "../" / filename);
+ cereal::XMLInputArchive archive(is);
+ archive(mapToFill);
+}
+
+
 
 #endif

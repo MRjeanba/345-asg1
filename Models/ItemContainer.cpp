@@ -25,7 +25,7 @@ using std::cout;
  }
 
 int ItemContainer::getSizeOfContainer() {
-    return (int) this->containedItems.size();
+    return static_cast<int>(this->containedItems.size());
 }
 
 ItemContainer::ItemContainer() = default;
