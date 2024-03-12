@@ -33,6 +33,8 @@ add_executable(345_asg1 driver.cpp
         Models/CharacterWornItems.h
         Controllers/MapEditorController.cpp
         Controllers/MapEditorController.h
+        Models/Campaign.cpp
+        Models/Campaign.h
 )
 
 
