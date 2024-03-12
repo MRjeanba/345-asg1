@@ -7,6 +7,7 @@
 #include <vector>
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/vector.hpp>
+#include "MapObserver.h"
 
 // Define Cell Types
 enum class CellType
@@ -65,6 +66,7 @@ private:
     int width;                                 /**< Width of the map. */
     int height;                                /**< Height of the map. */
     std::vector<std::vector<SingleCell>> grid; /**< Grid of the map. */
+     std::vector<MapObserver*> observers;
 
 public:
     /**
@@ -118,6 +120,14 @@ public:
    {
     archive( height, width, grid ); // serialize members of class by passing them to the archive
    }
+
+    // Displaying the map
+    void displayMap();
+
+    // Methods implemented for the MapObservable 
+    void registerObserver(MapObserver* observer);
+    void unregisterObserver(MapObserver* observer);
+    void notifyObservers();
 
 };
 

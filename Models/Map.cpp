@@ -1,6 +1,6 @@
 // Importations
 #include "Map.h"
-
+#include "MapObserver.cpp"
 #include <iostream>
 #include <queue>
 #include <stdexcept>
@@ -122,3 +122,62 @@ int Map::getHeight() {
     std::cout << height << std::endl;
     return this->height;
 }
+
+
+void Map::displayMap() 
+{
+    for (int j = 0; j < height; ++j)
+    {
+        for (int i = 0; i < width; ++i)
+        {
+            switch (static_cast<int>(grid[j][i].getType()))
+            {
+                case static_cast<int>(CellType::Empty):
+                    std::cout << ".";
+                    break;
+                case static_cast<int>(CellType::Wall):
+                    std::cout << "#";
+                    break;
+                case static_cast<int>(CellType::Occupied):
+                    std::cout << "O";
+                    break;
+                default:
+                    std::cout << "?"; // Unknown cell type
+                    break;
+            }
+
+            std::cout << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+
+void Map :: registerObserver(MapObserver* observer)
+{
+    observers.push_back(observer);
+    std::cout << "Observer registered. \n";
+};
+
+void Map :: unregisterObserver(MapObserver* observer)
+{
+    auto it = std::find(observers.begin(), observers.end(), observer);
+    if (it != observers.end()) 
+    {
+        observers.erase(it);
+        std::cout << "Observer unregistered. \n";
+
+        if(it != observers.end())
+        {
+            observers.erase(std::remove(observers.begin(), observers.end(), observers.back()), observers.end());
+        }
+    }
+};
+
+void Map :: notifyObservers()
+{
+    std::cout << "All observers of the map have been updated. \n";
+    std::cout << "Display of the updated map:  \n";
+    this->displayMap();
+};
