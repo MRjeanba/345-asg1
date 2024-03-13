@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Models/Map.cpp"
+#include "Models/MapBuilder.cpp"
 using namespace std;
 
 int main()
@@ -21,7 +22,5 @@ int main()
 
     testMap.unregisterObserver(obs3);
 
-    //Testing the Builder Pattern 
-
-    return 0;
+        return 0;
 };

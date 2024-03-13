@@ -130,12 +130,4 @@ public:
     void notifyObservers();
 };
 
-inline void loadMap(Map &mapToFill, const std::string &filename)
-{
-    const std::string completeFileName = filename + ".xml";
-    std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
-    cereal::XMLInputArchive archive(is);
-    archive(mapToFill);
-}
-
 #endif

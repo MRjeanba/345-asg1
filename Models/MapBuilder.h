@@ -22,7 +22,7 @@ private:
     Map mapToFill;
 
 public:
-    void buildMap() override;
+    void buildMap(String filename) override;
     MapFromTextFile(Map *map) : map(map){};
 };
 
@@ -35,7 +35,7 @@ private:
 
 public:
     MapGamePlayBuilder(Map *map, int level) : map(map), level(level){};
-    void buildMap() override;
+    void buildMap(string filename) override;
 };
 
 #endif
