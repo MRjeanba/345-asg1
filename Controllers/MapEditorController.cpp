@@ -3,28 +3,15 @@
 //
 
 #include "MapEditorController.h"
+#include "../Utilities.h"
 
-/**
- * Helper method to clear the screen, depending on the OS, it will use a different command
- */
-void Clear()
-{
-#if defined _WIN32
-    system("cls");
-    //clrscr(); // including header file : conio.h
-#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
-    system("clear");
-    //std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences
-#elif defined (__APPLE__)
-    system("clear");
-#endif
-}
 
 MapEditorController::MapEditorController() {
 
     //TODO: should also create a MabBuilder
     if (numberOfInstances < 1) {
         numberOfInstances++;
+        initStoredMaps();
         return;
     }
     std::cout << "There already exist an instance of the map editor controller, use the existing instance";
@@ -32,7 +19,7 @@ MapEditorController::MapEditorController() {
 }
 
 void MapEditorController::createMap() {
-    int height, width, cellType;
+    int height, width;
 
     std::cout << "To create a map, please provide a height for it:" << std::endl;
     std::cin >> height;
@@ -40,24 +27,30 @@ void MapEditorController::createMap() {
     std::cin >> width;
     Map createdMap = Map(height,width);
 
-    updateMap(createdMap);
-
     Clear();
 
-    std::string MapName;
+    std::string mapName;
     // now save map on file!
-    std::cout << "Now, let's save this map, which name do you want to give for the map?:" << std::endl;
-    std::cin >> MapName;
+    std::cout << "Now, let's save this map, which name do you want for this map?:" << std::endl;
+    std::cin >> mapName;
     Clear();
+    updateMap(createdMap, mapName);
+
     std::cout << "Creating and saving the map..." << std::endl;
-    saveMapToFile(createdMap,MapName);
+    saveMapToFile(createdMap,mapName);
+    storedMaps.push_back(mapName);
+    notifyCampaignEditor(mapName);
     std::cout << "Map created successfully!" << std::endl;
 }
 
-Map MapEditorController::loadMap(string& NameOfMap) {
-    //TODO: TO IMPLEMENT
-    return Map();
+void MapEditorController::notifyCampaignEditor(const string& newMapAdded) const {
+    campaignEditorControllerPtr->addMapToExistingMaps(newMapAdded);
 }
+
+// Map MapEditorController::loadMap(string& NameOfMap) {
+//     //TODO: TO IMPLEMENT
+//     return Map();
+// }
 
 void MapEditorController::saveMapToFile(Map &mapToSave, const std::string& fileName) {
     const std::string completeFileName = fileName + ".xml";
@@ -81,10 +74,20 @@ void MapEditorController::displayMenu() {
             case 2: {
                 Clear();
                 std::string nameOfMapToUpdate;
-                std::string userWantsToModify = "yes";
+
                 std::cout << "Please enter the name of the map you want to update" << std::endl;
-                Map mapToUpdate = loadMap(nameOfMapToUpdate);
-                updateMap(mapToUpdate);
+                std::cout << "To help you here is the list of map that you currently have in the system" << std::endl;
+                displayMaps();
+                std::cout << "Enter the name of the map you want to update:" << std::endl;
+                std::cin >> nameOfMapToUpdate;
+
+                if (!isValidMapName(nameOfMapToUpdate)) {
+                    std::cout << "The provided mapName does not exist! Aborting" << std::endl;
+                }
+
+                Map mapToUpdate = Map();
+                loadMap(mapToUpdate, nameOfMapToUpdate);
+                updateMap(mapToUpdate, nameOfMapToUpdate);
                 break;
             }
             default: {
@@ -98,9 +101,60 @@ void MapEditorController::displayMenu() {
     std::cout << "GoodBye!";
 }
 
-void MapEditorController::updateMap(Map &mapToUpdate) {
+void MapEditorController::displayMaps() {
+    // loop through MapsXML folder, print all the files inside
+    using recursive_directory_iterator = std::filesystem::recursive_directory_iterator;
+
+    std::cout << "Here are all your stored maps:" << std::endl;
+    for (const auto &dirEntry: recursive_directory_iterator(std::filesystem::current_path() / "../MapsXML/")) {
+        string path = dirEntry.path();
+        // transform the full path in file name only
+        std::string base_filename = path.substr(path.find_last_of("/\\") + 1);
+        // get the substring from last / till the end
+        std::string::size_type const p(base_filename.find_last_of('.'));
+        // get the index of the last . in file name (to remove extension)
+        std::string file_without_extension = base_filename.substr(0, p);
+        // substring from begginning to . in order to remove the extension
+        std::cout << file_without_extension << std::endl;
+    }
+}
+
+void MapEditorController::initStoredMaps() {
+    // loop through MapsXML folder, store all the maps in the campaign editor controller
+    using recursive_directory_iterator = std::filesystem::recursive_directory_iterator;
+
+    for (const auto &dirEntry: recursive_directory_iterator(std::filesystem::current_path() / "../MapsXML/")) {
+        string path = dirEntry.path();
+        // transform the full path in file name only
+        std::string base_filename = path.substr(path.find_last_of("/\\") + 1);
+        // get the substring from last / till the end
+        std::string::size_type const p(base_filename.find_last_of('.'));
+        // get the index of the last . in file name (to remove extension)
+        std::string file_without_extension = base_filename.substr(0, p);
+        // substring from begginning to . in order to remove the extension
+        if (file_without_extension.length() > 1) {
+            storedMaps.push_back(file_without_extension);
+        }
+    }
+}
+
+bool MapEditorController::isValidMapName(const string& mapNameToVerify) {
+    // we search in the existingMaps vector to verify if mapName is present, return true or false depending of if the map name is valid or not
+    return (std::find(
+                storedMaps.begin(),
+                storedMaps.end(),
+                mapNameToVerify) != storedMaps.end());
+}
+
+void MapEditorController::registerCampaignEditor(CampaignEditorController *campaignEditorPtr) {
+    campaignEditorControllerPtr = campaignEditorPtr;
+}
+
+void MapEditorController::updateMap(Map &mapToUpdate, const string& mapName) {
     std::string userChoice;
-    std::cout << "Do you want to modify some of the cells ? currently the map is empty. Y/N?" << std::endl;
+    std::cout << "Currently the map looks like that: " << std::endl;
+    mapToUpdate.displayMap();
+    std::cout << "Do you want to modify some of the cells Y/N?" << std::endl;
     std::cin >> userChoice;
 
     while (userChoice != "N") {
@@ -125,11 +179,14 @@ void MapEditorController::updateMap(Map &mapToUpdate) {
                     std::cout << "Please provide a valid type as mentionned above... the current choice has not been taken into account.";
                 break;
             }
+            saveMapToFile(mapToUpdate, mapName);
+            std::cout << "Map updated successfully!";
         } catch (...) {
             std::cout << "Wrong input, please enter as stated above 0 or 1 for the cell type!"  << std::endl;
         }
 
-        std::cout << "Do you want to modify another cell? answer with Y/N:";
+        std::cout << "Do you want to modify another cell? answer with Y/N:\nRight now, the map looks like that:\n";
+        mapToUpdate.displayMap();
         std::cin >> userChoice;
     }
 }
