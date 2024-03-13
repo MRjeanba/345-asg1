@@ -4,8 +4,9 @@
 using namespace std;
 #include <string>
 #include "fighter.h"
+#include "Observable.h"
 
-class knight : public fighter
+class knight : public fighter, public Observer
 {
 protected:
     int chargingDamage;

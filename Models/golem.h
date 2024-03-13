@@ -5,6 +5,7 @@ using namespace std;
 #include <string>
 #include <vector>
 #include "fighter.h"
+#include "Observable.h"
 
 /**
  * Golem class, child of fighter
@@ -12,7 +13,7 @@ using namespace std;
  * included vector librairies, because for its attacks ajustable array are needed
  */
 
-class golem : public fighter
+class golem : public fighter, public Observer
 {
 protected:
     string golemType;
@@ -70,6 +71,13 @@ public:
    @return void
    */
     void displayCharacter() override;
+
+
+    /**
+     * This method will update the golem
+  @return void
+*/
+    void updateGolem();
 };
 
 #endif

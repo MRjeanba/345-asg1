@@ -3,6 +3,8 @@
 #include <ctime>
 #include <string>
 #include "fighter.h"
+#include "Observable.h"
+
 using namespace std;
 
 int fighter::generateRandomNum()
@@ -172,6 +174,22 @@ void fighter::calculateDamageBonus()
     setDamageBonus(modifier);
 }
 
+void fighter::updateFighter() {
+//    Increase the fighter's level by 1
+    level++;
+
+    // Recalculate fighter's attributes for new level
+    calculateHitPoints();
+    calculateArmorClass();
+    calculateAttackBonus();
+    calculateDamageBonus();
+    setHp(level);
+    setItem();
+
+    notifyObservers();
+}
+
+
 void fighter::displayCharacter()
 {
     cout<< "Display of the fighter: "<< endl; 
@@ -186,5 +204,9 @@ void fighter::displayCharacter()
     cout<< "HP: " << getHp() << endl; 
     cout<< "Item: " << getItem() << endl; 
 }
+
+
+
+
 
 

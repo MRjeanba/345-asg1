@@ -5,7 +5,7 @@ using namespace std;
 #include <string>
 #include "fighter.h"
 
-class wizard : public fighter
+class wizard : public fighter, public Observer
 {
   string wizardType;
   string spell;
