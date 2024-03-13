@@ -2,9 +2,9 @@
 #define FIGHTER_H
 using namespace std;
 #include <string>
+#include "Observable.h"
 
-class fighter
-{
+class fighter : public Observable {
 protected:
     int level;
     int strength;
@@ -218,6 +218,17 @@ public:
     @return void
     */
     virtual void displayCharacter();
+
+    /**
+  This method is used to update fighter and notify observers
+  @return void
+  */
+    virtual void updateFighter();
+
+    void attachObserver(Observer* observer) {
+        registerObserver(observer);
+    }
+
 };
 
 #endif

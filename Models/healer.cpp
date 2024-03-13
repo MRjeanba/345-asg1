@@ -32,7 +32,6 @@ void healer::setHp(int level)
     hp = hpLevel[level];
 }
 
-
 void healer::displayCharacter()
 {
     cout<< "Display of the healer: "<< endl; 
@@ -50,4 +49,8 @@ void healer::displayCharacter()
     for (const auto& str : getPower()) {
         cout << str << " ";
     }
+}
+
+void healer::update() {
+    std::cout << "Healer received an update from Observable!" << std::endl;
 }

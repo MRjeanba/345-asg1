@@ -5,13 +5,14 @@ using namespace std;
 #include <string>
 #include <vector>
 #include "fighter.h"
+#include "Observer.h"
+#include "Observable.h" // Include the Observable class
 
 /**
  * Healer class, child of fighter
- * included vector librairies, because for its attacks ajustable array are needed
+ * included vector libraries, because for its attacks adjustable array are needed
  */
-class healer : public fighter
-{
+class healer : public fighter, public Observer {
 protected:
     vector<string> power;
 
@@ -46,6 +47,8 @@ public:
     @param param1 int level (between 1 to 5)
     */
     healer(int level);
+
+    void update() override;
 
     /**
      * displayCharacter() displays the characteristics of the healer such as powers, etc.

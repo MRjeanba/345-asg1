@@ -12,10 +12,10 @@ knight::knight(int level, int chargingDamage_) : fighter(level), chargingDamage(
     setKnightWeapon(level);
 }
 
-void knight::setHp(int level) 
+void knight::setHp(int level)
 {
     int hpLevel[5] = {300, 350, 400, 450,500};
-    hp = hpLevel[level]; 
+    hp = hpLevel[level];
 }
 
 int knight::getChargingDamage()
@@ -36,7 +36,6 @@ string knight::getCompanionAnimal()
 void knight::setCompanionAnimal(int level)
 {
     string companions[5] = {"dog", "horse", "falcon", "lion", "dragon"};
-    //there was an error here
     companionAnimal =  companions[level - 1];
 }
 

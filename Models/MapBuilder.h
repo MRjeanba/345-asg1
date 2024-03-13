@@ -12,6 +12,7 @@ public:
     virtual void buildMap() = 0;
     Map mapToFill;
     virtual ~MapBuilder(){};
+    MapBuilder(String filename); 
 };
 
 // ConcreteBuilder 1: For the map editor
