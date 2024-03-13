@@ -31,8 +31,7 @@ CellType SingleCell::getType() const
 // Map constructor
 Map::Map(int w, int h) : width(w), height(h), grid(h, std::vector<SingleCell>(w)) {}
 
- Map::Map() {
-}
+Map::Map() : width(0), height(0), grid() {}
 
 /**
  * @brief Sets the type of the cell at the given coordinates.
@@ -61,7 +60,7 @@ CellType Map::getCellType(int i, int j) const
 {
     if (i >= 0 && i < width && j >= 0 && j < height)
     {
-        return  grid[i][j].getType();
+        return grid[i][j].getType();
     }
     throw std::out_of_range("Coordinates out of range");
 }
@@ -118,13 +117,13 @@ bool Map::isValidMap(int begin_i, int begin_j, int end_i, int end_j) const
     return false; // No path between begin and end cell
 }
 
-int Map::getHeight() {
+int Map::getHeight()
+{
     std::cout << height << std::endl;
     return this->height;
 }
 
-
-void Map::displayMap() 
+void Map::displayMap()
 {
     for (int j = 0; j < height; ++j)
     {
@@ -132,18 +131,18 @@ void Map::displayMap()
         {
             switch (static_cast<int>(grid[j][i].getType()))
             {
-                case static_cast<int>(CellType::Empty):
-                    std::cout << ".";
-                    break;
-                case static_cast<int>(CellType::Wall):
-                    std::cout << "#";
-                    break;
-                case static_cast<int>(CellType::Occupied):
-                    std::cout << "O";
-                    break;
-                default:
-                    std::cout << "?"; // Unknown cell type
-                    break;
+            case static_cast<int>(CellType::Empty):
+                std::cout << ".";
+                break;
+            case static_cast<int>(CellType::Wall):
+                std::cout << "#";
+                break;
+            case static_cast<int>(CellType::Occupied):
+                std::cout << "O";
+                break;
+            default:
+                std::cout << "?"; // Unknown cell type
+                break;
             }
 
             std::cout << " ";
@@ -152,30 +151,28 @@ void Map::displayMap()
     }
 }
 
-
-
-void Map :: registerObserver(MapObserver* observer)
+void Map ::registerObserver(MapObserver *observer)
 {
     observers.push_back(observer);
     std::cout << "Observer registered. \n";
 };
 
-void Map :: unregisterObserver(MapObserver* observer)
+void Map ::unregisterObserver(MapObserver *observer)
 {
     auto it = std::find(observers.begin(), observers.end(), observer);
-    if (it != observers.end()) 
+    if (it != observers.end())
     {
         observers.erase(it);
         std::cout << "Observer unregistered. \n";
 
-        if(it != observers.end())
+        if (it != observers.end())
         {
             observers.erase(std::remove(observers.begin(), observers.end(), observers.back()), observers.end());
         }
     }
 };
 
-void Map :: notifyObservers()
+void Map ::notifyObservers()
 {
     std::cout << "All observers of the map have been updated. \n";
     std::cout << "Display of the updated map:  \n";

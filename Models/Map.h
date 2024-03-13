@@ -46,14 +46,14 @@ public:
     CellType getType() const;
 
     /**
-     * 
+     *
      * @tparam Archive The data type in which we want to store the data
      * @param archive the actual archive used for serialization
      */
-    template<class Archive>
-    void serialize(Archive & archive)
+    template <class Archive>
+    void serialize(Archive &archive)
     {
-     archive( type ); // serialize type by passing it to the archive
+        archive(type); // serialize type by passing it to the archive
     }
 };
 
@@ -66,7 +66,7 @@ private:
     int width;                                 /**< Width of the map. */
     int height;                                /**< Height of the map. */
     std::vector<std::vector<SingleCell>> grid; /**< Grid of the map. */
-     std::vector<MapObserver*> observers;
+    std::vector<MapObserver *> observers;
 
 public:
     /**
@@ -79,7 +79,7 @@ public:
      */
     Map(int w, int h);
 
- explicit Map();
+    explicit Map();
 
     /**
      * @brief Sets the type of the cell at the given coordinates.
@@ -113,30 +113,29 @@ public:
      */
     bool isValidMap(int begin_i, int begin_j, int end_i, int end_j) const;
 
-   int getHeight();
-   // This method lets cereal know which data members to serialize
-   template<class Archive>
-   void serialize(Archive & archive)
-   {
-    archive( height, width, grid ); // serialize members of class by passing them to the archive
-   }
+    int getHeight();
+    // This method lets cereal know which data members to serialize
+    template <class Archive>
+    void serialize(Archive &archive)
+    {
+        archive(height, width, grid); // serialize members of class by passing them to the archive
+    }
 
     // Displaying the map
     void displayMap();
 
-    // Methods implemented for the MapObservable 
-    void registerObserver(MapObserver* observer);
-    void unregisterObserver(MapObserver* observer);
+    // Methods implemented for the MapObservable
+    void registerObserver(MapObserver *observer);
+    void unregisterObserver(MapObserver *observer);
     void notifyObservers();
-
 };
 
-inline void loadMap(Map& mapToFill, const std::string& filename) {
- const std::string completeFileName = filename + ".xml";
- std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
- cereal::XMLInputArchive archive(is);
- archive(mapToFill);
+inline void loadMap(Map &mapToFill, const std::string &filename)
+{
+    const std::string completeFileName = filename + ".xml";
+    std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
+    cereal::XMLInputArchive archive(is);
+    archive(mapToFill);
 }
-
 
 #endif
