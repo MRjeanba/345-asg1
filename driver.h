@@ -10,7 +10,6 @@
 #include "Controllers/CampaignEditorController.h"
 #include "Controllers/MapEditorController.h"
 #include "Controllers/CharacterEditorController.h"
-#include "Controllers/CharacterEditorController.cpp"
 
 using std::cin;
 using std::cout;
@@ -23,12 +22,11 @@ inline void displayGameMenu()
     CharacterEditorController characterEditorController = CharacterEditorController();
 
     mapEditorController.registerCampaignEditor(&campaignEditorController);
-    // campaignEditorController.registerMapEditor(&mapEditorController);
 
     int userChoice;
     cout << "Welcome to the [INSERT NAME] Game!\n"
          << endl;
-    cout << "Please select something:\n1: New game [NOT IMPLEMENTED]\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
+    cout << "Please select something:\n1: New game [NOT FULLY IMPLEMENTED]\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
     cin >> userChoice;
 
     fighter *UserCharacter;
@@ -38,12 +36,12 @@ inline void displayGameMenu()
         {
         case 1:
         {
-            cout << "Welcome! \n Create a your character please";
+            cout << "Welcome!\nCreate a your character please" << endl;
             string name;
-            cout << "Enter the name: \n";
+            cout << "Enter a name for your character: \n" << endl;
             cin >> name;
             UserCharacter = characterEditorController.createCharacter(name);
-            throw std::runtime_error("NOT IMPLEMENTED YET.");
+            // throw std::runtime_error("NOT IMPLEMENTED YET.");
             break;
         }
         case 2:
@@ -67,8 +65,7 @@ inline void displayGameMenu()
             throw std::runtime_error("flemme de handle ce case ecris entre 1 et 5 please");
         }
         }
-        Clear();
-        cout << "Please select something:\n1: New game [NOT IMPLEMENTED]\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
+        cout << "\n\nPlease select something:\n1: New game [NOT IMPLEMENTED]\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
         cin >> userChoice;
     }
 }

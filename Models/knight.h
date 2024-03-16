@@ -4,7 +4,7 @@
 using namespace std;
 #include <string>
 #include "fighter.h"
-#include "Observable.h"
+#include "Observer.h"
 
 class knight : public fighter, public Observer
 {
