@@ -10,11 +10,12 @@ knight::knight(int level, int chargingDamage_) : fighter(level), chargingDamage(
     setCompanionAnimal(level);
     setHp(level);
     setKnightWeapon(level);
+    setChargingDamage(chargingDamage_);
 }
 
 void knight::setHp(int level)
 {
-    int hpLevel[5] = {300, 350, 400, 450,500};
+    int hpLevel[5] = {300, 350, 400, 450, 500};
     hp = hpLevel[level];
 }
 
@@ -36,7 +37,7 @@ string knight::getCompanionAnimal()
 void knight::setCompanionAnimal(int level)
 {
     string companions[5] = {"dog", "horse", "falcon", "lion", "dragon"};
-    companionAnimal =  companions[level - 1];
+    companionAnimal = companions[level - 1];
 }
 
 string knight::getKnightWeapon()
@@ -51,8 +52,7 @@ void knight::setKnightWeapon(int level)
         {"Battleaxe", "Morningstar"},
         {"Warhammer", "Lance"},
         {"Halberd", "Mace"},
-        {"Rapier", "Crossbow"}
-    };
+        {"Rapier", "Crossbow"}};
 
     srand(static_cast<unsigned>(time(nullptr)));
     int param2 = rand() % 2;
@@ -60,24 +60,23 @@ void knight::setKnightWeapon(int level)
     knightWeapon = weapons[level][param2];
 }
 
-
 void knight::displayCharacter()
 {
-    cout<< "Display of the knight: "<< endl; 
-    cout<< "Level: " << getLevel() << endl; 
-    cout<< "Strenght: " << getStrength() << endl; 
-    cout<< "Dexterity: " << getDexterity() << endl; 
-    cout<< "Constitution: " << getConstitution() << endl; 
-    cout<< "Hit Points: " << getHitPoints() << endl; 
-    cout<< "Armor Class: " << getArmorClass() << endl; 
-    cout<< "AttackBonus: " << getAttackBonus() << endl; 
-    cout<< "DamageBonus: " << getDamageBonus() << endl; 
-    cout<< "Companion Animal: " << getCompanionAnimal() << endl;
-    cout<< "hp: " << getHp() << endl;
-    cout<< "Charging Damage: " << getChargingDamage() << endl;
-    cout<< "Knight Weapon: " << getKnightWeapon() << endl;
-    
+    cout << "Display of the knight: " << endl;
+    cout << "Level: " << getLevel() << endl;
+    cout << "Strenght: " << getStrength() << endl;
+    cout << "Dexterity: " << getDexterity() << endl;
+    cout << "Constitution: " << getConstitution() << endl;
+    cout << "Hit Points: " << getHitPoints() << endl;
+    cout << "Armor Class: " << getArmorClass() << endl;
+    cout << "AttackBonus: " << getAttackBonus() << endl;
+    cout << "DamageBonus: " << getDamageBonus() << endl;
+    cout << "Companion Animal: " << getCompanionAnimal() << endl;
+    cout << "hp: " << getHp() << endl;
+    cout << "Charging Damage: " << getChargingDamage() << endl;
+    cout << "Knight Weapon: " << getKnightWeapon() << endl;
 }
-
-
-
+void knight::update()
+{
+    std::cout << "Knight received an update from Observable!" << std::endl;
+}

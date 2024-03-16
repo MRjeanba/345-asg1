@@ -8,14 +8,16 @@
 #include <cereal/archives/xml.hpp>
 #include "Controllers/MapEditorController.cpp"
 
-void MapBuilder::buildMap(String filename)
+void MapBuilder::buildMap(string filename)
 {
-
-    MapEditorController buildingMap;
-    buildingMap.createMap();
+    // look in MapsXML for the filename.xml -> put all content into mapToFill
+    const std::string completeFileName = filename + ".xml";
+    std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
+    cereal::XMLInputArchive archive(is);
+    archive(mapToFill);
 }
 
-void MapGamePlayBuilder::buildMap(String filename)
+void MapGamePlayBuilder::buildMap(string filename)
 {
     Map mapToFill;
 
@@ -24,10 +26,10 @@ void MapGamePlayBuilder::buildMap(String filename)
     // for characters with low level -> easy map
 }
 
-inline void loadMap(Map &mapToFill, const std::string &filename)
-{
-    const std::string completeFileName = filename + ".xml";
-    std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
-    cereal::XMLInputArchive archive(is);
-    archive(mapToFill);
-}
+// inline void loadMap(Map &mapToFill, const std::string &filename)
+// {
+//     const std::string completeFileName = filename + ".xml";
+//     std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
+//     cereal::XMLInputArchive archive(is);
+//     archive(mapToFill);
+// }

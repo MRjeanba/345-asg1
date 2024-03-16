@@ -75,6 +75,8 @@ public:
   @return
   */
   void displayCharacter() override;
+
+  void update() override;
 };
 
 #endif
