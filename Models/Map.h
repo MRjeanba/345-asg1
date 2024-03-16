@@ -14,6 +14,7 @@ enum class CellType
 {
     Empty,
     Wall,
+    Character,
     Occupied
 };
 
