@@ -122,29 +122,23 @@ int Map::getHeight()
     std::cout << height << std::endl;
     return this->height;
 }
-
-void Map::displayMap()
-{
-    for (int j = 0; j < height; ++j)
-    {
-        for (int i = 0; i < width; ++i)
-        {
-            switch (static_cast<int>(grid[j][i].getType()))
-            {
-            case static_cast<int>(CellType::Empty):
-                std::cout << ".";
-                break;
-            case static_cast<int>(CellType::Wall):
-                std::cout << "#";
-                break;
-            case static_cast<int>(CellType::Occupied):
-                std::cout << "O";
-                break;
-            default:
-                std::cout << "?"; // Unknown cell type
-                break;
+void Map::displayMap() {
+    for (int j = 0; j < height; ++j) {
+        for (int i = 0; i < width; ++i) {
+            switch (grid[j][i].getType()) {
+                case CellType::Empty:
+                    std::cout << ".";
+                    break;
+                case CellType::Wall:
+                    std::cout << "#";
+                    break;
+                case CellType::Character: // Display "@" for character
+                    std::cout << "@";
+                    break;
+                default:
+                    std::cout << "?"; // Unknown cell type
+                    break;
             }
-
             std::cout << " ";
         }
         std::cout << std::endl;

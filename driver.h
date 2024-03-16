@@ -9,6 +9,7 @@
 #include "Utilities.h"
 #include "Controllers/CampaignEditorController.h"
 #include "Controllers/MapEditorController.h"
+#include "Controllers/gameController.h"
 
 using std::cout;
 using std::cin;
@@ -17,19 +18,20 @@ using std::endl;
 inline void displayGameMenu() {
     MapEditorController mapEditorController = MapEditorController();
     CampaignEditorController campaignEditorController = CampaignEditorController();
+    gameController gameControllerHere = gameController();
 
     mapEditorController.registerCampaignEditor(&campaignEditorController);
     // campaignEditorController.registerMapEditor(&mapEditorController);
 
     int userChoice;
-    cout << "Welcome to the [INSERT NAME] Game!\n" << endl;
-    cout << "Please select something:\n1: New game [NOT IMPLEMENTED]\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
+    cout << "Welcome to the JUICE Game!\n" << endl;
+    cout << "Please select something:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
     cin >> userChoice;
 
     while (userChoice != 5) {
         switch (userChoice) {
             case 1: {
-                throw std::runtime_error("NOT IMPLEMENTED YET.");
+                gameControllerHere.displayMenu();
                 break;
             }
             case 2: {
@@ -50,7 +52,7 @@ inline void displayGameMenu() {
             }
         }
         Clear();
-        cout << "Please select something:\n1: New game [NOT IMPLEMENTED]\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
+        cout << "Please select something:\n1: New game[NOT IMPLEMENTED]\n2: Resume\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
         cin >> userChoice;
     }
 }

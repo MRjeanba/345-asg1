@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cereal>
+	<value0>
+		<value0>3</value0>
+		<value1>3</value1>
+		<value2 size="dynamic">
+			<value0 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+			</value0>
+			<value1 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+			</value1>
+			<value2 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+			</value2>
+		</value2>
+	</value0>
+</cereal>
+

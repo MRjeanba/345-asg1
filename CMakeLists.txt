@@ -49,6 +49,8 @@ add_executable(345_asg1 driver.cpp
         Models/fighter.h
         Models/knight.cpp
         Models/knight.h
+        Controllers/gameController.cpp
+        Controllers/gameController.h
 )
 
 
