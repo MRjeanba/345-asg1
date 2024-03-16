@@ -18,7 +18,7 @@ using std::endl;
 inline void displayGameMenu() {
     MapEditorController mapEditorController = MapEditorController();
     CampaignEditorController campaignEditorController = CampaignEditorController();
-
+    CharacterEditorController characterEditorController = CharacterEditorController();
     gameController gameControllerHere = gameController();
     mapEditorController.registerCampaignEditor(&campaignEditorController);
 
@@ -32,13 +32,12 @@ inline void displayGameMenu() {
         switch (userChoice) {
             case 1: {
                 gameControllerHere.displayMenu();
-                cout << "Welcome!\nCreate a your character please" << endl;
+                cout << "\nCreate a your character please" << endl;
                 string name;
                 cout << "Enter a name for your character: \n" << endl;
                 cin >> name;
                 UserCharacter = characterEditorController.createCharacter(name);
                 // throw std::runtime_error("NOT IMPLEMENTED YET.");
-                break;
                 break;
             }
             case 2: {
@@ -58,6 +57,8 @@ inline void displayGameMenu() {
                 throw std::runtime_error("flemme de handle ce case ecris entre 1 et 5 please");
             }
         }
+        cout << "Please select something else to do:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
+        cin >> userChoice;
     }
 }
 
