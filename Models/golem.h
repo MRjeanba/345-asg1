@@ -72,12 +72,11 @@ public:
    */
     void displayCharacter() override;
 
-
     /**
      * This method will update the golem
   @return void
 */
-    void updateGolem();
+    void update() override;
 };
 
 #endif

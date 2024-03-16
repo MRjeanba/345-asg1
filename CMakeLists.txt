@@ -31,13 +31,15 @@ add_executable(345_asg1 driver.cpp
         Models/TreasureChest.h
         Models/CharacterWornItems.cpp
         Models/CharacterWornItems.h
-        Controllers/MapEditorController.cpp
-        Controllers/MapEditorController.h
-
         Models/Campaign.cpp
         Models/Campaign.h
+
+        Controllers/MapEditorController.cpp
+        Controllers/MapEditorController.h
         Controllers/CampaignEditorController.cpp
         Controllers/CampaignEditorController.h
+        Controllers/CharacterEditorController.cpp
+        Controllers/CharacterEditorController.h
         Utilities.h
         driver.h
 
@@ -46,6 +48,12 @@ add_executable(345_asg1 driver.cpp
         Models/CharacterObserver.h
         Models/CharacterObserver.cpp
         Models/fighter.cpp
+        Models/golem.cpp
+        Models/golem.h
+        Models/healer.h
+        Models/healer.cpp
+        Models/wizard.cpp
+        Models/wizard.h
         Models/fighter.h
         Models/knight.cpp
         Models/knight.h

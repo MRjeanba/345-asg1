@@ -10,28 +10,34 @@
 #include "Controllers/CampaignEditorController.h"
 #include "Controllers/MapEditorController.h"
 #include "Controllers/gameController.h"
-
-using std::cout;
+#include "Controllers/CharacterEditorController.h"
 using std::cin;
+using std::cout;
 using std::endl;
 
 inline void displayGameMenu() {
     MapEditorController mapEditorController = MapEditorController();
     CampaignEditorController campaignEditorController = CampaignEditorController();
+    CharacterEditorController characterEditorController = CharacterEditorController();
     gameController gameControllerHere = gameController();
-
     mapEditorController.registerCampaignEditor(&campaignEditorController);
-    // campaignEditorController.registerMapEditor(&mapEditorController);
 
     int userChoice;
     cout << "Welcome to the JUICE Game!\n" << endl;
     cout << "Please select something:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
     cin >> userChoice;
+    fighter *UserCharacter;
 
     while (userChoice != 5) {
         switch (userChoice) {
             case 1: {
                 gameControllerHere.displayMenu();
+                cout << "\nCreate a your character please" << endl;
+                string name;
+                cout << "Enter a name for your character: \n" << endl;
+                cin >> name;
+                UserCharacter = characterEditorController.createCharacter(name);
+                // throw std::runtime_error("NOT IMPLEMENTED YET.");
                 break;
             }
             case 2: {
@@ -51,8 +57,7 @@ inline void displayGameMenu() {
                 throw std::runtime_error("flemme de handle ce case ecris entre 1 et 5 please");
             }
         }
-        Clear();
-        cout << "Please select something:\n1: New game[NOT IMPLEMENTED]\n2: Resume\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
+        cout << "Please select something else to do:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Quit" << endl;
         cin >> userChoice;
     }
 }

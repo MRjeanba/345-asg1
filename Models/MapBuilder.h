@@ -9,10 +9,10 @@
 class MapBuilder
 {
 public:
-    virtual void buildMap() = 0;
+    virtual void buildMap(string filename) = 0;
     Map mapToFill;
     virtual ~MapBuilder(){};
-    MapBuilder(String filename); 
+    MapBuilder(string filename);
 };
 
 // ConcreteBuilder 1: For the map editor
@@ -23,7 +23,7 @@ private:
     Map mapToFill;
 
 public:
-    void buildMap(String filename) override;
+    void buildMap(string filename) override;
     MapFromTextFile(Map *map) : map(map){};
 };
 
