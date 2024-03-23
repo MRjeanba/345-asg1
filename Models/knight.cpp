@@ -80,3 +80,6 @@ void knight::update()
 {
     std::cout << "Knight received an update from Observable!" << std::endl;
 }
+
+void knight::update(const std::string &message) {
+}

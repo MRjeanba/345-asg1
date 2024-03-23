@@ -4,6 +4,7 @@
 
 #include "Belt.h"
 #include <algorithm>
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 using std::string;
@@ -24,7 +25,14 @@ Belt Belt::createBelt(const string& enchantmentType) {
 
     throw invalid_argument("Invalid enchantment type provided for the belt creation");
 }
-Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType),WornItemsDecorator(decoratedInstancePtr) {}
+Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType),WornItemsDecorator(decoratedInstancePtr) {
+    if (!isItemTypeWorn.at(itemType)) {
+        isItemTypeWorn.at(itemType) = true;
+    } else {
+        cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
+        return;
+    }
+}
 
 string Belt::getType() { return itemType; }
 

@@ -15,7 +15,12 @@ int main()
 {
     // Run the game menu
     // displayGameMenu();
+    // auto * testPtr = new Helmet("Wisdom", new Belt("Strength", new Ring("Wisdom", new fighter())));
+    // //testPtr->isItemTypeWorn.at(testPtr->getType()) = true;
+    // cout << "items currently worn" << endl;
+    // cout << testPtr->getTypes();
+    // testPtr->remove(testPtr);
+    // cout << testPtr->getTypes();
 
-    //delete testPtr;
     return 0;
 }

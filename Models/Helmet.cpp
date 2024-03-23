@@ -7,6 +7,7 @@
 #include <vector>
 #include "Item.h"
 #include <algorithm>
+#include <iostream>
 #include <stdexcept>
 using std::string;
 using std::vector;
@@ -38,6 +39,12 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
  * \param decoratedInstancePtr
  */
 Helmet::Helmet(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {
+    if (!isItemTypeWorn.at(itemType)) {
+        isItemTypeWorn.at(itemType) = true;
+    } else {
+        cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
+        return;
+    }
 }
 
 string Helmet::getType() { return itemType; }

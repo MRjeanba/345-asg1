@@ -54,3 +54,6 @@ void healer::displayCharacter()
 void healer::update() {
     std::cout << "Healer received an update from Observable!" << std::endl;
 }
+void healer::update(const std::string &message) {
+
+}

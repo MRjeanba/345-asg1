@@ -6,7 +6,7 @@
 #define RING_H
 #include <string>
 
-#include "Items/Item.h"
+#include "Item.h"
 #include "WornItemsDecorator.h"
 using std::string;
 
