@@ -30,6 +30,7 @@ Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): WornI
         isItemTypeWorn.at(itemType) = true;
     } else {
         cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
+        throw std::runtime_error("Cannot wear another " + itemType + "!\nAborting...");
         return;
     }
 }
