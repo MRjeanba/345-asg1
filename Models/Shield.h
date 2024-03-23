@@ -6,9 +6,10 @@
 #define SHIELD_H
 #include <string>
 #include "Item.h"
+#include "WornItemsDecorator.h"
 using std::string;
 
-class Shield: public Item {
+class Shield: public Item, WornItemsDecorator {
 public:
     /**
      * \brief safely create a Shield item if the given enchantment type is valide
@@ -20,8 +21,16 @@ public:
     /**
      * \brief calls the Item parent constructor to instantiate the fields
      * \param enchantmentType
+     * \param decoratedInstancePtr
      */
-    explicit Shield(const string& enchantmentType);
+    explicit Shield(const string& enchantmentType,  fighter * decoratedInstancePtr);
+
+    string getType() override;
+
+    string getTypes() override;
+
+private:
+    string itemType = "Shield";
 };
 
 #endif //SHIELD_H

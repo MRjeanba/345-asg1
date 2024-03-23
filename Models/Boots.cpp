@@ -20,8 +20,14 @@ Boots Boots::createBoots(const string &enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Boots(enchantmentType);
+        return Boots(enchantmentType, nullptr);
 
     throw invalid_argument("Invalid enchantment type provided for the Boots creation");
 }
-Boots::Boots(const string &enchantmentType): Item(enchantmentType) {}
+Boots::Boots(const string &enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {}
+
+string Boots::getType() { return "Boots"; }
+
+string Boots::getTypes() {
+    return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}

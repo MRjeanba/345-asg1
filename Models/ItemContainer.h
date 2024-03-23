@@ -11,14 +11,14 @@ using std::vector;
 
 class ItemContainer {
 private:
-    vector<Item> containedItems;
+    vector<Item *> containedItems;
 public:
     /**
      * \brief Get an Item in the container
      * \param position an integer representing a position in the container
      * \return The Item located at the given position
      */
-    Item getItemAtPosition(int& position);
+    Item * getItemAtPosition(int& position);
 
     /**
      * Get the size of the container
@@ -30,7 +30,7 @@ public:
      * \brief Add the given item to the container
      * \param itemToAdd the item we want to add to the container
      */
-    void addItemToContainer(Item& itemToAdd);
+    void addItemToContainer(Item * itemToAdd);
 
     /**
      * Base constructor to create a container

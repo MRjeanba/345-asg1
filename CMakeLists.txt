@@ -59,6 +59,8 @@ add_executable(345_asg1 driver.cpp
         Models/knight.h
         Controllers/gameController.cpp
         Controllers/gameController.h
+        Models/WornItemsDecorator.cpp
+        Models/WornItemsDecorator.h
 )
 
 

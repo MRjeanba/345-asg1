@@ -18,8 +18,17 @@ Ring Ring::createRing(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Ring(enchantmentType);
+        return Ring(enchantmentType, nullptr);
 
     throw invalid_argument("Invalid enchantment type provided for the creation of the Ring item");
 }
-Ring::Ring(const string& enchantmentType): Item(enchantmentType){}
+
+Ring::Ring(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {
+    this->itemType == Ring::getType();
+}
+
+string Ring::getType() {return itemType;}
+
+string Ring::getTypes() {
+    return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}

@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include "../../Models/Helmet.h"
 
-    /**
+/**
      * This test verify that the HelmetCreation behaves correctly
      * In this case we expect that with a wrong enchantmentType the creation should throw an error
      */

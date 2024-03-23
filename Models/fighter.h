@@ -1,5 +1,6 @@
 #ifndef FIGHTER_H
 #define FIGHTER_H
+#include "EnchantmentInfo.h"
 using namespace std;
 #include <string>
 #include "Observable.h"
@@ -16,16 +17,19 @@ protected:
     int damageBonus;
     int hp;
     string item;
+    EnchantmentInfo enchantmentsDetails;
 
 public:
     /**
     This is the constructor method for a fighter object, which sets all the variables for a fighter object
     by using methods defined. Certains variables will depend on the level of the fighter, which means that
     methods are called with "level_" as a parameter.
-    @param param1 int level in range 1 to 5
+    @param level_ int level in range 1 to 5
     @return
     */
     fighter(int level_);
+
+    fighter();
 
     /**
     Getter function to fetch the "level" variable of the fighter object
@@ -218,6 +222,26 @@ public:
     @return void
     */
     virtual void displayCharacter();
+
+    /**
+     * Get the enchantment characteristics of the user, is the instance is decorated by items, these will add their
+     * enchantment bonus to the corresponding enchantmentType of the character
+     * @return a map<string,int> from enchantmentType to Bonus
+     */
+    virtual map<string,int> getEnchantmentsCharacteristics();
+
+    /**
+     * Get the type of the current fighter instance
+     * @return a string indicating the type
+     */
+    virtual string getType();
+
+    /**
+     * Get the type of the current fighter instance but also the type of all the decorators wrapping the fighter
+     * @return a string aggregating the types
+     */
+    virtual string getTypes();
+
 
     /**
   This method is used to update fighter and notify observers

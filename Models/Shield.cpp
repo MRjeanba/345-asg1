@@ -14,9 +14,15 @@ Shield Shield::createShield(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"ArmorClass"};
 
     if (enchantmentType == validEnchantmentTypes[0])
-        return Shield(enchantmentType);
+        return Shield(enchantmentType, nullptr);
 
     throw invalid_argument("Invalid enchantment type provided for the Shield creation");
 }
 
-Shield::Shield(const string &enchantmentType): Item(enchantmentType) {}
+Shield::Shield(const string &enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {}
+
+string Shield::getType() { return "Shield"; }
+
+string Shield::getTypes() {
+    return this->getFighterPtr()->getTypes() + getType() + "\n";
+}
