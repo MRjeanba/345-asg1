@@ -1,5 +1,7 @@
-# COMP 345 ASSIGNMENT 1 Pointer Masters 
-**Team Members: **  
+# COMP 345 Project: D&D Game
+## Team name: Pointer Masters  
+![alt text](https://images.ctfassets.net/swt2dsco9mfe/G8hY5RaUUgMiwctolsI0K/1496009a9a957296d768d86e7503b5ca/157997_1920x1342.jpg?q=70)
+**Team Members:**  
 Jean-Baptiste Garibo 40223491  
 Sarah Amaniss 40213883  
 Steven Lam 40226649  
@@ -7,13 +9,13 @@ Marilyne Nguyen 40228396
 
 ## project requirement
 - IDE preferred: CLionNova or CLion  
-- Compiler MinGW bundled from CLion  
-- Cmake is needed to fetch the googletest library in order to run our unit tests, without it, you can't interpret the script from CMakeLists.txt
+- Make sure to configure CMake before running the project, CMake will set the C++ version(17)    
+- Cmake is also needed to fetch the googletest library in order to run our unit tests  
 
 ## project structure:
-- driver.cpp (To run the future project)
+- driver.cpp (Run the project)
   
-- Models/ (Contains all the Models used in game, todo: clean the structure)
+- Models/ (Contains all the Models used in game, todo: clean the structure, make itemsModels, characterModels mapModels folders)
   * Items
   * ItemContainers
   * Characters
