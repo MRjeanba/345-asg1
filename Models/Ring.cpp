@@ -24,12 +24,12 @@ Ring Ring::createRing(const string& enchantmentType) {
     throw invalid_argument("Invalid enchantment type provided for the creation of the Ring item");
 }
 
-Ring::Ring(const string &enchantmentType, fighter *decoratedInstancePtr): Item(enchantmentType),
-                                                                          WornItemsDecorator(decoratedInstancePtr) {
+Ring::Ring(const string &enchantmentType, fighter *decoratedInstancePtr):WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
     if (!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     } else {
         cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
+        throw std::runtime_error("Cannot wear another " + itemType + "!\nAborting...");
         return;
     }
 }
