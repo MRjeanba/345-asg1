@@ -46,7 +46,7 @@ public:
 
     // virtual map<string, int> getEnchantmentsCharacteristics() override;
 
-    string getType() override;
+    //string getType() override;
 
     string getTypes() override = 0;
 

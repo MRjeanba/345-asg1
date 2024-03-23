@@ -92,3 +92,6 @@ void wizard::update()
 {
     std::cout << "Wizard received an update from Observable!" << std::endl;
 }
+
+void wizard::update(const std::string &message) {
+}

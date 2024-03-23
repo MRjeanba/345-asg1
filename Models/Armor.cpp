@@ -20,6 +20,9 @@ Armor Armor::createArmor(const string& enchantmentType) {
 }
 
 Armor::Armor(const string& enchantmentType, fighter* decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {
+    if(!isItemTypeWorn.at(itemType)) {
+        isItemTypeWorn.at(itemType) = true;
+    }
 }
 
 string Armor::getType() {

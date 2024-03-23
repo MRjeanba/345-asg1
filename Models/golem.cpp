@@ -91,3 +91,7 @@ void golem::update()
 {
     std::cout << "Golem received an update from Observable!" << std::endl;
 }
+
+void golem::update(const std::string &message) {
+    //Observer::update(message);
+}

@@ -26,7 +26,8 @@ public:
     /**
      * @brief Update method to be called when the observed fighter object's attributes are updated.
      */
-    void update(const std::string& message);
+    void update(const std::string &message) override;
+
 };
 
 #endif // CHARACTEROBSERVER_H

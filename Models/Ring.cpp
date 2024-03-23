@@ -3,6 +3,7 @@
 //
 #include "Ring.h"
 #include <algorithm>
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 using std::vector;
@@ -23,8 +24,14 @@ Ring Ring::createRing(const string& enchantmentType) {
     throw invalid_argument("Invalid enchantment type provided for the creation of the Ring item");
 }
 
-Ring::Ring(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {
-    this->itemType == Ring::getType();
+Ring::Ring(const string &enchantmentType, fighter *decoratedInstancePtr): Item(enchantmentType),
+                                                                          WornItemsDecorator(decoratedInstancePtr) {
+    if (!isItemTypeWorn.at(itemType)) {
+        isItemTypeWorn.at(itemType) = true;
+    } else {
+        cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
+        return;
+    }
 }
 
 string Ring::getType() {return itemType;}

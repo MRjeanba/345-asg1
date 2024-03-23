@@ -76,7 +76,8 @@ public:
      * This method will update the golem
   @return void
 */
-    void update() override;
+    void update();//override;
+    void update(const std::string &message) override;
 };
 
 #endif

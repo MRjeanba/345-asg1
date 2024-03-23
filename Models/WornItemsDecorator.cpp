@@ -19,10 +19,6 @@ WornItemsDecorator::WornItemsDecorator(fighter* fighterPtr):fighter() {
     try {
         itemType = fighterPtr->getType();
         //itemType = this->itemType;
-        if (isItemTypeWorn.at(itemType)) {
-            cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
-            return;
-        }
     } catch (...) {
         if (itemType == "character") {
             this->character = fighterPtr;
@@ -35,7 +31,7 @@ WornItemsDecorator::WornItemsDecorator(fighter* fighterPtr):fighter() {
         cout << "Decorating the character..." << endl;
     } else {
         cout << "adding the " + itemType + " on the character..." << endl;
-        WornItemsDecorator::isItemTypeWorn.at(itemType) = true;
+        //WornItemsDecorator::isItemTypeWorn.at(itemType) = true;
     }
     this->character = fighterPtr;
 }
@@ -63,7 +59,7 @@ void WornItemsDecorator::remove(WornItemsDecorator * headPtr) {
 void WornItemsDecorator::remove(const string &itemTypeToRemove, WornItemsDecorator * headPtr) {
 
     // case where we want to remove the first element of the list
-    if (itemTypeToRemove == itemType && headPtr == this) {
+    if (itemTypeToRemove == this->getType() && headPtr == this) {
         WornItemsDecorator * tempPtr = this;
         headPtr = dynamic_cast<WornItemsDecorator *>(this->character);
         //delete tempPtr;
@@ -94,6 +90,6 @@ WornItemsDecorator::~WornItemsDecorator() {
     character = nullptr;
 }
 
-string WornItemsDecorator::getType() {
-    return itemType;
-}
+// string WornItemsDecorator::getType() {
+//     return itemType;
+// }
