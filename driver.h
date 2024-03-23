@@ -28,7 +28,7 @@ inline void displayGameMenu() {
 
     int userChoice;
     cout << "Welcome to the JUICE Game!\n" << endl;
-    cout << "Please select something:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5 Test the CharacterWornItems as Decorators\n6: Quit" << endl;
+    cout << "Please select something:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Test the CharacterWornItems as Decorators\n6: Quit" << endl;
     cin >> userChoice;
     fighter *UserCharacter;
 
@@ -67,6 +67,7 @@ inline void displayGameMenu() {
                 cout << "Do you want to remove an item (1) or see the augmented characteristics? (2):" << endl;
                 cin >> uChoice;
                 if (uChoice == 1) {
+                    Clear();
                     testPtr = testPtr->remove(testPtr);
                     cout << "Items after remove operation:" << endl;
                     cout << testPtr->getTypes();
@@ -82,7 +83,7 @@ inline void displayGameMenu() {
                 throw std::runtime_error("flemme de handle ce case ecris entre 1 et 5 please");
             }
         }
-        cout << "Please select something else to do:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5 Test the CharacterWornItems as Decorators\n6: Quit" << endl;
+        cout << "Please select something else to do:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Test the CharacterWornItems as Decorators\n6: Quit" << endl;
         cin >> userChoice;
     }
 }
