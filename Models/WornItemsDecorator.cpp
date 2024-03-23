@@ -27,7 +27,7 @@ WornItemsDecorator::WornItemsDecorator(fighter* fighterPtr):fighter() {
     if (itemType == "character") {
         cout << "Decorating the character..." << endl;
     } else {
-        cout << "adding the " + itemType + " on the character..." << endl;
+        // cout << "adding the " + itemType + " on the character..." << endl;
         //WornItemsDecorator::isItemTypeWorn.at(itemType) = true;
     }
     this->character = fighterPtr;
