@@ -75,6 +75,9 @@ void wizard::displayCharacter()
 {
     cout << "Display of the wizard: " << endl;
     cout << "Level: " << getLevel() << endl;
+    cout<< "Wisdom: " << getWisdom() << endl;
+    cout<< "Intelligence: " << getIntelligence() << endl;
+    cout<< "Charisma: " << getCharisma() << endl;
     cout << "Strenght: " << getStrength() << endl;
     cout << "Dexterity: " << getDexterity() << endl;
     cout << "Constitution: " << getConstitution() << endl;
@@ -86,6 +89,7 @@ void wizard::displayCharacter()
     cout << "Wizard Type: " << getWizardType() << endl;
     cout << "Spell: " << getSpell() << endl;
     cout << "Wizard Weapon: " << getWizardWeapon() << endl;
+    cout << "\nWe rolled the dice! You're a NIMBLE fighter! " << endl;
 }
 
 void wizard::update()

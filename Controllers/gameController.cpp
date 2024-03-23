@@ -6,6 +6,7 @@ inline void loadMap(Map &mapToFill, const std::string &filename)
     std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
     cereal::XMLInputArchive archive(is);
     archive(mapToFill);
+    archive(mapToFill);
 }
 
 gameController::gameController() {

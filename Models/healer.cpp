@@ -35,7 +35,10 @@ void healer::setHp(int level)
 void healer::displayCharacter()
 {
     cout<< "Display of the healer: "<< endl; 
-    cout<< "Level: " << getLevel() << endl; 
+    cout<< "Level: " << getLevel() << endl;
+    cout<< "Wisdom: " << getWisdom() << endl;
+    cout<< "Intelligence: " << getIntelligence() << endl;
+    cout<< "Charisma: " << getCharisma() << endl;
     cout<< "Strenght: " << getStrength() << endl; 
     cout<< "Dexterity: " << getDexterity() << endl; 
     cout<< "Constitution: " << getConstitution() << endl; 
@@ -49,6 +52,7 @@ void healer::displayCharacter()
     for (const auto& str : getPower()) {
         cout << str << " ";
     }
+    cout << "\nWe rolled the dice! You're a NIMBLE fighter! " << endl;
 }
 
 void healer::update() {

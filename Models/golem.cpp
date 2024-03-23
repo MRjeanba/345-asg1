@@ -71,6 +71,9 @@ void golem::displayCharacter()
 {
     cout << "Display of the golem: " << endl;
     cout << "Level: " << getLevel() << endl;
+    cout<< "Wisdom: " << getWisdom() << endl;
+    cout<< "Intelligence: " << getIntelligence() << endl;
+    cout<< "Charisma: " << getCharisma() << endl;
     cout << "Strenght: " << getStrength() << endl;
     cout << "Dexterity: " << getDexterity() << endl;
     cout << "Constitution: " << getConstitution() << endl;
@@ -81,10 +84,12 @@ void golem::displayCharacter()
     cout << "HP: " << getHp() << endl;
     cout << "Golem Type: " << getGolemType() << endl;
     cout << "Golem Attacks: " << endl;
+
     for (const auto &str : getAttacks())
     {
         cout << str << " ";
     }
+    cout << "\nWe rolled the dice! You're a BULLY fighter! " << endl;
 }
 
 void golem::update()

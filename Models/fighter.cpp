@@ -380,6 +380,8 @@ void fighter::displayCharacter()
     cout<< "Damage Bonus: " << getDamageBonus() << endl;
     cout<< "HP: " << getHp() << endl;
     cout<< "Item: " << getItem() << endl;
+    cout << "\nWe rolled the dice! You're a BULLY fighter! " << endl;
+
 }
 
 /**

@@ -64,6 +64,9 @@ void knight::displayCharacter()
 {
     cout << "Display of the knight: " << endl;
     cout << "Level: " << getLevel() << endl;
+    cout<< "Wisdom: " << getWisdom() << endl;
+    cout<< "Intelligence: " << getIntelligence() << endl;
+    cout<< "Charisma: " << getCharisma() << endl;
     cout << "Strenght: " << getStrength() << endl;
     cout << "Dexterity: " << getDexterity() << endl;
     cout << "Constitution: " << getConstitution() << endl;
@@ -75,6 +78,7 @@ void knight::displayCharacter()
     cout << "hp: " << getHp() << endl;
     cout << "Charging Damage: " << getChargingDamage() << endl;
     cout << "Knight Weapon: " << getKnightWeapon() << endl;
+    cout << "\nWe rolled the dice! You're a TANK fighter! " << endl;
 }
 void knight::update()
 {

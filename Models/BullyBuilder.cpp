@@ -4,17 +4,31 @@
 
 #include "fighter.h"
 #include "BullyBuilder.h"
+#include "Dice.h"
 
 BullyBuilder::BullyBuilder() {
     fighter_ = new fighter(1);
 }
 
 void BullyBuilder::setAbilities() {
-    fighter_->setStrength(1);
-    fighter_->setConstitution(1);
-    fighter_->setWisdom(1);
-    fighter_->setIntelligence(1);
-    fighter_->setCharisma(1);
+
+    Dice rollDice;
+
+    vector<int> diceResults;
+    for (int i = 0; i < 5; ++i) {
+        int result = rollDice.rollDice("1d6+0"); // Roll a d6
+        diceResults.push_back(result);
+    }
+
+    sort(diceResults.begin(), diceResults.end());
+
+    fighter_->setStrength(diceResults[0]);
+    fighter_->setConstitution(diceResults[1]);
+    fighter_->setDexterity(diceResults[2]);
+    fighter_->setIntelligence(diceResults[3]);
+    fighter_->setCharisma(diceResults[4]);
+    fighter_->setWisdom(diceResults[5]);
+
 }
 
 void BullyBuilder::setLevel() {
