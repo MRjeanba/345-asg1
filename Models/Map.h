@@ -16,7 +16,8 @@ enum class CellType
     Empty,
     Wall,
     Character,
-    Occupied
+    Occupied,
+    End
 };
 
 // Define single cell
@@ -116,6 +117,7 @@ public:
     bool isValidMap(int begin_i, int begin_j, int end_i, int end_j) const;
 
     int getHeight();
+    int getWidth();
     // This method lets cereal know which data members to serialize
     template <class Archive>
     void serialize(Archive &archive)

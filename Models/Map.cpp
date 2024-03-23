@@ -119,9 +119,15 @@ bool Map::isValidMap(int begin_i, int begin_j, int end_i, int end_j) const
 
 int Map::getHeight()
 {
-    std::cout << height << std::endl;
     return this->height;
 }
+
+int Map::getWidth()
+{
+    return this->width;
+}
+
+
 void Map::displayMap() {
     for (int j = 0; j < height; ++j) {
         for (int i = 0; i < width; ++i) {
@@ -134,6 +140,9 @@ void Map::displayMap() {
                     break;
                 case CellType::Character: // Display "@" for character
                     std::cout << "@";
+                    break;
+                case CellType::End: // Display "X" for end cell
+                    std::cout << "X";
                     break;
                 default:
                     std::cout << "?"; // Unknown cell type

@@ -31,13 +31,14 @@ inline void displayGameMenu() {
     while (userChoice != 5) {
         switch (userChoice) {
             case 1: {
-                gameControllerHere.displayMenu();
                 cout << "\nCreate a your character please" << endl;
                 string name;
                 cout << "Enter a name for your character: \n" << endl;
                 cin >> name;
                 UserCharacter = characterEditorController.createCharacter(name);
                 // throw std::runtime_error("NOT IMPLEMENTED YET.");
+//                gameControllerHere.displayMenu();
+                gameControllerHere.startGame();
                 break;
             }
             case 2: {

@@ -158,40 +158,47 @@ void MapEditorController::registerCampaignEditor(CampaignEditorController *campa
 
 void MapEditorController::updateMap(Map &mapToUpdate, const string& mapName) {
     std::string userChoice;
-    std::cout << "Currently the map looks like that: " << std::endl;
+    std::cout << "Currently the map looks like this:" << std::endl;
     mapToUpdate.displayMap();
-    std::cout << "Do you want to modify some of the cells Y/N?" << std::endl;
+    std::cout << "Do you want to modify some of the cells? (Y/N)" << std::endl;
     std::cin >> userChoice;
 
     while (userChoice != "N") {
         int row, col;
         int cellType;
 
-        std::cout << "Enter the row of the cell that you want to modify (start from 0)" << std::endl;
+        std::cout << "Enter the row of the cell that you want to modify (starting from 0):" << std::endl;
         std::cin >> row;
-        std::cout << "Now, enter the row of the cell that you want to modify (start from 0)" << std::endl;
+        std::cout << "Now, enter the column of the cell that you want to modify (starting from 0):" << std::endl;
         std::cin >> col;
-        std::cout << "Now, please choose a type for the given cell\n0:Empty\n1:Wall" << std::endl;
+
+        if (row == 0 && col == 0) {
+            std::cout << "This is your begin cell! You cannot insert here." << std::endl;
+            continue; // Skip the rest of the loop and start again
+        }
+
+        std::cout << "Now, please choose a type for the given cell:\n0: Empty\n1: Wall" << std::endl;
         std::cin >> cellType;
+
         try {
             switch (cellType) {
                 case 0:
-                    mapToUpdate.setCellType(row,col,CellType::Empty);
-                break;
+                    mapToUpdate.setCellType(row, col, CellType::Empty);
+                    break;
                 case 1:
-                    mapToUpdate.setCellType(row,col,CellType::Wall);
-                break;
+                    mapToUpdate.setCellType(row, col, CellType::Wall);
+                    break;
                 default:
-                    std::cout << "Please provide a valid type as mentionned above... the current choice has not been taken into account.";
-                break;
+                    std::cout << "Please provide a valid type as mentioned above. The current choice has not been taken into account." << std::endl;
+                    break;
             }
             saveMapToFile(mapToUpdate, mapName);
-            std::cout << "Map updated successfully!";
+            std::cout << "Map updated successfully!" << std::endl;
         } catch (...) {
-            std::cout << "Wrong input, please enter as stated above 0 or 1 for the cell type!"  << std::endl;
+            std::cout << "Wrong input. Please enter 0 or 1 for the cell type." << std::endl;
         }
 
-        std::cout << "Do you want to modify another cell? answer with Y/N:\nRight now, the map looks like that:\n";
+        std::cout << "Do you want to modify another cell? (Y/N)" << std::endl;
         mapToUpdate.displayMap();
         std::cin >> userChoice;
     }
