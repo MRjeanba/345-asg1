@@ -2,6 +2,7 @@
 #define DICE_H
 #include <string>
 #include <random>
+#include "Observable.h"
 using std::string;
 /**
 Dice class that can create Dice objects that can roll
@@ -10,7 +11,7 @@ Included string and random librairies
 - string: for the method isValidExpression, some methods from that library are necessary (parsing, text processing)
 - random: to produce random numbers
 */
-class Dice
+class Dice: public Observable
 {
 private:
     int result; // result of the roll
@@ -36,6 +37,7 @@ public:
     @return boolean value true if the expression is following this format xdy+z
     */
     bool isValidExpression(string expression); // checking if the expression respects the format xdy+z
+    void roll(int result);
 };
 
 #endif

@@ -186,7 +186,7 @@ void fighter::updateFighter() {
     setHp(level);
     setItem();
 
-    notifyObservers();
+    notifyObservers("The fighter is updated");
 }
 
 
@@ -203,6 +203,11 @@ void fighter::displayCharacter()
     cout<< "DamageBonus: " << getDamageBonus() << endl; 
     cout<< "HP: " << getHp() << endl; 
     cout<< "Item: " << getItem() << endl; 
+}
+
+void fighter::attack(const std::string& result)
+{
+    notifyObservers("Attack attempted and its result: " + result);
 }
 
 

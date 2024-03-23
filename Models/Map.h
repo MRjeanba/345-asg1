@@ -8,6 +8,7 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/vector.hpp>
 #include "MapObserver.h"
+#include "Observable.h"
 
 // Define Cell Types
 enum class CellType
@@ -61,7 +62,7 @@ public:
 /**
  * @brief Represents a grid map composed of cells.
  */
-class Map
+class Map : public Observable
 {
 private:
     int width;                                 /**< Width of the map. */
@@ -129,6 +130,7 @@ public:
     void registerObserver(MapObserver *observer);
     void unregisterObserver(MapObserver *observer);
     void notifyObservers();
+    void recordMovement(const std::string& movement);
 };
 
 #endif

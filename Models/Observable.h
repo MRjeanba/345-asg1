@@ -12,9 +12,10 @@
 /**
  * @brief The Observable class represents an observable object that can be observed by multiple observers.
  */
-class Observable : public Observer {
+class Observable {
 protected:
     std::vector<Observer*> observers; /**< Vector to store pointers to the registered observers */
+    bool isEnabled = true;
 
 public:
     /**
@@ -40,16 +41,23 @@ public:
     /**
      * @brief Notifies all registered observers that an update has occurred.
      */
-    void notifyObservers() {
-        for (Observer* observer : observers) {
-            observer->update();
+    void notifyObservers(const std::string& message) {
+        if(isEnabled)
+        {
+            for (Observer* observer : observers) {
+                observer->update(message);
+            }
         }
+    }
+
+    void setEnabled(bool enabled) {
+        isEnabled = enabled;
     }
 
     /**
      * @brief Virtual method to be overridden by subclasses for specific update behavior.
      */
-    virtual void update() override {}
-};
+//    void update() override {}
+    };
 
 #endif
