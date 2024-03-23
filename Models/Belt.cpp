@@ -25,7 +25,7 @@ Belt Belt::createBelt(const string& enchantmentType) {
 
     throw invalid_argument("Invalid enchantment type provided for the belt creation");
 }
-Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType),WornItemsDecorator(decoratedInstancePtr) {
+Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
     if (!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     } else {

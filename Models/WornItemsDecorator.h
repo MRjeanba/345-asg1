@@ -44,7 +44,7 @@ public:
 
     virtual ~WornItemsDecorator();
 
-    // virtual map<string, int> getEnchantmentsCharacteristics() override;
+    virtual map<string, int> getEnchantmentsCharacteristics() override;
 
     //string getType() override;
 
@@ -52,9 +52,9 @@ public:
 
     virtual fighter* getFighterPtr();
 
-    void remove(WornItemsDecorator * headPtr);
+    WornItemsDecorator * remove(WornItemsDecorator * headPtr);
 
-    void remove(const string& itemTypeToRemove, WornItemsDecorator * headPtr);
+    WornItemsDecorator * remove(const string& itemTypeToRemove, WornItemsDecorator * headPtr);
 
 private:
     fighter *character = nullptr;
