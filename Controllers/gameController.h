@@ -13,11 +13,12 @@ private:
     void displayMaps();
     int selectMap();
     void displaySelectedMap(Map& selectedMap);
-    void startGame();
 
 public:
     gameController();
     void displayMenu();
+    void keepGoingGame();
+    void startGame();
 };
 
 #endif // GAMECONTROLLER_H

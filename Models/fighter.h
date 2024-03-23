@@ -1,9 +1,11 @@
 #ifndef FIGHTER_H
 #define FIGHTER_H
+
 #include "EnchantmentInfo.h"
-using namespace std;
-#include <string>
 #include "Observable.h"
+#include <string>
+#include <map>
+using namespace std;
 
 class fighter : public Observable {
 protected:
@@ -11,6 +13,9 @@ protected:
     int strength;
     int dexterity;
     int constitution;
+    int wisdom;
+    int charisma;
+    int intelligence;
     int hitpoints;
     int armorClass;
     int attackBonus;
@@ -22,7 +27,7 @@ protected:
 public:
     /**
     This is the constructor method for a fighter object, which sets all the variables for a fighter object
-    by using methods defined. Certains variables will depend on the level of the fighter, which means that
+    by using methods defined. Certain variables will depend on the level of the fighter, which means that
     methods are called with "level_" as a parameter.
     @param level_ int level in range 1 to 5
     @return
@@ -42,6 +47,24 @@ public:
     @return int
     */
     int getStrength();
+
+    /**
+    Getter function to fetch the "wisdom" of the fighter object
+    @return int
+    */
+    int getWisdom();
+
+    /**
+    Getter function to fetch the "intelligence" of the fighter object
+    @return int
+    */
+    int getIntelligence();
+
+    /**
+    Getter function to fetch the "charisma" of the fighter object
+    @return int
+    */
+    int getCharisma();
 
     /**
     Getter function to fetch the "dexterity" variable of the fighter object
@@ -110,6 +133,27 @@ public:
     void setStrength(int strength_);
 
     /**
+    This method is used to set a new value to variable "wisdom" of fighter object
+    @param param1 int wisdom
+    @return void
+    */
+    void setWisdom(int wisdom_);
+
+    /**
+    This method is used to set a new value to variable "intelligence" of fighter object
+    @param param1 int intelligence
+    @return void
+    */
+    void setIntelligence(int intelligence_);
+
+    /**
+    This method is used to set a new value to variable "charisma" of fighter object
+    @param param1 int charisma
+    @return void
+    */
+    void setCharisma(int charisma_);
+
+    /**
     This method is used to set a new value to variable "dexterity" of fighter object
     @param param1 int dexterity
     @return void
@@ -153,7 +197,7 @@ public:
 
     /**
     This method is used to set a new value to variable "hp" of fighter object. This method is also made
-    virtual, since it is going to be overriden in child class.
+    virtual, since it is going to be overridden in child class.
     @param param1 int hep
     @return void
     */
@@ -174,7 +218,7 @@ public:
     int generateRandomNum();
 
     /**
-    This method set the values for 3 variables (strenght, dexterity, constitution) of fighter class. It does
+    This method set the values for 3 variables (strength, dexterity, constitution) of fighter class. It does
     this, by using the setter functions of these 3 variables, which in turn invoke generateRandomNumber() method
     to randomly set the values of these abilities.
     @return void
@@ -195,8 +239,8 @@ public:
     */
     void calculateArmorClass();
 
-    /**
-    This method calculate the "hitpoint" variable of the fighter class, and this value depends on the value of
+/**
+This method calculate the "hitpoint" variable of the fighter class, and this value depends on the value of
     the strength and level variables of the fighter object
     @return void
     */
@@ -210,7 +254,7 @@ public:
     void calculateDamageBonus();
 
     /**
-    This method calculate the a value depending on the parameter passed to the function. It is a helper method
+    This method calculate a value depending on the parameter passed to the function. It is a helper method
     to the setter function
     @return int
     */
@@ -218,13 +262,13 @@ public:
 
     /**
     This method is used to display all the values of the variables of the fighter object on the terminal and
-    it is meant to be overriden in child classes.
+    it is meant to be overridden in child classes.
     @return void
     */
     virtual void displayCharacter();
 
     /**
-     * Get the enchantment characteristics of the user, is the instance is decorated by items, these will add their
+     * Get the enchantment characteristics of the user, if the instance is decorated by items, these will add their
      * enchantment bonus to the corresponding enchantmentType of the character
      * @return a map<string,int> from enchantmentType to Bonus
      */
@@ -242,11 +286,10 @@ public:
      */
     virtual string getTypes();
 
-
     /**
-  This method is used to update fighter and notify observers
-  @return void
-  */
+    This method is used to update fighter and notify observers
+    @return void
+    */
     virtual void updateFighter();
 
     void attachObserver(Observer* observer) {
