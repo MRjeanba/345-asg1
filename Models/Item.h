@@ -39,7 +39,6 @@ public:
   */
  virtual string getTypes() = 0;
 
-private:
  /**
   * \brief a structure holding the enchantment bonus and type in one place
   */

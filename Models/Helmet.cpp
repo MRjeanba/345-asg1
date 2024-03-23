@@ -38,7 +38,7 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
  * \param enchantmentType At this stage, the enchantmentType is valid so we proceed to create the Item
  * \param decoratedInstancePtr
  */
-Helmet::Helmet(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {
+Helmet::Helmet(const string& enchantmentType, fighter * decoratedInstancePtr): WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
     if (!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     } else {

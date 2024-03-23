@@ -13,13 +13,14 @@
 
 int main()
 {
+    srand((unsigned int)time(NULL));
     // Run the game menu
-    // displayGameMenu();
-    // auto * testPtr = new Helmet("Wisdom", new Belt("Strength", new Ring("Wisdom", new fighter())));
+    displayGameMenu();
+    // WornItemsDecorator * testPtr = new Helmet("Wisdom", new Belt("Strength", new Ring("Wisdom", new fighter())));
     // //testPtr->isItemTypeWorn.at(testPtr->getType()) = true;
     // cout << "items currently worn" << endl;
     // cout << testPtr->getTypes();
-    // testPtr->remove(testPtr);
+    // testPtr = testPtr->remove(testPtr);
     // cout << testPtr->getTypes();
 
     return 0;

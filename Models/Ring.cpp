@@ -24,8 +24,7 @@ Ring Ring::createRing(const string& enchantmentType) {
     throw invalid_argument("Invalid enchantment type provided for the creation of the Ring item");
 }
 
-Ring::Ring(const string &enchantmentType, fighter *decoratedInstancePtr): Item(enchantmentType),
-                                                                          WornItemsDecorator(decoratedInstancePtr) {
+Ring::Ring(const string &enchantmentType, fighter *decoratedInstancePtr):WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
     if (!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     } else {

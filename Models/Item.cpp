@@ -17,8 +17,8 @@ void Item::outputInfos() {
 
 Item::Item(const string& enchantmentType) {
     // to have more random number
-    srand((unsigned int)time(NULL));
-    int randomEnchantBonus = rand() % 6;
+    //srand((unsigned int)time(NULL));
+    int randomEnchantBonus = rand() % 5 +1;
     this->enchantmentDetails = {randomEnchantBonus, enchantmentType};
     this->enchantmentDetails.enchantmentTypeToBonus.insert({enchantmentType,randomEnchantBonus});
     //std::cout << "Item created, here are the details: ";
