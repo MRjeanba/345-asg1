@@ -27,7 +27,7 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType){
-        return Helmet(enchantmentType);
+        return Helmet(enchantmentType, nullptr);
     }
     throw invalid_argument("The enchantment type provided does not match with the accepted enchantment types");
 }
@@ -35,5 +35,13 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
 /**
  * \brief Calls the Item constructor to build the Helmet
  * \param enchantmentType At this stage, the enchantmentType is valid so we proceed to create the Item
+ * \param decoratedInstancePtr
  */
-Helmet::Helmet(const string& enchantmentType): Item(enchantmentType){}
+Helmet::Helmet(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {
+}
+
+string Helmet::getType() { return itemType; }
+
+string Helmet::getTypes() {
+    return getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}

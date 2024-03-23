@@ -20,8 +20,14 @@ Belt Belt::createBelt(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Belt(enchantmentType);
+        return Belt(enchantmentType, nullptr);
 
     throw invalid_argument("Invalid enchantment type provided for the belt creation");
 }
-Belt::Belt(const string& enchantmentType): Item(enchantmentType) {}
+Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType),WornItemsDecorator(decoratedInstancePtr) {}
+
+string Belt::getType() { return itemType; }
+
+string Belt::getTypes() {
+    return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}

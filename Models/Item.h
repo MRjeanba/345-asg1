@@ -11,13 +11,10 @@
  */
 class Item
 {
-private:
-    /**
-     * \brief a structure holding the enchantment bonus and type in one place
-     */
- EnchantmentInfo enchantmentDetails{};
 public:
-    /**
+ virtual ~Item() = default;
+
+ /**
      * Creates an instance of an Item, with the given enchantType
      * @param enchantType the enchantmentType provided by the user
      */
@@ -31,6 +28,22 @@ public:
   * Helper method just to display the item at its creation to see if it is working
   */
  void outputInfos();
+
+ /**
+  * Return the type of the current item
+  */
+ virtual string getType() = 0;
+
+ /**
+  * Return the type of the current item + all the decorated items
+  */
+ virtual string getTypes() = 0;
+
+private:
+ /**
+  * \brief a structure holding the enchantment bonus and type in one place
+  */
+ EnchantmentInfo enchantmentDetails{};
 };
 
 

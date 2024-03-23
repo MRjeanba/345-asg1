@@ -20,9 +20,15 @@ Weapon Weapon::createWeapon(const string &enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Weapon(enchantmentType);
+        return Weapon(enchantmentType, nullptr);
 
     throw invalid_argument("Invalid enchantment type provided for the belt creation");
 }
 
-Weapon::Weapon(const string& enchantmentType): Item(enchantmentType) {}
+Weapon::Weapon(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {}
+
+string Weapon::getType() { return "Weapon"; }
+
+string Weapon::getTypes() {
+    return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}

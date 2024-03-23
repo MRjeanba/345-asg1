@@ -6,9 +6,10 @@
 #define BELT_H
 #include <string>
 #include "Item.h"
+#include "WornItemsDecorator.h"
 using std::string;
 
-class Belt: public Item {
+class Belt: public Item, public WornItemsDecorator {
 public:
 
     /**
@@ -21,8 +22,16 @@ public:
     /**
      * \brief Simply instantiate a Belt with the valid enchantment type.
      * \param enchantmentType the valid enchantment type to forward.
+     * \param decoratedInstancePtr
      */
-    explicit Belt(const string& enchantmentType);
+    explicit Belt(const string& enchantmentType, fighter * decoratedInstancePtr);
+
+    string getType() override;
+
+    string getTypes() override;
+
+private:
+    string itemType = "Belt";
 };
 
 #endif //BELT_H

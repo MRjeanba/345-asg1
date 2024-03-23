@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cereal>
+	<value0>
+		<value0>5</value0>
+		<value1>5</value1>
+		<value2 size="dynamic">
+			<value0 size="dynamic">
+				<value0>
+					<value0>1</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+				<value3>
+					<value0>0</value0>
+				</value3>
+				<value4>
+					<value0>0</value0>
+				</value4>
+			</value0>
+			<value1 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+				<value3>
+					<value0>0</value0>
+				</value3>
+				<value4>
+					<value0>0</value0>
+				</value4>
+			</value1>
+			<value2 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+				<value3>
+					<value0>0</value0>
+				</value3>
+				<value4>
+					<value0>0</value0>
+				</value4>
+			</value2>
+			<value3 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+				<value3>
+					<value0>0</value0>
+				</value3>
+				<value4>
+					<value0>0</value0>
+				</value4>
+			</value3>
+			<value4 size="dynamic">
+				<value0>
+					<value0>0</value0>
+				</value0>
+				<value1>
+					<value0>0</value0>
+				</value1>
+				<value2>
+					<value0>0</value0>
+				</value2>
+				<value3>
+					<value0>0</value0>
+				</value3>
+				<value4>
+					<value0>0</value0>
+				</value4>
+			</value4>
+		</value2>
+	</value0>
+</cereal>
+

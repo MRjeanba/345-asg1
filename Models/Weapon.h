@@ -6,9 +6,10 @@
 #define WEAPON_H
 #include <string>
 #include "Item.h"
+#include "WornItemsDecorator.h"
 using std::string;
 
-class Weapon: public Item {
+class Weapon: public Item, WornItemsDecorator {
 public:
     /**
      * \brief Safely create an instance of Weapon if the provided enchantmentType is valid for the class.
@@ -20,8 +21,16 @@ public:
     /**
      * \brief Simply instantiate a Weapon with the valid enchantment type.
      * \param enchantmentType the valid enchantment type to forward.
+     * \param decoratedInstancePtr
      */
-    explicit Weapon(const string& enchantmentType);
+    explicit Weapon(const string& enchantmentType, fighter * decoratedInstancePtr);
+
+    string getType() override;
+
+    string getTypes() override;
+
+private:
+    string itemType = "Weapon";
 };
 
 #endif //WEAPON_H

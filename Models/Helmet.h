@@ -6,9 +6,10 @@
 #define HELMET_H
 #include <string>
 #include "Item.h"
+#include "WornItemsDecorator.h"
 using std::string;
 
-class Helmet: public Item {
+class Helmet: public Item, public WornItemsDecorator {
 public:
     /**
      * \brief safely instantiate a Helmet object if the provided enchantmentType is valid
@@ -20,8 +21,16 @@ public:
     /**
      * \brief instantiate an Object of the Helmet class by calling the parent class
      * \param enchantmentType the valid enchantment type for the Helmet class
+     * \param decoratedInstancePtr
      */
-    explicit Helmet(const string& enchantmentType);
+    explicit Helmet(const string& enchantmentType, fighter * decoratedInstancePtr);
+
+    string getType() override;
+
+    string getTypes() override;
+
+private:
+    string itemType = "Helmet";
 };
 
 

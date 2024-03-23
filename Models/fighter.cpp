@@ -26,6 +26,21 @@ fighter::fighter(int level_)
     setItem();
 }
 
+fighter::fighter(): level(0), strength(0), dexterity(0), constitution(0), hitpoints(0), armorClass(0), attackBonus(0),
+                    damageBonus(0), hp(0) {
+    this->enchantmentsDetails.enchantmentTypeToBonus = {
+        {"ArmorClass", 0},
+        {"Wisdom", 0},
+        {"Intelligence", 0},
+        {"Strength", 0},
+        {"Constitution", 0},
+        {"Charisma", 0},
+        {"Dexterity", 0},
+        {"AttackBonus", 0},
+        {"DamageBonus", 0},
+    };
+}
+
 int fighter::getLevel()
 {
     return level;
@@ -210,6 +225,17 @@ void fighter::attack(const std::string& result)
     notifyObservers("Attack attempted and its result: " + result);
 }
 
+map<string,int> fighter::getEnchantmentsCharacteristics() {
+    return this->enchantmentsDetails.enchantmentTypeToBonus;
+}
+
+string fighter::getType() {
+    return "character";
+}
+
+string fighter::getTypes() {
+    return "character";
+}
 
 
 
