@@ -61,6 +61,10 @@ add_executable(345_asg1 driver.cpp
         Controllers/gameController.h
         Models/WornItemsDecorator.cpp
         Models/WornItemsDecorator.h
+        Models/GameLog.cpp
+        Models/GameLog.h
+        Models/GameController.cpp
+        Models/GameController.h
 )
 
 
@@ -110,6 +114,8 @@ set(unitTestFiles
         Models/Shield.h
         Models/Shield.cpp
         GoogleTests/Models/ShieldTest.cpp
+        Models/GameLog.h
+        Models/GameController.h
 )
 add_executable(UnitTests ${unitTestFiles}) # add this executables
 

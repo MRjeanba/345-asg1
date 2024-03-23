@@ -253,6 +253,8 @@ public:
         registerObserver(observer);
     }
 
+    void attack(const std::string& result);
+
 };
 
 #endif

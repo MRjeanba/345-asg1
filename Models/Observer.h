@@ -3,7 +3,7 @@
 
 class Observer {
 public:
-    virtual void update() = 0;
+    virtual void update(const std::string& message) = 0;
 };
 
 #endif

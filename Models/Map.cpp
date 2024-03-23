@@ -172,3 +172,8 @@ void Map ::notifyObservers()
     std::cout << "Display of the updated map:  \n";
     this->displayMap();
 };
+
+void Map::recordMovement(const std::string& movement)
+{
+    Observable::notifyObservers("Movement on map: " + movement);
+}

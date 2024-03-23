@@ -46,3 +46,7 @@ int Dice::rollDice(string expression)
         return 0;
     }
 };
+
+void Dice::roll(int result) {
+    notifyObservers("Dice roll: " + std::to_string(result));
+}
