@@ -1,11 +1,15 @@
-# COMP 345 Project: D&D Game
-## Team name: Pointer Masters  
-![alt text](https://images.ctfassets.net/swt2dsco9mfe/G8hY5RaUUgMiwctolsI0K/1496009a9a957296d768d86e7503b5ca/157997_1920x1342.jpg?q=70)
+# COMP 345 Project: D&D Game  
+## Team name: Pointer Masters 
+
+  <img src="https://images.ctfassets.net/swt2dsco9mfe/G8hY5RaUUgMiwctolsI0K/1496009a9a957296d768d86e7503b5ca/157997_1920x1342.jpg?q=70" width="400" height="400">  
+
+
+
 **Team Members:**  
-Jean-Baptiste Garibo 40223491  
-Sarah Amaniss 40213883  
-Steven Lam 40226649  
-Marilyne Nguyen 40228396  
+Jean-Baptiste Garibo 40223491    
+Sarah Amaniss 40213883    
+Steven Lam 40226649    
+Marilyne Nguyen 40228396    
 
 ## project requirement
 - IDE preferred: CLionNova or CLion  
