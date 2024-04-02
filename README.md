@@ -12,7 +12,7 @@ Steven Lam 40226649
 Marilyne Nguyen 40228396    
 
 ## project requirement
-- IDE preferred: CLionNova or CLion  
+- IDE preferred: CLion    
 - Make sure to configure CMake before running the project, CMake will set the C++ version(17)    
 - Cmake is also needed to fetch the googletest library in order to run our unit tests  
 
@@ -25,6 +25,11 @@ Marilyne Nguyen 40228396
   * Characters
   * Map
   * Dice
+- Controllers/ (Contains the companent that interact/perform actions on the models)
+  * CampaignEditorController
+  * MapEditorController
+  * CharacterEditorController
+  * GameController
 - GoogleTest/
   * driverTest.cpp (Driver which runs all of our unit tests)
   * Models/ (Contains our classes to test and the writen test cases in each)
