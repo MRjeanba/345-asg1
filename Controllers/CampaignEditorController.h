@@ -22,11 +22,10 @@ private:
     inline static int numberOfInstances;
     vector<string> storedCampaigns;
     vector<string> existingMaps;
-    // MapEditorController* mapEditorControllerPtr; // May not be needed
 public:
 
     /**
-     * Basic constructor for the class, cannot instantiate more than one istance (Singleton). Also initialize storedCampaigns and existingMaps by calling their respective init methods
+     * Basic constructor for the class, cannot instantiate more than one instance (Singleton). Also initialize storedCampaigns and existingMaps by calling their respective init methods
      */
     CampaignEditorController();
 
@@ -102,12 +101,6 @@ public:
      * Initialize storedCampaigns by looping through the CampaignsXML folder and storing the files name
      */
     void initializeStoredCampaign();
-    //
-    // /**
-    //  *
-    //  * @param mapEditorPtr
-    //  */
-    // void registerMapEditor(MapEditorController* mapEditorPtr);
 };
 
 

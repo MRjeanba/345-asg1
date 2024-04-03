@@ -4,8 +4,8 @@
 
 #include "MapEditorController.h"
 #include "../Utilities.h"
-inline void loadMap(Map &mapToFill, const std::string &filename)
-{
+
+void MapEditorController::loadMap(Map &mapToFill, const std::string &filename) {
     const std::string completeFileName = filename + ".xml";
     std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
     cereal::XMLInputArchive archive(is);

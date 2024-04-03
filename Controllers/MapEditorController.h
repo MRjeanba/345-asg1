@@ -42,12 +42,12 @@ public:
   */
  void notifyCampaignEditor(const string& newMapAdded) const;
 
- // /**
- //  *
- //  * @param mapName the name of the map to load from txt files.
- //  * @return the instance of the map stored in the txt file.
- //  */
- // Map loadMap(string& mapName);
+  /**
+   *
+   * @param mapName the name of the map to load from txt files.
+   * @return the instance of the map stored in the txt file.
+   */
+  void loadMap(Map &mapToFill, const std::string &filename);
 
  /**
   * Save the creared map inside the MapsXML folder into its own file, the name of the file is the name of the map

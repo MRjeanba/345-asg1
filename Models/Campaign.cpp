@@ -19,7 +19,6 @@ Campaign::Campaign(const vector<string>& listOfMaps, const string& campaignName)
 }
 
 void Campaign::addMap(const string& mapToAdd) {
-    // verify that map is not already in campaign
     if (isMapInList(mapToAdd)) {
         cout << "Cannot add this map, it is already present in the campaign...";
         return;
@@ -28,8 +27,6 @@ void Campaign::addMap(const string& mapToAdd) {
 }
 
 void Campaign::removeMap(const string& mapToRemove) {
-    // verify that the map is present in the vector
-    // if yes, then remove the map
     if (isMapInList(mapToRemove)) {
         cout << "Removing the map from the campaign..." << endl;
         listOfMap.erase(std::remove(listOfMap.begin(), listOfMap.end(), mapToRemove), listOfMap.end());
@@ -91,3 +88,15 @@ void Campaign::displayListOfMap() const {
         cout << map << endl;
     }
 }
+
+string Campaign::getCurrentMapName() const {
+    return listOfMap[currLevel];
+}
+
+bool Campaign::isFinished() const {
+    return listOfMap.size() - 1 == (currLevel);
+}
+
+void Campaign::incrementCurrLevel() { currLevel++; }
+
+void Campaign::resetCurrentLevel() { currLevel = 0; }

@@ -13,6 +13,7 @@
 
 int main()
 {
+    // used only one time in the program to make the random variables more 'random'
     srand((unsigned int)time(NULL));
     // Run the game menu
      displayGameMenu();

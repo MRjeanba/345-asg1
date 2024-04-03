@@ -116,6 +116,7 @@ void CampaignEditorController::updateCampaign(Campaign& campaignToUpdate) {
 
                 cout << "Adding the map to the campaign..." << endl;
                 campaignToUpdate.addMap(mapChosen);
+                saveCampaignToFile(campaignToUpdate, campaignToUpdate.getName());
                 cout << "Map added successfully!" << endl;
                 break;
             }
@@ -133,6 +134,7 @@ void CampaignEditorController::updateCampaign(Campaign& campaignToUpdate) {
                 }
                 campaignToUpdate.removeMap(mapToDelete);
                 cout << "Map removed from campaign successfully!" << endl;
+                saveCampaignToFile(campaignToUpdate, campaignToUpdate.getName());
                 break;
             }
             case 3: {
@@ -152,6 +154,7 @@ void CampaignEditorController::updateCampaign(Campaign& campaignToUpdate) {
         cout << "What do you want to do now?\n1: add a map to the campaign\n2: remove a map from the campaign\n3: arrange the order of the campaign\n4: Do nothing" << endl;
         cin >> userChoice;
     }
+
 }
 
 void CampaignEditorController::saveCampaignToFile(Campaign &campaignToSave, const string &campaignName) {

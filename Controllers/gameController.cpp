@@ -1,102 +1,61 @@
 #include "gameController.h"
+#include "../Utilities.h"
 
-inline void loadMap(Map &mapToFill, const std::string &filename)
-{
-    const std::string completeFileName = filename + ".xml";
-    std::ifstream is(std::filesystem::current_path() / "../MapsXML/" / completeFileName);
-    cereal::XMLInputArchive archive(is);
-    archive(mapToFill);
-    archive(mapToFill);
-}
+using std::string;
+using std::cout;
+using std::cin;
+using std::endl;
 
 gameController::gameController() {
-    // Load stored maps from MapsXML folder
-    for (const auto& dirEntry : std::filesystem::directory_iterator(std::filesystem::current_path() / "../MapsXML/")) {
-        std::string path = dirEntry.path();
-        std::string baseFilename = path.substr(path.find_last_of("/\\") + 1);
-        std::string::size_type const p(baseFilename.find_last_of('.'));
-        std::string fileWithoutExtension = baseFilename.substr(0, p);
-        if (fileWithoutExtension.length() > 1) {
-            storedMaps.push_back(fileWithoutExtension);
-        }
-    }
-}
-
-//void gameController::displayWelcomeMessage() {
-//    std::cout << "Are you ready to play?" << std::endl;
-//
-//
-//}
-
-void gameController::displayMaps() {
-    std::cout << "\nHere are the maps you created. Choose one:" << std::endl;
-    for (int i = 0; i < storedMaps.size(); ++i) {
-        std::cout << i + 1 << ": " << storedMaps[i] << std::endl;
-    }
-}
-
-int gameController::selectMap() {
-    int choice;
-    std::cout << "\nEnter the number of the map you want to play: ";
-    std::cin >> choice;
-    if (choice < 1 || choice > storedMaps.size()) {
-        std::cout << "Invalid map choice. Please try again." << std::endl;
-        return selectMap();
-    }
-    return choice - 1; // Adjusting for zero-based indexing
-
+    mapEditorController.registerCampaignEditor(&campaignEditorController);
 }
 
 void gameController::startGame() {
-//    displayWelcomeMessage();
 
-    displayMaps();
-    int mapChoice = selectMap();
-    std::string selectedMap = storedMaps[mapChoice];
-    std::cout << "You chose map: " << selectedMap << std::endl;
-    // Start the game with the selected map
-    Map mapToDisplay;
-    loadMap(mapToDisplay, selectedMap); // Load the selected map
-    mapToDisplay.displayMap();
+    string chosenCampaignName = selectCampaignName();
+    loadCampaign(chosenCampaignName);
+
+
+    int level = 0;
+    mapEditorController.loadMap(currMap, campaign.getCurrentMapName());
+    currMap.displayMap();
 
     std::cout << "\nLET'S BEGIN! Your character is represented by the @\nYour goal is to get to the X cell! " << std::endl;
-    mapToDisplay.setCellType(0,0,CellType::Character);
-    mapToDisplay.setCellType(mapToDisplay.getWidth()/2,mapToDisplay.getWidth()/2,CellType::End);
+    setMapToDefault();
 
     int characterRow = 0; // Initial character position row
     int characterCol = 0; // Initial character position column
-    int endRow = mapToDisplay.getHeight() / 2; // Row of the end cell
-    int endCol = mapToDisplay.getWidth() / 2; // Column of the end cell
+    int endRow = currMap.getHeight() / 2; // Row of the end cell
+    int endCol = currMap.getWidth() / 2; // Column of the end cell
 
-    std::cout << "Use WASD keys to move the character. Press Q to quit." << std::endl;
+    cout << "Use WASD keys to move the character. Press Q to quit." << endl;
 
     while (true) {
-        mapToDisplay.displayMap(); // Display the map
+        currMap.displayMap();
 
-        // Ask the user to make a move
-        std::cout << "Make a move (W: up, A: left, S: down, D: right): ";
+        cout << "Make a move (W: up, A: left, S: down, D: right): ";
         char move;
-        std::cin >> move;
+        cin >> move;
 
         // Clear the previous cell occupied by the character
-        mapToDisplay.setCellType(characterRow, characterCol, CellType::Empty);
+        currMap.setCellType(characterRow, characterCol, CellType::Empty);
 
         switch (move) {
             case 'W':
             case 'w':
-                if (characterRow > 0) characterRow--; // Move character up if not at top edge
+                if (characterRow > 0 && currMap.getCellType(characterRow - 1, characterCol) != CellType::Wall) characterRow--; // Move character up if not at top edge
                 break;
             case 'S':
             case 's':
-                if (characterRow < mapToDisplay.getHeight() - 1) characterRow++; // Move character down if not at bottom edge
+                if (characterRow < currMap.getHeight() - 1 && currMap.getCellType(characterRow + 1, characterCol) != CellType::Wall) characterRow++; // Move character down if not at bottom edge
                 break;
             case 'A':
             case 'a':
-                if (characterCol > 0) characterCol--; // Move character left if not at left edge
+                if (characterCol > 0 && currMap.getCellType(characterRow, characterCol - 1) != CellType::Wall) characterCol--; // Move character left if not at left edge
                 break;
             case 'D':
             case 'd':
-                if (characterCol < mapToDisplay.getWidth() - 1) characterCol++; // Move character right if not at right edge
+                if (characterCol < currMap.getWidth() - 1 && currMap.getCellType(characterRow, characterCol + 1) != CellType::Wall) characterCol++; // Move character right if not at right edge
                 break;
             case 'Q':
             case 'q':
@@ -107,48 +66,53 @@ void gameController::startGame() {
                 break;
         }
 
-        // Update the character's position on the map
-        mapToDisplay.setCellType(characterRow, characterCol, CellType::Character);
+        currMap.setCellType(characterRow, characterCol, CellType::Character);
 
         // Check if the character has reached the end cell
         if (characterRow == endRow && characterCol == endCol) {
-            mapToDisplay.displayMap();
-            std::cout << "Congratulations! You've reached the end cell. You win!" << std::endl;
-            return;
+            currMap.displayMap();
+            if (campaign.isFinished()){
+                Clear();
+                cout << "Congratulations! You've finished the last level: " << level << "\n You finished the campaign!" << endl;
+                campaign.resetCurrentLevel();
+                return;
+            }
+            Clear();
+            cout << "Congratulations! You've finished level" << level++ << "\n let's head on to level: " << level << endl;
+            // load the next map, so incr currLevel of campaign and load the next campaign within the map
+            campaign.incrementCurrLevel();
+            currMap = Map();
+            mapEditorController.loadMap(currMap, campaign.getCurrentMapName());
+            cout << "Entering the new map..."<< endl;
+            setMapToDefault();
+            characterRow = 0;
+            characterCol = 0;
+            endRow = currMap.getHeight() / 2;
+            endCol = currMap.getWidth() / 2;
         }
     }
-
-
-
 }
 
+string gameController::selectCampaignName() {
+    cout << "Hi please select a campaign to play!:" << endl;
+    string chosenCampaign;
+    campaignEditorController.displayCampaigns();
+    cout << "Please enter the name of the campaign you want to play:" << endl;
+    cin >> chosenCampaign;
 
+    while (!campaignEditorController.isValidCampaignName(chosenCampaign)){
+        campaignEditorController.displayCampaigns();
+        cout << "You provided a wrong campaign name, please enter it exactly as it is:" << endl;
+        cin >> chosenCampaign;
+    }
+    return chosenCampaign;
+}
 
-//void gameController::displayMenu() {
-//    int userChoice = 0;
-//    std::cout << "Welcome to the JUICE Game!\n";
-//    std::cout << "What would you like to do?\n";
-//    std::cout << "1. Play a game\n";
-//    std::cout << "2. Exit\n";
-//    std::cout << "Enter your choice: ";
-//    std::cin >> userChoice;
-//
-//    switch (userChoice) {
-//        case 1: {
-//            startGame();
-//            break;
-//        }
-//        case 2: {
-//            std::cout << "Exiting the game. Goodbye!\n";
-//            break;
-//        }
-//        default: {
-//            std::cout << "Invalid choice. Please try again.\n";
-//            displayMenu(); // Recursively call displayMenu if the choice is invalid
-//            break;
-//        }
-//    }
-//}
+void gameController::loadCampaign(string &campaignName) {
+    campaignEditorController.loadCampaign(campaign, campaignName);
+}
 
-
-
+void gameController::setMapToDefault() {
+    currMap.setCellType(0,0,CellType::Character);
+    currMap.setCellType(currMap.getHeight()/2,currMap.getWidth()/2,CellType::End);
+}

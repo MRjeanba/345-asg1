@@ -2,7 +2,10 @@
 <cereal>
 	<value0>
 		<value0 size="dynamic">
-			<value0>Sarahhh</value0>
+			<value0>test</value0>
+			<value1>SarahTest</value1>
+			<value2>big</value2>
+			<value3>small</value3>
 		</value0>
 		<value1>base</value1>
 	</value0>
