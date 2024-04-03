@@ -10,32 +10,13 @@ gameController::gameController() {
     mapEditorController.registerCampaignEditor(&campaignEditorController);
 }
 
-void gameController::displayMaps() {
-    std::cout << "\nHere are the maps you created. Choose one:" << std::endl;
-    for (int i = 0; i < storedMaps.size(); ++i) {
-        std::cout << i + 1 << ": " << storedMaps[i] << std::endl;
-    }
-}
-
-int gameController::selectMap() {
-    int choice;
-    std::cout << "\nEnter the number of the map you want to play: ";
-    std::cin >> choice;
-    if (choice < 1 || choice > storedMaps.size()) {
-        std::cout << "Invalid map choice. Please try again." << std::endl;
-        return selectMap();
-    }
-    return choice - 1; // Adjusting for zero-based indexing
-
-}
-
 void gameController::startGame() {
 
     string chosenCampaignName = selectCampaignName();
     loadCampaign(chosenCampaignName);
 
 
-    int level = 0; // indicate the current level of the game
+    int level = 0;
     mapEditorController.loadMap(currMap, campaign.getCurrentMapName());
     currMap.displayMap();
 
@@ -50,9 +31,8 @@ void gameController::startGame() {
     cout << "Use WASD keys to move the character. Press Q to quit." << endl;
 
     while (true) {
-        currMap.displayMap(); // Display the map
+        currMap.displayMap();
 
-        // Ask the user to make a move
         cout << "Make a move (W: up, A: left, S: down, D: right): ";
         char move;
         cin >> move;
@@ -63,19 +43,19 @@ void gameController::startGame() {
         switch (move) {
             case 'W':
             case 'w':
-                if (characterRow > 0) characterRow--; // Move character up if not at top edge
+                if (characterRow > 0 && currMap.getCellType(characterRow - 1, characterCol) != CellType::Wall) characterRow--; // Move character up if not at top edge
                 break;
             case 'S':
             case 's':
-                if (characterRow < currMap.getHeight() - 1) characterRow++; // Move character down if not at bottom edge
+                if (characterRow < currMap.getHeight() - 1 && currMap.getCellType(characterRow + 1, characterCol) != CellType::Wall) characterRow++; // Move character down if not at bottom edge
                 break;
             case 'A':
             case 'a':
-                if (characterCol > 0) characterCol--; // Move character left if not at left edge
+                if (characterCol > 0 && currMap.getCellType(characterRow, characterCol - 1) != CellType::Wall) characterCol--; // Move character left if not at left edge
                 break;
             case 'D':
             case 'd':
-                if (characterCol < currMap.getWidth() - 1) characterCol++; // Move character right if not at right edge
+                if (characterCol < currMap.getWidth() - 1 && currMap.getCellType(characterRow, characterCol + 1) != CellType::Wall) characterCol++; // Move character right if not at right edge
                 break;
             case 'Q':
             case 'q':
@@ -94,6 +74,7 @@ void gameController::startGame() {
             if (campaign.isFinished()){
                 Clear();
                 cout << "Congratulations! You've finished the last level: " << level << "\n You finished the campaign!" << endl;
+                campaign.resetCurrentLevel();
                 return;
             }
             Clear();
@@ -104,10 +85,10 @@ void gameController::startGame() {
             mapEditorController.loadMap(currMap, campaign.getCurrentMapName());
             cout << "Entering the new map..."<< endl;
             setMapToDefault();
-            characterRow = 0; // Initial character position row
-            characterCol = 0; // Initial character position column
-            endRow = currMap.getHeight() / 2; // Row of the end cell
-            endCol = currMap.getWidth() / 2; // Column of the end cell
+            characterRow = 0;
+            characterCol = 0;
+            endRow = currMap.getHeight() / 2;
+            endCol = currMap.getWidth() / 2;
         }
     }
 }

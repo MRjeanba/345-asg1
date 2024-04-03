@@ -98,3 +98,5 @@ bool Campaign::isFinished() const {
 }
 
 void Campaign::incrementCurrLevel() { currLevel++; }
+
+void Campaign::resetCurrentLevel() { currLevel = 0; }

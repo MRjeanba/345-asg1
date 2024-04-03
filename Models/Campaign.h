@@ -90,6 +90,11 @@ public:
     void incrementCurrLevel();
 
     /**
+     * Reset the currLevel of the campaign
+     */
+    void resetCurrentLevel();
+
+    /**
      * @brief Method used by cereal library for serializing the class
      * @tparam Archive The data type in which we want to store the data
      * @param archive the actual archive used for serialization

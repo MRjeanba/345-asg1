@@ -10,17 +10,16 @@ private:
     std::vector<std::string> storedMaps;
     Campaign campaign;
     Map currMap;
-    // reference to a player or embedded player character??
-    void displayWelcomeMessage();
-    void displayMaps();
-    int selectMap();
-    void displaySelectedMap(Map& selectedMap);
 
 public:
+    /**
+     * Default constructor, instantiate the gameController and the campaignEditor and mapEditor aswell
+     */
     gameController();
-    void displayMenu();
-    void keepGoingGame();
 
+    /**
+     * Set the exit of the currMap on the center of the map, set the character location on the first cell aswell
+     */
     void setMapToDefault();
 
     /**
@@ -41,6 +40,7 @@ public:
      */
     void loadCampaign(string& campaignName);
 
+    // made public to access them in the driver.h file, but we may later move the driver.h logic within this class
     MapEditorController mapEditorController;
     CampaignEditorController campaignEditorController;
 };
