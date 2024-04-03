@@ -20,11 +20,11 @@ using std::cout;
 using std::endl;
 
 inline void displayGameMenu() {
-    MapEditorController mapEditorController = MapEditorController();
-    CampaignEditorController campaignEditorController = CampaignEditorController();
+//    MapEditorController mapEditorController = MapEditorController();
+//    CampaignEditorController campaignEditorController = CampaignEditorController();
     CharacterEditorController characterEditorController = CharacterEditorController();
     gameController gameControllerHere = gameController();
-    mapEditorController.registerCampaignEditor(&campaignEditorController);
+//    mapEditorController.registerCampaignEditor(&campaignEditorController);
 
     int userChoice;
     cout << "Welcome to the JUICE Game!\n" << endl;
@@ -40,8 +40,6 @@ inline void displayGameMenu() {
                 cout << "Enter a name for your character: \n" << endl;
                 cin >> name;
                 UserCharacter = characterEditorController.createCharacter(name);
-                // throw std::runtime_error("NOT IMPLEMENTED YET.");
-//                gameControllerHere.displayMenu();
                 gameControllerHere.startGame();
                 break;
             }
@@ -50,12 +48,12 @@ inline void displayGameMenu() {
                 break;
             }
             case 3: {
-                mapEditorController.displayMenu();
+                gameControllerHere.mapEditorController.displayMenu();
                 break;
             }
             case 4: {
                 Clear();
-                campaignEditorController.displayMenu();
+                gameControllerHere.campaignEditorController.displayMenu();
                 break;
             }
             case 5: {

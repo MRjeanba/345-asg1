@@ -15,9 +15,11 @@ class Campaign {
 private:
     vector<string> listOfMap;
     string campaignName;
+    int currLevel = 0;
+    bool objectiveFulfilled = listOfMap.size() == currLevel;
 public:
     /**
-     * Basic constructor for the class, does not set any member
+     * Default constructor for the class
      */
     Campaign();
 
@@ -65,15 +67,33 @@ public:
     string getName() const;
 
     /**
-     * loop through the listOfMaps contained within the campaign and output them, one by one
+     * loop through the listOfMaps contained within the campaign and output them
      */
     void displayListOfMap() const;
 
     /**
- * @brief Method used by cereal library for serializing the class
- * @tparam Archive The data type in which we want to store the data
- * @param archive the actual archive used for serialization
- */
+     * Gives information about the map currently loaded from the campaign
+     * @return the map of the current level of the campaign
+     */
+    [[nodiscard]] string getCurrentMapName() const;
+
+    /**
+     * Gives information about the state of the campaign, if it is finished or not
+     * @return a boolean indicating true if the campaign if finished, false otherwise
+     */
+    bool isFinished() const;
+
+    /**
+     * indicates that the current map door has been taken, so we increment the current level to load the next map
+     * on the game
+     */
+    void incrementCurrLevel();
+
+    /**
+     * @brief Method used by cereal library for serializing the class
+     * @tparam Archive The data type in which we want to store the data
+     * @param archive the actual archive used for serialization
+     */
     template<class Archive>
     void serialize(Archive & archive)
     {

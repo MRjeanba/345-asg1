@@ -118,7 +118,12 @@ public:
 
     int getHeight();
     int getWidth();
-    // This method lets cereal know which data members to serialize
+
+    /**
+     * Method used by cereal library in order to know how to save/load this data type
+     * @tparam Archive The data type in which we want to store the data
+     * @param archive the actual archive used for serialization
+     */
     template <class Archive>
     void serialize(Archive &archive)
     {

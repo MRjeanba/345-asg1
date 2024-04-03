@@ -1,7 +1,3 @@
-//
-// Created by Jean-Baptiste Garibo on 2024-03-22.
-//
-
 #ifndef WORNITEMSDECORATOR_H
 #define WORNITEMSDECORATOR_H
 #include <map>
@@ -22,13 +18,6 @@ inline map<string, int> itemTypeToIntMap = {
 
 class WornItemsDecorator : public fighter {
 public:
-    // inline static int wornArmor = 0;
-    // inline static int wornBelt = 0;
-    // inline static int wornBoots = 0;
-    // inline static int wornHelmet = 0;
-    // inline static int wornRing = 0;
-    // inline static int wornShield = 0;
-    // inline static int wornWeapon = 0;
     inline static map<string,bool> isItemTypeWorn = {
         {"Armor", false},
         {"Belt", false},
@@ -44,9 +33,7 @@ public:
 
     virtual ~WornItemsDecorator();
 
-    virtual map<string, int> getEnchantmentsCharacteristics() override;
-
-    //string getType() override;
+    map<string, int> getEnchantmentsCharacteristics() override;
 
     string getTypes() override = 0;
 
