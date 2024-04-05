@@ -215,7 +215,7 @@ public:
     of other variables to set their values randomly.
     @return int
     */
-    int generateRandomNum();
+    int generateRandomNumFromTheDice();
 
     /**
     This method set the values for 3 variables (strength, dexterity, constitution) of fighter class. It does
@@ -266,6 +266,7 @@ This method calculate the "hitpoint" variable of the fighter class, and this val
     @return void
     */
     virtual void displayCharacter();
+
 
     /**
      * Get the enchantment characteristics of the user, if the instance is decorated by items, these will add their

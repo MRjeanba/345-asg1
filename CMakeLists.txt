@@ -61,7 +61,8 @@ add_executable(345_asg1 driver.cpp
         Controllers/gameController.h
         Models/WornItemsDecorator.cpp
         Models/WornItemsDecorator.h
-#        Models/GameLog.cpp
+        Models/MapBuilder.h
+        #        Models/GameLog.cpp
 #        Models/GameLog.h
 #        Models/GameController.cpp
 #        Models/GameController.h
@@ -116,8 +117,10 @@ set(unitTestFiles
         GoogleTests/Models/ShieldTest.cpp
         Models/GameLog.h
         Models/GameController.h
+        Models/MapBuilder.h
 )
-add_executable(UnitTests ${unitTestFiles}) # add this executables
+add_executable(UnitTests ${unitTestFiles}
+        Models/MapBuilder.h) # add this executables
 
 target_link_libraries(UnitTests PRIVATE gtest) # link google test to this executable
 include(googletest)

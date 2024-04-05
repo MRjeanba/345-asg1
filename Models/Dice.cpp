@@ -20,9 +20,6 @@ int Dice::rollDice(string expression)
         int diceType = stoi(expression.substr(expression.find("d") + 1, expression.find("+"))); // getting the diceType
         int z = stoi(expression.substr(expression.find("+") + 1, expression.length()));         // value of z
 
-        // seed random number generator
-        srand(static_cast<unsigned>(time(nullptr)));
-
         result = 0;
         // getting the total depending on the rolls and the random number generated
         for (int i = 0; i < numberOfRolls; i++)
@@ -35,7 +32,7 @@ int Dice::rollDice(string expression)
         // adding z to the result
         result += z;
 
-        cout << expression << " => Rolling d" << diceType << " for " << numberOfRolls << " times and adding z : " << z << endl;
+        cout << " => Rolling d" << diceType << " for " << numberOfRolls << " time(s) and adding z : " << z << endl;
         cout << "Result: " << result << endl;
 
         return result;

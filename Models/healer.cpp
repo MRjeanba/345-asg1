@@ -53,6 +53,7 @@ void healer::displayCharacter()
         cout << str << " ";
     }
     cout << "\nWe rolled the dice! You're a NIMBLE fighter! " << endl;
+    cout << endl;
 }
 
 void healer::update() {

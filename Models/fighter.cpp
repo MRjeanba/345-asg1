@@ -4,6 +4,8 @@
 #include <string>
 #include "fighter.h"
 #include "Observable.h"
+#include "Dice.h"
+#include <fstream> // Include the file stream library
 
 using namespace std;
 
@@ -11,10 +13,34 @@ using namespace std;
  * Generate a random number between 1 and 20
  * @return int
  */
-int fighter::generateRandomNum()
+int fighter::generateRandomNumFromTheDice()
 {
-    srand(static_cast<unsigned>(time(nullptr)));
-    int num = rand() % 20 + 1;
+//    srand(static_cast<unsigned>(time(nullptr)));
+//    int num = rand() % 20 + 1;
+    Dice d;
+    int level = this->getLevel();
+    int num = 0;
+
+    switch(level)
+    {
+        case 1:
+            num =  d.rollDice("4d6+1");
+            break;
+        case 2:
+             num =  d.rollDice("4d6+2");
+             break;
+        case 3:
+             num =  d.rollDice("4d6+3");
+             break;
+        case 4:
+             num =  d.rollDice("4d6+4");
+             break;
+        case 5:
+            num =  d.rollDice("4d6+4");
+            break;
+        default:
+            num = 15;
+    };
     return num;
 }
 
@@ -293,12 +319,18 @@ void fighter::setItem()
  */
 void fighter::generateAbilities()
 {
-    setWisdom(generateRandomNum());
-    setIntelligence(generateRandomNum());
-    setCharisma(generateRandomNum());
-    setStrength(generateRandomNum());
-    setDexterity(generateRandomNum());
-    setConstitution(generateRandomNum());
+    cout << "Setting Wisdom Ability with d6 dice..." << endl;
+    setWisdom(generateRandomNumFromTheDice());
+    cout << "Setting Intelligence Ability with d6 dice..." << endl;
+    setIntelligence(generateRandomNumFromTheDice());
+    cout << "Setting Charisma Ability with d6 dice..." << endl;
+    setCharisma(generateRandomNumFromTheDice());
+    cout << "Setting Strength Ability with d6 dice..." << endl;
+    setStrength(generateRandomNumFromTheDice());
+    cout << "Setting Dexterity Ability with d6 dice..." << endl;
+    setDexterity(generateRandomNumFromTheDice());
+    cout << "Setting Constitution Ability with d6 dice..." << endl;
+    setConstitution(generateRandomNumFromTheDice());
 }
 
 /**
@@ -317,7 +349,11 @@ int fighter::calculateModifier(int abilityScore) const
 void fighter::calculateHitPoints()
 {
     int modifier = calculateModifier(getConstitution());
-    setHitPoints(modifier * getLevel());
+//    setHitPoints(modifier * getLevel());
+    Dice d;
+    cout << endl << "Rolling a d20 dice... setting the HitPoints... " << endl;
+    int resultDice = generateRandomNumFromTheDice();
+    setHitPoints(modifier * resultDice);
 }
 
 /**
@@ -334,8 +370,9 @@ void fighter::calculateArmorClass()
  */
 void fighter::calculateAttackBonus()
 {
+    cout << endl << "Rolling a d20 dice... setting the AttackBonus... " << endl;
     int modifier = calculateModifier(getStrength());
-    setAttackBonus(modifier + getLevel());
+    setAttackBonus(modifier + generateRandomNumFromTheDice());
 }
 
 /**
@@ -366,7 +403,8 @@ void fighter::updateFighter() {
  */
 void fighter::displayCharacter()
 {
-    cout<< "Display of the fighter:\n "<< endl;
+    cout<< endl;
+    cout<< endl << "Display of the fighter:\n "<< endl;
     cout<< "Level: " << getLevel() << endl;
     cout<< "Strength: " << getStrength() << endl;
     cout<< "Wisdom: " << getWisdom() << endl;
@@ -380,7 +418,9 @@ void fighter::displayCharacter()
     cout<< "Damage Bonus: " << getDamageBonus() << endl;
     cout<< "HP: " << getHp() << endl;
     cout<< "Item: " << getItem() << endl;
+    //where does this come from ...
     cout << "\nWe rolled the dice! You're a BULLY fighter! " << endl;
+    cout << endl;
 
 }
 
@@ -417,8 +457,31 @@ string fighter::getTypes() {
     return "character";
 }
 
+/* Depending on the usage of the roll we choose a different type of dice
+ * xdy[+z] -> x will always be 1 for one dice (maybe depending on the level we can change the number of dices available)
+ * 1 - Dice could be used for the modifiers of fighter characteristics
+ * (instead of random numbers)
+ * 2 - Dice could be rolled when the user wants to attack to see how much damage it
+ * could make
+ * 3 - Dice could be used when the character wants to destroy a wall
+ *  -> must have a number greater than a certain value to be able to destroy it
+ * 4 - Dice display to make sure the user is respecting the game's rules
+ *
+ */
 
-
+/*
+ * Mandatory class is Fighter, which can attack using either a bow (or other ranged weapon)
+ * or sword (or other melee weapon), and wear light, medium or heavy armor and a shield.
+ *
+ * Armor class (light, medium, heavy)
+ * Shield class
+ * create an object from armor and shield classes for the fighter
+ * Armor object (light, medium, heavy)
+ * light -> less "protection points" -> can be damaged easily
+ * medium -> moderate "protection points" -> can be damaged moderately
+ * heavy -> high "protection points" -> can be damaged but will take a lot of hit points
+ * Shield object -> its value could be the same for every character
+ */
 
 
 

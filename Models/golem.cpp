@@ -83,13 +83,14 @@ void golem::displayCharacter()
     cout << "DamageBonus: " << getDamageBonus() << endl;
     cout << "HP: " << getHp() << endl;
     cout << "Golem Type: " << getGolemType() << endl;
-    cout << "Golem Attacks: " << endl;
+    cout << "Golem Attacks: ";
 
     for (const auto &str : getAttacks())
     {
         cout << str << " ";
     }
     cout << "\nWe rolled the dice! You're a BULLY fighter! " << endl;
+    cout << endl;
 }
 
 void golem::update()
