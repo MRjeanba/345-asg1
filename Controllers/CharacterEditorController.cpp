@@ -27,6 +27,7 @@ void CharacterEditorController::printToTEXT(std::string name)
 
         outfile.flush();
         outfile.close();
+
 }
 
 fighter *CharacterEditorController::createCharacter(const string name) {
