@@ -133,7 +133,7 @@ void Map::displayMap() {
         for (int i = 0; i < width; ++i) {
             switch (grid[j][i].getType()) {
                 case CellType::Empty:
-                    std::cout << "□";
+                    std::cout << "■";
                     break;
                 case CellType::Wall:
                     std::cout << "#";
@@ -142,7 +142,7 @@ void Map::displayMap() {
                     std::cout << "@";
                     break;
                 case CellType::ValidTarget: // Display green coloured cell for valid target area
-                    std::cout << "\033[1;32m.\033[0m";
+                    std::cout << "\033[1;31m■\033[0m";
                     break;
                 case CellType::Cursor: // Display arrow dot for cursor
                     std::cout << "△";

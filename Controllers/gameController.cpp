@@ -42,14 +42,24 @@ void gameController::startGame() {
 
         // Clear the previous cell occupied by the character and cursor
         currMap.setCellType(characterRow, characterCol, CellType::Empty);
-        currMap.setCellType(cursorRow, cursorCol, CellType::Empty);
 
-        // Revert cells around the previous character position to their original type
+        if (cursorRow == endRow && cursorCol == endCol) {
+            currMap.setCellType(endRow, endCol, CellType::End);
+        }
+        else{
+            currMap.setCellType(cursorRow, cursorCol, CellType::Empty);
+        }
+
+
+        // Clear ValidTarget cells around the previous character position
         for (int r = std::max(0, characterRow - 1); r <= std::min(currMap.getHeight() - 1, characterRow + 1); ++r) {
             for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
-                currMap.setCellType(r, c, originalCellTypes[r][c]);
+                if (!(r == characterRow && c == characterCol)) { // Exclude the character cell itself
+                    currMap.setCellType(r, c, CellType::Empty);
+                }
             }
         }
+
 
         switch (move) {
             case 'W':
@@ -93,17 +103,7 @@ void gameController::startGame() {
                 break;
         }
 
-        // Mark cells around the character as ValidTarget and store original cell types
-//        for (int r = std::max(0, characterRow - 1); r <= std::min(currMap.getHeight() - 1, characterRow + 1); ++r) {
-//            for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
-//                if (r != endRow || c != endCol) { // Exclude End cell
-//                    originalCellTypes[r][c] = currMap.getCellType(r, c); // Store original cell type
-//                    currMap.setCellType(r, c, CellType::ValidTarget);
-//                }
-//            }
-//        }
-
-
+        currMap.setCellType(endRow, endCol, CellType::End);
         currMap.setCellType(characterRow, characterCol, CellType::Character);
         currMap.setCellType(cursorRow, cursorCol, CellType::Cursor);
 
@@ -131,8 +131,21 @@ void gameController::startGame() {
             endRow = currMap.getHeight() / 2;
             endCol = currMap.getWidth() / 2;
         }
+
+        // Mark cells surrounding the character as ValidTarget
+        for (int r = std::max(0, characterRow - 1); r <= std::min(currMap.getHeight() - 1, characterRow + 1); ++r) {
+            for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
+                if (r != characterRow || c != characterCol) {
+                    if (currMap.getCellType(r, c) != CellType::Wall && currMap.getCellType(r, c) != CellType::End && currMap.getCellType(r, c) != CellType::Cursor) {
+                        currMap.setCellType(r, c, CellType::ValidTarget);
+                    }
+                }
+            }
+        }
+
     }
 }
+
 
 
 
