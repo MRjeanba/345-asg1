@@ -16,7 +16,9 @@ enum class CellType
     Empty,
     Wall,
     Character,
+    ValidTarget,
     Occupied,
+    Cursor,
     End
 };
 

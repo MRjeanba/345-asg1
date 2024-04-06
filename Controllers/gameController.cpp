@@ -11,10 +11,8 @@ gameController::gameController() {
 }
 
 void gameController::startGame() {
-
     string chosenCampaignName = selectCampaignName();
     loadCampaign(chosenCampaignName);
-
 
     int level = 0;
     mapEditorController.loadMap(currMap, campaign.getCurrentMapName());
@@ -25,20 +23,33 @@ void gameController::startGame() {
 
     int characterRow = 0; // Initial character position row
     int characterCol = 0; // Initial character position column
+    int cursorRow = 0;     // Initial cursor position row
+    int cursorCol = 0;     // Initial cursor position column
     int endRow = currMap.getHeight() / 2; // Row of the end cell
-    int endCol = currMap.getWidth() / 2; // Column of the end cell
+    int endCol = currMap.getWidth() / 2;  // Column of the end cell
 
-    cout << "Use WASD keys to move the character. Press Q to quit." << endl;
+    // 2D array to store original cell types
+    std::vector<std::vector<CellType>> originalCellTypes(currMap.getHeight(), std::vector<CellType>(currMap.getWidth(), CellType::Empty));
+
+    cout << "Use WASD keys to move the character. Use IJKL keys to move the cursor. Press Q to quit." << endl;
 
     while (true) {
         currMap.displayMap();
 
-        cout << "Make a move (W: up, A: left, S: down, D: right): ";
+        cout << "Make a move (WASD to move character, IJKL to move cursor, Q to quit): ";
         char move;
         cin >> move;
 
-        // Clear the previous cell occupied by the character
+        // Clear the previous cell occupied by the character and cursor
         currMap.setCellType(characterRow, characterCol, CellType::Empty);
+        currMap.setCellType(cursorRow, cursorCol, CellType::Empty);
+
+        // Revert cells around the previous character position to their original type
+        for (int r = std::max(0, characterRow - 1); r <= std::min(currMap.getHeight() - 1, characterRow + 1); ++r) {
+            for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
+                currMap.setCellType(r, c, originalCellTypes[r][c]);
+            }
+        }
 
         switch (move) {
             case 'W':
@@ -57,6 +68,22 @@ void gameController::startGame() {
             case 'd':
                 if (characterCol < currMap.getWidth() - 1 && currMap.getCellType(characterRow, characterCol + 1) != CellType::Wall) characterCol++; // Move character right if not at right edge
                 break;
+            case 'I':
+            case 'i':
+                if (cursorRow > 0) cursorRow--; // Move cursor up if not at top edge
+                break;
+            case 'K':
+            case 'k':
+                if (cursorRow < currMap.getHeight() - 1) cursorRow++; // Move cursor down if not at bottom edge
+                break;
+            case 'J':
+            case 'j':
+                if (cursorCol > 0) cursorCol--; // Move cursor left if not at left edge
+                break;
+            case 'L':
+            case 'l':
+                if (cursorCol < currMap.getWidth() - 1) cursorCol++; // Move cursor right if not at right edge
+                break;
             case 'Q':
             case 'q':
                 std::cout << "Game terminated." << std::endl;
@@ -66,32 +93,50 @@ void gameController::startGame() {
                 break;
         }
 
+        // Mark cells around the character as ValidTarget and store original cell types
+//        for (int r = std::max(0, characterRow - 1); r <= std::min(currMap.getHeight() - 1, characterRow + 1); ++r) {
+//            for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
+//                if (r != endRow || c != endCol) { // Exclude End cell
+//                    originalCellTypes[r][c] = currMap.getCellType(r, c); // Store original cell type
+//                    currMap.setCellType(r, c, CellType::ValidTarget);
+//                }
+//            }
+//        }
+
+
         currMap.setCellType(characterRow, characterCol, CellType::Character);
+        currMap.setCellType(cursorRow, cursorCol, CellType::Cursor);
 
         // Check if the character has reached the end cell
         if (characterRow == endRow && characterCol == endCol) {
             currMap.displayMap();
             if (campaign.isFinished()){
                 Clear();
-                cout << "Congratulations! You've finished the last level: " << level << "\n You finished the campaign!" << endl;
+                cout << "Congratulations! You've finished the last level: " << level << "\nYou finished the campaign!" << endl;
                 campaign.resetCurrentLevel();
                 return;
             }
             Clear();
-            cout << "Congratulations! You've finished level" << level++ << "\n let's head on to level: " << level << endl;
+            cout << "Congratulations! You've finished level " << level++ << "\nLet's head on to level: " << level << endl;
             // load the next map, so incr currLevel of campaign and load the next campaign within the map
             campaign.incrementCurrLevel();
             currMap = Map();
             mapEditorController.loadMap(currMap, campaign.getCurrentMapName());
-            cout << "Entering the new map..."<< endl;
+            cout << "Entering the new map..." << endl;
             setMapToDefault();
             characterRow = 0;
             characterCol = 0;
+            cursorRow = 0;
+            cursorCol = 0;
             endRow = currMap.getHeight() / 2;
             endCol = currMap.getWidth() / 2;
         }
     }
 }
+
+
+
+
 
 string gameController::selectCampaignName() {
     cout << "Hi please select a campaign to play!:" << endl;
