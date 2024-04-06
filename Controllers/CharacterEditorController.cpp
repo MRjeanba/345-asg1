@@ -14,7 +14,8 @@ using namespace std;
 
 void CharacterEditorController::printToTEXT(std::string name)
 {
-        ofstream outfile("Characters.txt");
+        ofstream outfile;
+        outfile.open("Characters.txt");
         if (outfile.is_open())
         {
             outfile << "New fighter created named ";
