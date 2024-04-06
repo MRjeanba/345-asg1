@@ -312,6 +312,12 @@ void fighter::setItem()
     srand(static_cast<unsigned>(time(nullptr)));
     int num = rand() % 6;
     item = items[num];
+    inventory.push_back(item);
+}
+
+vector<string> fighter::getInventory()
+{
+    return inventory;
 }
 
 /**
@@ -418,6 +424,11 @@ void fighter::displayCharacter()
     cout<< "Damage Bonus: " << getDamageBonus() << endl;
     cout<< "HP: " << getHp() << endl;
     cout<< "Item: " << getItem() << endl;
+    cout<< "Inventory: ";
+    for (const auto &str : getInventory())
+    {
+        cout << str << " ";
+    }
     //where does this come from ...
     cout << "\nWe rolled the dice! You're a BULLY fighter! " << endl;
     cout << endl;

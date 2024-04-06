@@ -23,6 +23,7 @@ protected:
     int hp;
     string item;
     EnchantmentInfo enchantmentsDetails;
+    vector <string> inventory;
 
 public:
     /**
@@ -117,6 +118,7 @@ public:
     @return string
     */
     string getItem();
+    vector<string> getInventory();
 
     /**
     This method is used to set a new value to variable "level" of fighter object

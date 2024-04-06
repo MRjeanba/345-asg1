@@ -12,14 +12,14 @@
 
 using namespace std;
 
-void CharacterEditorController::printToTEXT(std::string name)
+void CharacterEditorController::printToTEXT(string name, string type )
 {
         ofstream outfile;
-        outfile.open("Characters.txt");
+         outfile.open(std::filesystem::current_path() / "../Controllers/Characters.txt");
         if (outfile.is_open())
         {
-            outfile << "New fighter created named ";
-            cout<< "Character successfully saved in text file...";
+            outfile << "New "<< type <<" created named " << name <<endl;
+            cout << "Character successfully saved in text file...";
         }
         else
         {
@@ -49,23 +49,26 @@ fighter *CharacterEditorController::createCharacter(const string name) {
     fighter *myFighter;
     if (choiceCharacter == "fighter") {
         myFighter = new fighter(0);
-        printToTEXT(name);
+        printToTEXT(name, choiceCharacter);
     }
     if (choiceCharacter == "golem") {
         myFighter = new golem(0);
+        printToTEXT(name, choiceCharacter);
 
     }
     if (choiceCharacter == "healer") {
         myFighter = new healer(0);
+        printToTEXT(name, choiceCharacter);
 
     }
     if (choiceCharacter == "knight") {
         myFighter = new knight(0, 5);
+        printToTEXT(name, choiceCharacter);
 
     }
     if (choiceCharacter == "wizard") {
         myFighter = new wizard(0);
-
+        printToTEXT(name, choiceCharacter);
     }
 
     myFighter->displayCharacter();
