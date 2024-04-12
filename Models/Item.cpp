@@ -5,7 +5,7 @@
 #include "Item.h"
 #include "EnchantmentInfo.h"
 #include <cstdlib>
-#include <ctime>
+
 using namespace std;
 
 void Item::outputInfos() {
@@ -15,11 +15,11 @@ void Item::outputInfos() {
 }
 
 
-Item::Item(const string& enchantmentType) {
-    // to have more random number
-    //srand((unsigned int)time(NULL));
+Item::Item(const string& enchantmentType):WornItemsDecorator() {
     int randomEnchantBonus = rand() % 5 +1;
     this->enchantmentDetails = {randomEnchantBonus, enchantmentType};
+    this->enchantmentDetails.enchantmentBonus = randomEnchantBonus;
+    this->enchantmentDetails.enchantmentType = enchantmentType;
     this->enchantmentDetails.enchantmentTypeToBonus.insert({enchantmentType,randomEnchantBonus});
     //std::cout << "Item created, here are the details: ";
     //this->outputInfos();
@@ -29,5 +29,6 @@ EnchantmentInfo Item::getEnchantmentInfo() {
     return this->enchantmentDetails;
 }
 
-
-
+string Item::getItemName() {
+    return this->itemName;
+}

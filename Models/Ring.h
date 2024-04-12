@@ -10,7 +10,7 @@
 #include "WornItemsDecorator.h"
 using std::string;
 
-class Ring: public Item, public WornItemsDecorator {
+class Ring: public Item {
 public:
     /**
      * \brief Safely create an instance of the Ring class
@@ -24,11 +24,15 @@ public:
      * \param enchantmentType the enchantmentType to apply to the Ring instance
      * \param decoratedInstancePtr
      */
-    explicit Ring(const string& enchantmentType, fighter * decoratedInstancePtr);
+    explicit Ring(const string& enchantmentType);
 
     string getType() override;
 
     string getTypes() override;
+
+    void setCharacteristics(fighter *fighterPtr) override;
+
+    void removeAddedCharacteristics(fighter *fighterPtr) override;
 
 private:
     string itemType = "Ring";

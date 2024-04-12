@@ -1,20 +1,10 @@
 #ifndef WORNITEMSDECORATOR_H
 #define WORNITEMSDECORATOR_H
 #include <map>
-
 #include "fighter.h"
 #include <string>
 using std::string;
-
-inline map<string, int> itemTypeToIntMap = {
-    {"Armor", 0},
-    {"Belt", 1},
-    {"Boots", 2},
-    {"Helmet", 3},
-    {"Ring", 4},
-    {"Shield", 5},
-    {"Weapon", 6},
-};
+using std::map;
 
 class WornItemsDecorator : public fighter {
 public:
@@ -29,23 +19,22 @@ public:
         {"character", false},
     };
 
-    explicit WornItemsDecorator(fighter *fighterPtr);
+    WornItemsDecorator();
 
     virtual ~WornItemsDecorator();
 
-    map<string, int> getEnchantmentsCharacteristics() override;
-
     string getTypes() override = 0;
+
+    virtual string getType() override = 0;
+
+    virtual void setCharacteristics(fighter * fighterPtr) = 0;
 
     virtual fighter* getFighterPtr();
 
-    WornItemsDecorator * remove(WornItemsDecorator * headPtr);
-
-    WornItemsDecorator * remove(const string& itemTypeToRemove, WornItemsDecorator * headPtr);
+    virtual void setFighterPtr(fighter * fighterPtr);
 
 private:
-    fighter *character = nullptr;
-    string itemType;
+    fighter *character;
 };
 
 #endif //WORNITEMSDECORATOR_H

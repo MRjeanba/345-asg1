@@ -5,7 +5,11 @@
 #include "Observable.h"
 #include <string>
 #include <map>
+#include <vector>
+#include "CharacterWornItems.h"
 using namespace std;
+//class CharacterWornItems;   // Forward declaration
+class WornItemsDecorator;    // Forward declaration
 
 class fighter : public Observable {
 protected:
@@ -22,9 +26,8 @@ protected:
     int damageBonus;
     int hp;
     string item;
-    EnchantmentInfo enchantmentsDetails;
     vector <string> inventory;
-
+    CharacterWornItems * wornItemsPtr;
 public:
     /**
     This is the constructor method for a fighter object, which sets all the variables for a fighter object
@@ -274,8 +277,9 @@ This method calculate the "hitpoint" variable of the fighter class, and this val
      * Get the enchantment characteristics of the user, if the instance is decorated by items, these will add their
      * enchantment bonus to the corresponding enchantmentType of the character
      * @return a map<string,int> from enchantmentType to Bonus
+     * TODO: MAYBE REMOVE
      */
-    virtual map<string,int> getEnchantmentsCharacteristics();
+//    virtual map<string,int> getEnchantmentsCharacteristics();
 
     /**
      * Get the type of the current fighter instance
@@ -301,6 +305,32 @@ This method calculate the "hitpoint" variable of the fighter class, and this val
 
     void attack(const std::string& result);
 
+    /**
+     * Set the pointer to the worn items container, so that we can access the wornItemsContainer directly from the fighter
+     * @param wornItemsContainer the pointer to the wornItemsContainer
+     */
+    void setWornItemsPtr(CharacterWornItems * wornItemsContainer);
+
+    /**
+     * Get the pointer to the worn items container
+     * @return the pointer to the wornItemsContainer
+     */
+    CharacterWornItems * getWornItemsPtr();
+
+    /**
+     * remove an item from the worn items container
+     */
+    void removeItem();
+
+    /**
+     * wear an item, add it to the wornItemContainer
+     */
+    void wearItem(WornItemsDecorator * itemToWear);
+
+    /**
+     * get the worn items of the character from the wornItemsContainer (CharacterWornItems)
+     */
+    void getWornItems();
 };
 
 #endif

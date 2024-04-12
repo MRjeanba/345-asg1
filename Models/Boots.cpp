@@ -6,9 +6,11 @@
 #include <stdexcept>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 using std::string;
 using std::vector;
 using std::invalid_argument;
+using std::cout;
 
 Boots Boots::createBoots(const string &enchantmentType) {
     vector<string> validEnchantmentTypes = {"ArmorClass", "Dexterity"};
@@ -24,10 +26,30 @@ Boots Boots::createBoots(const string &enchantmentType) {
 
     throw invalid_argument("Invalid enchantment type provided for the Boots creation");
 }
-Boots::Boots(const string &enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {}
+Boots::Boots(const string &enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType) {}
 
 string Boots::getType() { return "Boots"; }
 
 string Boots::getTypes() {
     return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}
+
+void Boots::setCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "ArmorClass"){
+        fighterPtr->setArmorClass(fighterPtr->getArmorClass() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    } else {
+        fighterPtr->setDexterity(fighterPtr->getDexterity() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+}
+
+void Boots::removeAddedCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "ArmorClass"){
+        fighterPtr->setArmorClass(fighterPtr->getArmorClass() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character by "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    } else {
+        fighterPtr->setDexterity(fighterPtr->getDexterity() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character by "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
 }

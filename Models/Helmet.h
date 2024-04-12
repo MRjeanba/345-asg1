@@ -9,7 +9,7 @@
 #include "WornItemsDecorator.h"
 using std::string;
 
-class Helmet: public Item, public WornItemsDecorator {
+class Helmet: public Item {
 public:
     /**
      * \brief safely instantiate a Helmet object if the provided enchantmentType is valid
@@ -23,11 +23,15 @@ public:
      * \param enchantmentType the valid enchantment type for the Helmet class
      * \param decoratedInstancePtr
      */
-    explicit Helmet(const string& enchantmentType, fighter * decoratedInstancePtr);
+    explicit Helmet(const string& enchantmentType);
 
     string getType() override;
 
     string getTypes() override;
+
+    void setCharacteristics(fighter *fighterPtr) override;
+
+    void removeAddedCharacteristics(fighter *fighterPtr) override;
 
 private:
     string itemType = "Helmet";

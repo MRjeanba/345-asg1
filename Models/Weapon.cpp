@@ -4,11 +4,13 @@
 
 #include "Weapon.h"
 #include <stdexcept>
+#include <iostream>
 #include <vector>
 #include <algorithm>
 using std::string;
 using std::vector;
 using std::invalid_argument;
+using std::cout;
 
 Weapon Weapon::createWeapon(const string &enchantmentType) {
     vector<string> validEnchantmentTypes = {"AttackBonus","DamageBonus"};
@@ -20,15 +22,37 @@ Weapon Weapon::createWeapon(const string &enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Weapon(enchantmentType, nullptr);
+        return Weapon(enchantmentType);
 
-    throw invalid_argument("Invalid enchantment type provided for the belt creation");
+    throw invalid_argument("Invalid enchantment type provided for the Weapon creation");
 }
 
-Weapon::Weapon(const string& enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType), WornItemsDecorator(decoratedInstancePtr) {}
+Weapon::Weapon(const string& enchantmentType): Item(enchantmentType) {}
 
 string Weapon::getType() { return "Weapon"; }
 
 string Weapon::getTypes() {
     return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}
+
+void Weapon::setCharacteristics(fighter *fighterPtr) {
+    if (this->enchantmentDetails.enchantmentType == "AttackBonus"){
+        fighterPtr->setAttackBonus(fighterPtr->getAttackBonus() + this->enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the fighter " <<enchantmentDetails.enchantmentType << " of" << this->enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    else {
+        fighterPtr->setDamageBonus(fighterPtr->getDamageBonus() + this->enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the fighter " <<enchantmentDetails.enchantmentType << " of" << this->enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+}
+
+void Weapon::removeAddedCharacteristics(fighter *fighterPtr) {
+    if (this->enchantmentDetails.enchantmentType == "AttackBonus"){
+        fighterPtr->setAttackBonus(fighterPtr->getAttackBonus() - this->enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the fighter " <<enchantmentDetails.enchantmentType << " of" << this->enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    else {
+        fighterPtr->setDamageBonus(fighterPtr->getDamageBonus() - this->enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the fighter " <<enchantmentDetails.enchantmentType << " of" << this->enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
 }
