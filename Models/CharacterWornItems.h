@@ -8,13 +8,42 @@
 
 #include <map>
 #include <string>
-#include "ItemContainer.h"
 #include "EnchantmentInfo.h"
+using std::map;
+using std::string;
+class WornItemsDecorator;
+class fighter;
 /**
- * To implement later in the project
+ * Container class, which holds the worn items of a character
  */
-class CharacterWornItems: ItemContainer {
+class CharacterWornItems {
+public:
+    CharacterWornItems();
+    explicit CharacterWornItems(fighter * fighterPtr);
 
+    void getWornItems();
+    friend class fighter;
+    void attachFighter(fighter * fighterPtr);
+    void removeFromWornItems();
+    void removeItem(const string& itemTypeToRemove);
+
+    void wearItem(WornItemsDecorator * itemToWear);
+
+    inline static map<string,bool> isItemTypeWorn = {
+            {"Armor", false},
+            {"Belt", false},
+            {"Boots", false},
+            {"Helmet", false},
+            {"Ring", false},
+            {"Shield", false},
+            {"Weapon", false},
+            {"character", false},
+    };
+
+private:
+    WornItemsDecorator * wornItems;
+    fighter * fighterWearingItems;
+    int numberOfWornItems;
 };
 
 #endif //INC_345_ASG1_CHARACTERWORNITEMS_H

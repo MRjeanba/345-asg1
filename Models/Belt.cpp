@@ -21,17 +21,36 @@ Belt Belt::createBelt(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Belt(enchantmentType, nullptr);
+        return Belt(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the belt creation");
 }
-Belt::Belt(const string& enchantmentType, fighter * decoratedInstancePtr): WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
+Belt::Belt(const string& enchantmentType):Item(enchantmentType) {
     if (!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     } else {
         cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
         throw std::runtime_error("Cannot wear another " + itemType + "!\nAborting...");
-        return;
+    }
+}
+
+void Belt::setCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "Constitution"){
+        fighterPtr->setConstitution(fighterPtr->getConstitution() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    } else {
+        fighterPtr->setStrength(fighterPtr->getStrength() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+}
+
+void Belt::removeAddedCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "Constitution"){
+        fighterPtr->setConstitution(fighterPtr->getConstitution() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    } else {
+        fighterPtr->setStrength(fighterPtr->getStrength() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
     }
 }
 

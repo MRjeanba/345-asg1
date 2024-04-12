@@ -28,7 +28,7 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType){
-        return Helmet(enchantmentType, nullptr);
+        return Helmet(enchantmentType);
     }
     throw invalid_argument("The enchantment type provided does not match with the accepted enchantment types");
 }
@@ -38,18 +38,41 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
  * \param enchantmentType At this stage, the enchantmentType is valid so we proceed to create the Item
  * \param decoratedInstancePtr
  */
-Helmet::Helmet(const string& enchantmentType, fighter * decoratedInstancePtr): WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
-    if (!isItemTypeWorn.at(itemType)) {
-        isItemTypeWorn.at(itemType) = true;
-    } else {
-        cout << "Cannot wear this item, you are already wearing a " + itemType + "!" << endl;
-        throw std::runtime_error("Cannot wear another " + itemType + "!\nAborting...");
-        return;
-    }
+Helmet::Helmet(const string& enchantmentType): Item(enchantmentType) {
 }
 
 string Helmet::getType() { return itemType; }
 
 string Helmet::getTypes() {
-    return getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+    return this->getFighterPtr()->getTypes() + "\n" + this->getType() + "\n";
+}
+
+void Helmet::setCharacteristics(fighter *fighterPtr) {
+    if (this->enchantmentDetails.enchantmentType == "Intelligence"){
+        fighterPtr->setIntelligence(fighterPtr->getIntelligence() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Wisdom"){
+        fighterPtr->setWisdom(fighterPtr->getWisdom() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    else {
+        fighterPtr->setArmorClass(fighterPtr->getArmorClass() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+}
+
+void Helmet::removeAddedCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "Intelligence"){
+        fighterPtr->setIntelligence(fighterPtr->getIntelligence() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Wisdom"){
+        fighterPtr->setWisdom(fighterPtr->getWisdom() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
+    else {
+        fighterPtr->setArmorClass(fighterPtr->getArmorClass() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
 }

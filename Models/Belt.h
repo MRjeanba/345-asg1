@@ -9,7 +9,7 @@
 #include "WornItemsDecorator.h"
 using std::string;
 
-class Belt: public Item, public WornItemsDecorator {
+class Belt: public Item {
 public:
 
     /**
@@ -24,11 +24,15 @@ public:
      * \param enchantmentType the valid enchantment type to forward.
      * \param decoratedInstancePtr
      */
-    explicit Belt(const string& enchantmentType, fighter * decoratedInstancePtr);
+    explicit Belt(const string& enchantmentType);
 
     string getType() override;
 
     string getTypes() override;
+
+    void setCharacteristics(fighter *fighterPtr) override;
+
+    void removeAddedCharacteristics(fighter *fighterPtr) override;
 
 private:
     string itemType = "Belt";

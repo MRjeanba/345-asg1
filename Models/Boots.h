@@ -9,7 +9,7 @@
 #include "WornItemsDecorator.h"
 using std::string;
 
-class Boots: public Item, WornItemsDecorator {
+class Boots: public Item {
 public:
     /**
      * \brief safely instantiate a Boots object if the provided enchantmentType is valid
@@ -28,6 +28,10 @@ public:
     string getType() override;
 
     string getTypes() override;
+
+    void setCharacteristics(fighter *fighterPtr) override;
+
+    void removeAddedCharacteristics(fighter *fighterPtr) override;
 
 private:
     string itemType = "Boots";

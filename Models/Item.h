@@ -5,11 +5,12 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include "EnchantmentInfo.h"
+#include "WornItemsDecorator.h"
 
 /**
  * \brief Base class for the different items in the game, items have an enchantment bonus and type
  */
-class Item
+class Item: public WornItemsDecorator
 {
 public:
  virtual ~Item() = default;
@@ -43,6 +44,14 @@ public:
   * \brief a structure holding the enchantment bonus and type in one place
   */
  EnchantmentInfo enchantmentDetails{};
+
+
+ virtual void removeAddedCharacteristics(fighter * fighterPtr) = 0;
+
+ string getItemName();
+
+private:
+    string itemName;
 };
 
 

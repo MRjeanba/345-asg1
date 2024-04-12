@@ -64,19 +64,7 @@ fighter::fighter(int level_)
  * Default constructor for fighter class
  */
 fighter::fighter(): level(0), strength(0), intelligence(0), wisdom(0), charisma(0), dexterity(0), constitution(0), hitpoints(0), armorClass(0), attackBonus(0),
-                    damageBonus(0), hp(0) {
-    this->enchantmentsDetails.enchantmentTypeToBonus = {
-            {"ArmorClass", 0},
-            {"Wisdom", 0},
-            {"Intelligence", 0},
-            {"Strength", 0},
-            {"Constitution", 0},
-            {"Charisma", 0},
-            {"Dexterity", 0},
-            {"AttackBonus", 0},
-            {"DamageBonus", 0},
-    };
-}
+                    damageBonus(0), hp(0) {}
 
 /**
  * Getter function for the level of the fighter
@@ -444,13 +432,6 @@ void fighter::attack(const std::string& result)
     notifyObservers("Attack attempted and its result: " + result);
 }
 
-/**
- * Get the enchantment characteristics of the fighter
- * @return map<string,int>
- */
-map<string,int> fighter::getEnchantmentsCharacteristics() {
-    return this->enchantmentsDetails.enchantmentTypeToBonus;
-}
 
 /**
  * Get the type of the fighter
@@ -461,11 +442,30 @@ string fighter::getType() {
 }
 
 /**
- * Get the types of the fighter
- * @return string
+ * Function used for the decorator pattern, used from Worn items and recurse up to the character
+ * Since the character is not an item we don't want to output it so we return an empty string
+ * @return string an empty string serving as a base case to stop the recursion
  */
 string fighter::getTypes() {
-    return "character";
+    return "";
+}
+
+void fighter::setWornItemsPtr(CharacterWornItems *wornItemsContainer) {
+    this->wornItemsPtr = wornItemsContainer;
+}
+
+CharacterWornItems * fighter::getWornItemsPtr() { return wornItemsPtr; }
+
+void fighter::removeItem() {
+    wornItemsPtr->removeFromWornItems();
+}
+
+void fighter::wearItem(WornItemsDecorator *itemToWear) {
+    wornItemsPtr->wearItem(itemToWear);
+}
+
+void fighter::getWornItems() {
+    wornItemsPtr->getWornItems();
 }
 
 /* Depending on the usage of the roll we choose a different type of dice
@@ -493,6 +493,3 @@ string fighter::getTypes() {
  * heavy -> high "protection points" -> can be damaged but will take a lot of hit points
  * Shield object -> its value could be the same for every character
  */
-
-
-

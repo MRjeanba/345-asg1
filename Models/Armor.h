@@ -8,7 +8,7 @@
 #include "Item.h"
 #include "WornItemsDecorator.h"
 
-class Armor: public Item, WornItemsDecorator {
+class Armor: public Item {
 public:
     /**
      * \brief safely create an Armor item if the given enchantment type is valid
@@ -27,6 +27,10 @@ public:
     string getType() override;
 
     string getTypes() override;
+
+    void setCharacteristics(fighter *fighterPtr) override;
+
+    void removeAddedCharacteristics(fighter *fighterPtr) override;
 
 private:
     string itemType = "Armor";

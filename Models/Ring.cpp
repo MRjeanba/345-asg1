@@ -2,7 +2,6 @@
 // Created by jeanb on 24/02/2024.
 //
 #include "Ring.h"
-#include <algorithm>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -19,12 +18,12 @@ Ring Ring::createRing(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Ring(enchantmentType, nullptr);
+        return Ring(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the creation of the Ring item");
 }
 
-Ring::Ring(const string &enchantmentType, fighter *decoratedInstancePtr):WornItemsDecorator(decoratedInstancePtr), Item(enchantmentType) {
+Ring::Ring(const string &enchantmentType): Item(enchantmentType) {
     if (!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     } else {
@@ -38,4 +37,50 @@ string Ring::getType() {return itemType;}
 
 string Ring::getTypes() {
     return this->getFighterPtr()->getTypes() + "\n" + getType() + "\n";
+}
+
+void Ring::setCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "ArmorClass"){
+        fighterPtr->setArmorClass(fighterPtr->getArmorClass() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Wisdom"){
+        fighterPtr->setWisdom(fighterPtr->getWisdom() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Strength"){
+        fighterPtr->setStrength(fighterPtr->getStrength() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Constitution"){
+        fighterPtr->setConstitution(fighterPtr->getConstitution() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+    else {
+        fighterPtr->setCharisma(fighterPtr->getCharisma() + enchantmentDetails.enchantmentBonus);
+        cout << "Increasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts with the " << this->getItemName() << endl;
+    }
+}
+
+void Ring::removeAddedCharacteristics(fighter *fighterPtr) {
+    if (enchantmentDetails.enchantmentType == "ArmorClass"){
+        fighterPtr->setArmorClass(fighterPtr->getArmorClass() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Wisdom"){
+        fighterPtr->setWisdom(fighterPtr->getWisdom() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Strength"){
+        fighterPtr->setStrength(fighterPtr->getStrength() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
+    if (enchantmentDetails.enchantmentType == "Constitution"){
+        fighterPtr->setConstitution(fighterPtr->getConstitution() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
+    else {
+        fighterPtr->setCharisma(fighterPtr->getCharisma() - enchantmentDetails.enchantmentBonus);
+        cout << "Decreasing the " << enchantmentDetails.enchantmentType << " of the character of "<< enchantmentDetails.enchantmentBonus << " pts by removing " << this->getItemName() << endl;
+    }
 }

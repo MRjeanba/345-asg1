@@ -9,7 +9,7 @@
 #include "WornItemsDecorator.h"
 using std::string;
 
-class Shield: public Item, WornItemsDecorator {
+class Shield: public Item {
 public:
     /**
      * \brief safely create a Shield item if the given enchantment type is valide
@@ -28,6 +28,10 @@ public:
     string getType() override;
 
     string getTypes() override;
+
+    void setCharacteristics(fighter *fighterPtr) override;
+
+    void removeAddedCharacteristics(fighter *fighterPtr) override;
 
 private:
     string itemType = "Shield";
