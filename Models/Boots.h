@@ -7,6 +7,7 @@
 #include <string>
 #include "Item.h"
 #include "WornItemsDecorator.h"
+#include "cereal/types/polymorphic.hpp"
 using std::string;
 
 class Boots: public Item {
@@ -16,15 +17,16 @@ public:
      * \param enchantmentType the provided enchantmentType that we want for the Boots.
      * \return an instance of Boots if the enchantment type is valid
      */
-    static Boots createBoots(const string& enchantmentType);
+    static Boots * createBoots(const string& enchantmentType);
 
     /**
      * \brief instantiate an Object of the Boots class
      * \param enchantmentType the valid enchantment type for the Boots class
      * \param decoratedInstancePtr
      */
-    explicit Boots(const string& enchantmentType, fighter * decoratedInstancePtr);
+    explicit Boots(const string& enchantmentType);
 
+    Boots() = default;
     string getType() override;
 
     string getTypes() override;
@@ -32,6 +34,16 @@ public:
     void setCharacteristics(fighter *fighterPtr) override;
 
     void removeAddedCharacteristics(fighter *fighterPtr) override;
+
+    /**
+     * \brief serialize the Boots object
+     * \tparam Archive the data type in which we want to store the data
+     * \param archive the actual archive used for serialization
+     */
+    template<class Archive>
+    void serialize(Archive &archive) {
+        archive(cereal::base_class<Item>(this), itemType);
+    }
 
 private:
     string itemType = "Boots";

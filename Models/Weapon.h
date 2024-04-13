@@ -7,6 +7,7 @@
 #include <string>
 #include "Item.h"
 #include "WornItemsDecorator.h"
+#include "cereal/types/polymorphic.hpp"
 using std::string;
 
 class Weapon: public Item {
@@ -16,7 +17,7 @@ public:
      * \param enchantmentType the provided enchantmentType that we want for the weapon.
      * \return an instance of the Weapon class if the enchantmentType was valid.
      */
-    static Weapon createWeapon(const string& enchantmentType);
+    static Weapon * createWeapon(const string& enchantmentType);
 
     /**
      * \brief Simply instantiate a Weapon with the valid enchantment type.
@@ -25,6 +26,7 @@ public:
      */
     explicit Weapon(const string& enchantmentType);
 
+    Weapon() = default;
     string getType() override;
 
     string getTypes() override;
@@ -32,6 +34,16 @@ public:
     void setCharacteristics(fighter *fighterPtr) override;
 
     void removeAddedCharacteristics(fighter *fighterPtr) override;
+
+    /**
+     * \brief serialize the Weapon object
+     * \tparam Archive the data type in which we want to store the data
+     * \param archive the actual archive used for serialization
+     */
+    template<class Archive>
+    void serialize(Archive &archive) {
+        archive(cereal::base_class<Item>(this), itemType);
+    }
 
 private:
     string itemType = "Weapon";

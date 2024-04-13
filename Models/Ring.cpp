@@ -8,8 +8,9 @@
 using std::vector;
 using std::string;
 using std::invalid_argument;
+CEREAL_REGISTER_TYPE(Ring)
 
-Ring Ring::createRing(const string& enchantmentType) {
+Ring * Ring::createRing(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"ArmorClass","Strength","Constitution","Wisdom","Charisma"};
 
     bool isValidEnchantmentType = (std::find(
@@ -18,7 +19,7 @@ Ring Ring::createRing(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Ring(enchantmentType);
+        return new Ring(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the creation of the Ring item");
 }

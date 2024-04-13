@@ -460,7 +460,7 @@ void fighter::removeItem() {
     wornItemsPtr->removeFromWornItems();
 }
 
-void fighter::wearItem(WornItemsDecorator *itemToWear) {
+void fighter::wearItem(WornItemsDecorator * itemToWear) {
     wornItemsPtr->wearItem(itemToWear);
 }
 

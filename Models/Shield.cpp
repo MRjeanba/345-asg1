@@ -11,18 +11,19 @@ using std::string;
 using std::vector;
 using std::invalid_argument;
 using std::cout;
+CEREAL_REGISTER_TYPE(Shield)
 
-Shield Shield::createShield(const string& enchantmentType) {
+Shield * Shield::createShield(const string& enchantmentType) {
 
     vector<string> validEnchantmentTypes = {"ArmorClass"};
 
     if (enchantmentType == validEnchantmentTypes[0])
-        return Shield(enchantmentType, nullptr);
+        return new Shield(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the Shield creation");
 }
 
-Shield::Shield(const string &enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType) {}
+Shield::Shield(const string &enchantmentType): Item(enchantmentType) {}
 
 string Shield::getType() { return "Shield"; }
 

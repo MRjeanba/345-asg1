@@ -62,6 +62,8 @@ add_executable(345_asg1 driver.cpp
         Models/WornItemsDecorator.cpp
         Models/WornItemsDecorator.h
         Models/MapBuilder.h
+        Controllers/ItemEditorController.cpp
+        Controllers/ItemEditorController.h
         #        Models/GameLog.cpp
 #        Models/GameLog.h
 #        Models/GameController.cpp

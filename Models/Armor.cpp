@@ -1,26 +1,28 @@
 //
 // Created by jeanb on 24/02/2024.
 //
-
 #include "Armor.h"
 #include <stdexcept>
 #include <vector>
 #include <iostream>
+#include <cereal/types/polymorphic.hpp>
 using std::string;
 using std::vector;
 using std::invalid_argument;
 using std::cout;
 
-Armor Armor::createArmor(const string& enchantmentType) {
-    vector<string> validEnchantmentTypes = {"ArmorClass"};
+CEREAL_REGISTER_TYPE(Armor)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Item, Armor)
 
+Armor* Armor::createArmor(const string& enchantmentType) {
+    vector<string> validEnchantmentTypes = {"ArmorClass"};
     if (enchantmentType == validEnchantmentTypes[0])
-        return Armor(enchantmentType, nullptr);
+        return new Armor(enchantmentType);
 
     throw invalid_argument("You provided a non valid enchantment type for the Armor Item");
 }
 
-Armor::Armor(const string& enchantmentType, fighter* decoratedInstancePtr): Item(enchantmentType) {
+Armor::Armor(const string& enchantmentType): Item(enchantmentType) {
     if(!isItemTypeWorn.at(itemType)) {
         isItemTypeWorn.at(itemType) = true;
     }
