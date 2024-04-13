@@ -12,7 +12,7 @@ using std::vector;
 using std::invalid_argument;
 using std::cout;
 
-Weapon Weapon::createWeapon(const string &enchantmentType) {
+Weapon * Weapon::createWeapon(const string &enchantmentType) {
     vector<string> validEnchantmentTypes = {"AttackBonus","DamageBonus"};
 
     // we search in the validEnchantmentTypes vector list to verify if enchantmentType is valid
@@ -22,7 +22,7 @@ Weapon Weapon::createWeapon(const string &enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Weapon(enchantmentType);
+        return new Weapon(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the Weapon creation");
 }

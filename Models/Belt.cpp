@@ -10,8 +10,9 @@
 using std::string;
 using std::vector;
 using std::invalid_argument;
+CEREAL_REGISTER_TYPE(Belt)
 
-Belt Belt::createBelt(const string& enchantmentType) {
+Belt * Belt::createBelt(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"Constitution","Strength"};
 
     // we search in the validEnchantmentTypes vector list to verify if enchantmentType is valid
@@ -21,7 +22,7 @@ Belt Belt::createBelt(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Belt(enchantmentType);
+        return new Belt(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the belt creation");
 }
