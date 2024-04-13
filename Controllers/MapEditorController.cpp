@@ -177,7 +177,7 @@ void MapEditorController::updateMap(Map &mapToUpdate, const string& mapName) {
             continue; // Skip the rest of the loop and start again
         }
 
-        std::cout << "Now, please choose a type for the given cell:\n0: Empty\n1: Wall" << std::endl;
+        std::cout << "Now, please choose a type for the given cell:\n0: Empty\n1: Wall \n2: HealerNPC \n3: FighterNPC \n4: WizardNPC \n5: GolemNPC \n6: KnightNPC" << std::endl;
         std::cin >> cellType;
 
         try {
@@ -188,6 +188,22 @@ void MapEditorController::updateMap(Map &mapToUpdate, const string& mapName) {
                 case 1:
                     mapToUpdate.setCellType(row, col, CellType::Wall);
                     break;
+                case 2:
+                    mapToUpdate.setCellType(row, col, CellType::HealerNPC);
+                    break;
+                case 3:
+                    mapToUpdate.setCellType(row, col, CellType::FighterNPC);
+                    break;
+                case 4:
+                    mapToUpdate.setCellType(row, col, CellType::WizardNPC);
+                    break;
+                case 5:
+                    mapToUpdate.setCellType(row, col, CellType::GolemNPC);
+                    break;
+                case 6:
+                    mapToUpdate.setCellType(row, col, CellType::KnightNPC);
+                    break;
+
                 default:
                     std::cout << "Please provide a valid type as mentioned above. The current choice has not been taken into account." << std::endl;
                     break;

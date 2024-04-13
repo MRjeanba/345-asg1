@@ -19,6 +19,8 @@ void gameController::startGame() {
     currMap.displayMap();
 
     std::cout << "\nLET'S BEGIN! Your character is represented by the @\nYour goal is to get to the X cell! " << std::endl;
+    std::cout << "The letters represent the enemies (H: Healer, F: fighter, W: wizard, G: golem and K: knight) " << std::endl;
+
     setMapToDefault();
 
     int characterRow = 0; // Initial character position row
@@ -56,6 +58,26 @@ void gameController::startGame() {
             for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
                 if (!(r == characterRow && c == characterCol)) { // Exclude the character cell itself
                     currMap.setCellType(r, c, CellType::Empty);
+                }
+                else if(currMap.getCellType(r, c) == CellType::ValidTargetHealerNPC || currMap.getCellType(r, c) == CellType::HealerNPC)
+                {
+                    currMap.setCellType(r, c, CellType::HealerNPC);
+                }
+                else if(currMap.getCellType(r, c) == CellType::ValidTargetKnightNPC || currMap.getCellType(r, c) == CellType::KnightNPC)
+                {
+                    currMap.setCellType(r, c, CellType::KnightNPC);
+                }
+                else if(currMap.getCellType(r, c) == CellType::ValidTargetWizardNPC || currMap.getCellType(r, c) == CellType::WizardNPC)
+                {
+                    currMap.setCellType(r, c, CellType::WizardNPC);
+                }
+                else if(currMap.getCellType(r, c) == CellType::ValidTargetGolemNPC || currMap.getCellType(r, c) == CellType::GolemNPC)
+                {
+                    currMap.setCellType(r, c, CellType::GolemNPC);
+                }
+                else if(currMap.getCellType(r, c) == CellType::ValidTargetFighterNPC || currMap.getCellType(r, c) == CellType::FighterNPC)
+                {
+                    currMap.setCellType(r, c, CellType::FighterNPC);
                 }
             }
         }
@@ -137,7 +159,34 @@ void gameController::startGame() {
             for (int c = std::max(0, characterCol - 1); c <= std::min(currMap.getWidth() - 1, characterCol + 1); ++c) {
                 if (r != characterRow || c != characterCol) {
                     if (currMap.getCellType(r, c) != CellType::Wall && currMap.getCellType(r, c) != CellType::End && currMap.getCellType(r, c) != CellType::Cursor) {
-                        currMap.setCellType(r, c, CellType::ValidTarget);
+                       if(currMap.getCellType(r, c) == CellType::HealerNPC || currMap.getCellType(r, c) == CellType::ValidTargetHealerNPC)
+                       {
+                           currMap.setCellType(r, c, CellType::ValidTargetHealerNPC);
+                            cout << endl << "You just killed a Healer Enemy" << endl;
+                       }
+                       else if(currMap.getCellType(r, c) == CellType::KnightNPC || currMap.getCellType(r, c) == CellType::ValidTargetKnightNPC)
+                       {
+                           currMap.setCellType(r, c, CellType::ValidTargetKnightNPC);
+                           cout << endl << "You just killed a Knight Enemy" << endl;
+                       }
+                       else if(currMap.getCellType(r, c) == CellType::WizardNPC || currMap.getCellType(r, c) == CellType::ValidTargetWizardNPC)
+                       {
+                           currMap.setCellType(r, c, CellType::ValidTargetWizardNPC );
+                           cout << endl << "You just killed a Wizard Enemy" << endl;
+                       }
+                       else if(currMap.getCellType(r, c) == CellType::GolemNPC || currMap.getCellType(r, c) == CellType::ValidTargetGolemNPC)
+                       {
+                           currMap.setCellType(r, c, CellType::ValidTargetGolemNPC );
+                           cout << endl << "You just killed a Golem Enemy" << endl;
+                       }
+                       else if(currMap.getCellType(r, c) == CellType::FighterNPC || currMap.getCellType(r, c) == CellType::ValidTargetFighterNPC)
+                       {
+                           currMap.setCellType(r, c, CellType::ValidTargetFighterNPC);
+                           cout << endl <<"You just killed a Fighter Enemy" << endl;
+                       }
+                       else {
+                           currMap.setCellType(r, c, CellType::ValidTarget);
+                       }
                     }
                 }
             }

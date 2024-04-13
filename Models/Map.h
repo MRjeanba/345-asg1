@@ -17,7 +17,17 @@ enum class CellType
     Wall,
     Character,
     ValidTarget,
+    ValidTargetHealerNPC,
+    ValidTargetFighterNPC,
+    ValidTargetWizardNPC,
+    ValidTargetGolemNPC,
+    ValidTargetKnightNPC,
     Occupied,
+    HealerNPC,
+    FighterNPC,
+    WizardNPC,
+    GolemNPC,
+    KnightNPC,
     Cursor,
     End
 };

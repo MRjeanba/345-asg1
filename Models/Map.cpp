@@ -142,13 +142,43 @@ void Map::displayMap() {
                     std::cout << "@";
                     break;
                 case CellType::ValidTarget: // Display green coloured cell for valid target area
-                    std::cout << "\033[1;31m■\033[0m";
+                    std::cout << "\033[1;32m■\033[0m";
                     break;
                 case CellType::Cursor: // Display arrow dot for cursor
                     std::cout << "△";
                     break;
                 case CellType::End: // Display "X" for end cell
                     std::cout << "X";
+                    break;
+                case CellType::HealerNPC: // Display "H" for Healer NPC cell
+                    std::cout << "H";
+                    break;
+                case CellType::FighterNPC: // Display "F" for Fighter NPC cell
+                    std::cout << "F";
+                    break;
+                case CellType::WizardNPC: // Display "W" for Wizard NPC cell
+                    std::cout << "W";
+                    break;
+                case CellType::GolemNPC: // Display "G" for Golem cell
+                    std::cout << "G";
+                    break;
+                case CellType::KnightNPC: // Display "K" for knight cell
+                    std::cout << "K";
+                    break;
+               case CellType::ValidTargetHealerNPC: // Display "H" for Valid Target Healer NPC cell
+                    std::cout << "\033[1;32mH\033[0m";
+                    break;
+               case CellType::ValidTargetFighterNPC: // Display "F" for Valid Target Fighter NPC cell
+                    std::cout << "\033[1;32mF\033[0m";
+                    break;
+               case CellType::ValidTargetWizardNPC: // Display "W" for Valid Target Wizard NPC cell
+                    std::cout << "\033[1;32mW\033[0m";
+                    break;
+               case CellType::ValidTargetGolemNPC: // Display "G" for Valid Target Golem cell
+                    std::cout << "\033[1;32mG\033[0m";
+                    break;
+               case CellType::ValidTargetKnightNPC: // Display "K" for Valid Target knight cell
+                    std::cout << "\033[1;32mK\033[0m";
                     break;
                 default:
                     std::cout << "?"; // Unknown cell type
