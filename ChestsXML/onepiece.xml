@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cereal>
+	<value0>
+		<itemsNames size="dynamic">
+			<value0>aa</value0>
+			<value1>belt</value1>
+		</itemsNames>
+		<chestName>onepiece</chestName>
+	</value0>
+</cereal>
+

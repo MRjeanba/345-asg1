@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cereal>
+	<itemType>Belt</itemType>
 	<value0>
 		<enchantmentDetails>
 			<value0>Strength</value0>
-			<value1>100</value1>
+			<value1>12</value1>
 		</enchantmentDetails>
 		<itemName>belt</itemName>
 		<itemType>Belt</itemType>

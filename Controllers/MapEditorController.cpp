@@ -12,6 +12,7 @@ void MapEditorController::loadMap(Map &mapToFill, const std::string &filename) {
     archive(mapToFill);
 }
 
+
 MapEditorController::MapEditorController() {
 
     //TODO: should also create a MabBuilder
@@ -57,6 +58,13 @@ void MapEditorController::notifyCampaignEditor(const string& newMapAdded) const 
 //     //TODO: TO IMPLEMENT
 //     return Map();
 // }
+
+void MapEditorController::loadChest(Chest &chestToFill, const std::string &filename) {
+    const std::string completeFileName = filename + ".xml";
+    std::ifstream is(std::filesystem::current_path() / "../ChestsXML/" / completeFileName);
+    cereal::XMLInputArchive archive(is);
+    archive(chestToFill);
+}
 
 void MapEditorController::saveMapToFile(Map &mapToSave, const std::string& fileName) {
     const std::string completeFileName = fileName + ".xml";
@@ -177,17 +185,28 @@ void MapEditorController::updateMap(Map &mapToUpdate, const string& mapName) {
             continue; // Skip the rest of the loop and start again
         }
 
-        std::cout << "Now, please choose a type for the given cell:\n0: Empty\n1: Wall" << std::endl;
+        std::cout << "Now, please choose a type for the given cell:\n0: Empty\n1: Wall\n2: Chest" << std::endl;
         std::cin >> cellType;
 
         try {
             switch (cellType) {
-                case 0:
+                case 0:{
                     mapToUpdate.setCellType(row, col, CellType::Empty);
                     break;
+                }
                 case 1:
                     mapToUpdate.setCellType(row, col, CellType::Wall);
                     break;
+                case 2:{
+                    string chestName;
+                    Chest ch = Chest();
+                    cout << "Please give the name of the chest that you want at this cell: " << endl;
+                    cin >> chestName;
+                    loadChest(ch, chestName);
+                    cout << "ChestName" << ch.chestName << endl;
+                    mapToUpdate.setCellType(row, col, CellType::Chest, ch);
+                    break;
+                }
                 default:
                     std::cout << "Please provide a valid type as mentioned above. The current choice has not been taken into account." << std::endl;
                     break;

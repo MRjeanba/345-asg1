@@ -2,9 +2,10 @@
 <cereal>
 	<value0>
 		<value0 size="dynamic">
-			<value0>small</value0>
+			<value0>map</value0>
+			<value1>map2</value1>
 		</value0>
-		<value1>b2</value1>
+		<value1>cp1</value1>
 	</value0>
 </cereal>
 

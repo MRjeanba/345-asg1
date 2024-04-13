@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cereal>
+	<itemType>Armor</itemType>
+	<value0>
+		<enchantmentDetails>
+			<value0>ArmorClass</value0>
+			<value1>1</value1>
+		</enchantmentDetails>
+		<itemName>aa</itemName>
+		<itemType>Armor</itemType>
+	</value0>
+</cereal>
+

@@ -8,6 +8,7 @@
 
 #include <string>
 #include "../Models/Item.h"
+#include "../Models/Chest.h"
 
 using std::vector;
 using std::string;
@@ -18,6 +19,11 @@ private:
     vector<string> storedItemNames;
 
 public:
+
+    void createChest();
+
+    void saveChestToFile(Chest &chestToSave, const string &fileName);
+
     /**
      * Basic constructor for the class, cannot instantiate more than one instance (Singleton). Also initialize storedItems by calling their respective init methods
      */
@@ -48,6 +54,8 @@ public:
      */
     void loadItem(Item& itemToFill, const string& itemName);
 
+    Item * createCorrectType(const string& itemName);
+
     Item * determineItemType();
 
     /**
@@ -67,6 +75,8 @@ public:
      * Initialize the storedItems vector by reading the item files names
      */
     void initializeStoredItems();
+
+    void saveItemType( Item& item, const string &itemName);
 
     /**
      * Display the stored items to the user

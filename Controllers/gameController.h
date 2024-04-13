@@ -10,12 +10,15 @@ private:
     std::vector<std::string> storedMaps;
     Campaign campaign;
     Map currMap;
+    fighter * player;
 
 public:
     /**
      * Default constructor, instantiate the gameController and the campaignEditor and mapEditor aswell
      */
     gameController();
+
+    void attachPlayer(fighter * pFighter);
 
     /**
      * Set the exit of the currMap on the center of the map, set the character location on the first cell aswell
@@ -43,6 +46,7 @@ public:
     // made public to access them in the driver.h file, but we may later move the driver.h logic within this class
     MapEditorController mapEditorController;
     CampaignEditorController campaignEditorController;
+    ItemEditorController itemEditorController;
 };
 
 #endif // GAMECONTROLLER_H

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cereal>
+	<value0>
+		<value0>4</value0>
+		<value1>4</value1>
+		<value2 size="dynamic">
+			<value0 size="dynamic">
+				<value0>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value0>
+				<value1>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value1>
+				<value2>
+					<value0>7</value0>
+					<value1>
+						<itemsNames size="dynamic">
+							<value0>aa</value0>
+							<value1>belt</value1>
+						</itemsNames>
+						<chestName>onepiece</chestName>
+					</value1>
+				</value2>
+				<value3>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value3>
+			</value0>
+			<value1 size="dynamic">
+				<value0>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value0>
+				<value1>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value1>
+				<value2>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value2>
+				<value3>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value3>
+			</value1>
+			<value2 size="dynamic">
+				<value0>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value0>
+				<value1>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value1>
+				<value2>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value2>
+				<value3>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value3>
+			</value2>
+			<value3 size="dynamic">
+				<value0>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value0>
+				<value1>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value1>
+				<value2>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value2>
+				<value3>
+					<value0>0</value0>
+					<value1>
+						<itemsNames size="dynamic"/>
+						<chestName></chestName>
+					</value1>
+				</value3>
+			</value3>
+		</value2>
+	</value0>
+</cereal>
+

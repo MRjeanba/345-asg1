@@ -8,8 +8,8 @@
 #include <vector>
 #include "CharacterWornItems.h"
 using namespace std;
-//class CharacterWornItems;   // Forward declaration
 class WornItemsDecorator;    // Forward declaration
+class Item;    // Forward declaration
 
 class fighter : public Observable {
 protected:
@@ -171,6 +171,10 @@ public:
     @return void
     */
     void setConstitution(int constitution_);
+
+    void addItemsToInventory(vector<string> items);
+
+    void displayInventory();
 
     /**
     This method is used to set a new value to variable "hitpoints" of fighter object

@@ -9,6 +9,7 @@
 #include <cereal/types/vector.hpp>
 #include "MapObserver.h"
 #include "Observable.h"
+#include "Chest.h"
 
 // Define Cell Types
 enum class CellType
@@ -20,6 +21,7 @@ enum class CellType
     Occupied,
     Cursor,
     End,
+    Chest,
 };
 
 // Define single cell
@@ -27,7 +29,7 @@ class SingleCell
 {
 private:
     CellType type; /**< Type of the cell. */
-    // chest of Item pointers??
+    Chest chest;
 public:
     /**
      * @brief Constructor for SingleCell class.
@@ -43,12 +45,16 @@ public:
      */
     void setType(CellType newType);
 
+    void setChest(Chest ch);
+
     /**
      * @brief Gets the type of the cell.
      *
      * @return The type of the cell.
      */
     CellType getType() const;
+
+    Chest getChest() const;
 
     /**
      *
@@ -58,7 +64,7 @@ public:
     template <class Archive>
     void serialize(Archive &archive)
     {
-        archive(type); // serialize type by passing it to the archive
+        archive(type, chest); // serialize type by passing it to the archive
     }
 };
 
@@ -95,6 +101,10 @@ public:
      */
     void setCellType(int i, int j, CellType type);
 
+
+    void setCellType(int i, int j, CellType type, Chest& chestName);
+
+
     /**
      * @brief Gets the type of the cell at the given coordinates.
      *
@@ -104,6 +114,9 @@ public:
      * @throw std::out_of_range If the coordinates are out of range.
      */
     CellType getCellType(int i, int j) const;
+
+
+    Chest getChest(int i, int j) const;
 
     /**
      * @brief Validates the map to ensure there is a clear path between the specified start and end cells.

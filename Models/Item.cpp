@@ -43,3 +43,7 @@ void Item::displayEnchantmentInfo() {
 void Item::setItemName(const string &name) {
     this->itemName = name;
 }
+
+void Item::setType(std::string type) {
+    itemType = type;
+}

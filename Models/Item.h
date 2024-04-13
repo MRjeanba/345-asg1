@@ -57,6 +57,8 @@ public:
      */
     EnchantmentInfo enchantmentDetails{};
 
+    void setType(string type);
+
 
     virtual void removeAddedCharacteristics(fighter *fighterPtr) = 0;
 

@@ -28,6 +28,14 @@ CellType SingleCell::getType() const
     return type;
 }
 
+void SingleCell::setChest(Chest ch) {
+    chest = ch;
+}
+
+Chest SingleCell::getChest() const {
+    return chest;
+}
+
 // Map constructor
 Map::Map(int w, int h) : width(w), height(h), grid(h, std::vector<SingleCell>(w)) {}
 
@@ -45,6 +53,14 @@ void Map::setCellType(int i, int j, CellType type)
     if (i >= 0 && i < width && j >= 0 && j < height)
     {
         grid[i][j].setType(type);
+    }
+}
+
+void Map::setCellType(int i, int j, CellType type, Chest &chest) {
+    if (i >= 0 && i < width && j >= 0 && j < height)
+    {
+        grid[i][j].setType(type);
+        grid[i][j].setChest(chest);
     }
 }
 
@@ -133,25 +149,28 @@ void Map::displayMap() {
         for (int i = 0; i < width; ++i) {
             switch (grid[j][i].getType()) {
                 case CellType::Empty:
-                    std::cout << "■";
+                    std::cout << "🔲" ;
                     break;
                 case CellType::Wall:
-                    std::cout << "#";
+                    std::cout << "𝌉";
                     break;
                 case CellType::Character: // Display "@" for character
-                    std::cout << "@";
+                    std::cout << "🥷";
                     break;
                 case CellType::ValidTarget: // Display green coloured cell for valid target area
-                    std::cout << "\033[1;31m■\033[0m";
+                    std::cout << "🟥";
                     break;
                 case CellType::Cursor: // Display arrow dot for cursor
-                    std::cout << "△";
+                    std::cout << "🔶";
                     break;
                 case CellType::End: // Display "X" for end cell
-                    std::cout << "X";
+                    std::cout << "🚪";
+                    break;
+                case CellType::Chest:
+                    std::cout << "🧳";
                     break;
                 default:
-                    std::cout << "?"; // Unknown cell type
+                    std::cout << "🌈";
                     break;
             }
             std::cout << " ";
@@ -180,6 +199,10 @@ void Map ::unregisterObserver(MapObserver *observer)
         }
     }
 };
+
+Chest Map::getChest(int i, int j) const {
+    return grid[i][j].getChest();
+}
 
 void Map ::notifyObservers()
 {

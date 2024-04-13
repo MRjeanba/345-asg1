@@ -291,21 +291,33 @@ string fighter::getItem()
     return item;
 }
 
+void fighter::addItemsToInventory(vector<std::string> items) {
+    inventory.insert(inventory.end(), items.begin(), items.end());
+}
+
+void fighter::displayInventory() {
+    cout << "Content of the inventory:" << endl;
+    for (const auto &item : inventory) {
+        cout << item << endl;
+    }
+}
+
 /**
  * Setter function for the item of the fighter
  */
 void fighter::setItem()
 {
-    string items[6] = {"armor", "shield", "weapon", "boots", "ring", "helmet"};
-    srand(static_cast<unsigned>(time(nullptr)));
-    int num = rand() % 6;
-    item = items[num];
-    inventory.push_back(item);
+//    string items[6] = {"armor", "shield", "weapon", "boots", "ring", "helmet"};
+//    srand(static_cast<unsigned>(time(nullptr)));
+//    int num = rand() % 6;
+//    item = items[num];
+//    inventory.push_back(item);
 }
 
 vector<string> fighter::getInventory()
 {
-    return inventory;
+    //return inventory;
+    return {};
 }
 
 /**

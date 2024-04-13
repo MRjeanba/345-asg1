@@ -64,6 +64,8 @@ add_executable(345_asg1 driver.cpp
         Models/MapBuilder.h
         Controllers/ItemEditorController.cpp
         Controllers/ItemEditorController.h
+        Models/Chest.cpp
+        Models/Chest.h
         #        Models/GameLog.cpp
 #        Models/GameLog.h
 #        Models/GameController.cpp

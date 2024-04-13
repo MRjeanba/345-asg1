@@ -28,7 +28,6 @@ using std::endl;
 inline void displayGameMenu() {
     CharacterEditorController characterEditorController = CharacterEditorController();
     gameController gameControllerHere = gameController();
-    ItemEditorController itemEditorController = ItemEditorController();
     int userChoice;
     cout << "Welcome to the JUICE Game!\n" << endl;
     cout << "Please select something:\n1: New game\n2: Resume [NOT IMPLEMENTED]\n3: Open map editor\n4: Open campaign editor\n5: Test the CharacterWornItems as Decorators\n6: Open the ItemEditorController \n7: Quit" << endl;
@@ -42,7 +41,12 @@ inline void displayGameMenu() {
                 string name;
                 cout << "Enter a name for your character: \n" << endl;
                 cin >> name;
+                // don't ask questions about this...
                 UserCharacter = characterEditorController.createCharacter(name);
+                CharacterWornItems * characWornItems = new CharacterWornItems();
+                characWornItems->attachFighter(UserCharacter);
+                UserCharacter->setWornItemsPtr(characWornItems);
+                gameControllerHere.attachPlayer(UserCharacter);
                 gameControllerHere.startGame();
                 break;
             }
@@ -93,7 +97,7 @@ inline void displayGameMenu() {
             }
             case 6: {
                 Clear();
-                itemEditorController.displayMenu();
+                gameControllerHere.itemEditorController.displayMenu();
                 break;
             }
             default: {

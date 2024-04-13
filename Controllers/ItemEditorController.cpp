@@ -15,6 +15,7 @@
 #include "../Models/Boots.h"
 #include "../Models/Ring.h"
 #include "../Models/Weapon.h"
+#include "../Models/Chest.h"
 
 using std::string;
 ItemEditorController::ItemEditorController() {
@@ -58,7 +59,9 @@ void ItemEditorController::saveItem(Item& itemToSave, const string &itemName) {
         std::filesystem::create_directory("../ItemsXML");
         std::ofstream os(std::filesystem::current_path() / "../ItemsXML/" / completeFileName);
         cereal::XMLOutputArchive archive(os);
-        archive(itemToSave);
+//        archive(itemToSave);
+        archive(cereal::make_nvp("itemType", itemToSave.getType()));
+        archive(cereal::make_nvp("value0", itemToSave));
     } catch (const std::filesystem::filesystem_error &e) {
         std::cerr << "File system error: " << e.what() << std::endl;
     }
@@ -292,13 +295,63 @@ void ItemEditorController::loadItem(Item& itemToFill, const string &itemName) {
         const std::string completeFileName = itemName + ".xml";
         std::ifstream is(std::filesystem::current_path() / "../ItemsXML/" / completeFileName);
         cereal::XMLInputArchive archive(is);
-        // Load the itemType from the XML file
-        archive(itemToFill);
+        std::string itemType;
+        archive(cereal::make_nvp("itemType", itemType));
+        if (itemType == "Belt"){
+            is.clear(); // Clear any flags
+            is.seekg(0, std::ios::beg);
+            itemToFill.setType(itemType);
+            archive(itemToFill);
+            itemToFill.setType(itemType);
+            cout << itemToFill.getType();
+        }
+//        is.clear(); // Clear any flags
+//        is.seekg(0, std::ios::beg);
+//        archive(itemToFill);
     } catch (const std::filesystem::filesystem_error &e) {
         std::cerr << "File system error: " << e.what() << std::endl;
     } catch (const std::runtime_error &e) {
         std::cerr << "Runtime error: " << e.what() << std::endl;
     }
+}
+
+Item *ItemEditorController::createCorrectType(const std::string &itemName) {
+    try {
+        if (!isValidItemName(itemName)) {
+            throw std::runtime_error("The provided item name does not exist.");
+        }
+        const std::string completeFileName = itemName + ".xml";
+        std::ifstream is(std::filesystem::current_path() / "../ItemsXML/" / completeFileName);
+        cereal::XMLInputArchive archive(is);
+        std::string itemType;
+        archive(cereal::make_nvp("itemType", itemType));
+        if (itemType == "Belt"){
+            return new Belt();
+        }
+        if (itemType == "Armor"){
+            return new Armor();
+        }
+        if (itemType == "Boots"){
+            return new Boots();
+        }
+        if (itemType == "Helmet"){
+            return new Helmet();
+        }
+        if (itemType == "Ring"){
+            return new Ring();
+        }
+        if (itemType == "Shield"){
+            return new Shield();
+        }
+        if (itemType == "Weapon"){
+            return new Weapon();
+        }
+    } catch (const std::filesystem::filesystem_error &e) {
+        std::cerr << "File system error: " << e.what() << std::endl;
+    } catch (const std::runtime_error &e) {
+        std::cerr << "Runtime error: " << e.what() << std::endl;
+    }
+    return nullptr;
 }
 
 void ItemEditorController::loadItemType(std::string &itemType, const std::string &itemName) {
@@ -317,8 +370,7 @@ void ItemEditorController::loadItemType(std::string &itemType, const std::string
 void ItemEditorController::updateItem() {
     string itemName;
     int updateChoice;
-    Item * itemToFill = nullptr;
-    itemToFill = new Armor();
+    Item * itemToFill;
 
     cout << "Here are all your stored items" << endl;
     displayStoredItems();
@@ -328,12 +380,12 @@ void ItemEditorController::updateItem() {
         std::cerr << "The item name you entered does not exist, please enter a valid one:" << std::endl;
         cin >> itemName;
     }
-    cout << "What was the type of the item? (Armor, Belt, Shield, Weapon, Ring, Boots, Helmet)" << endl;
-    itemToFill = determineItemType();
+
+    itemToFill = createCorrectType(itemName);
     loadItem(*itemToFill, itemName);
     cout << "Here are the characteristics for your item:" << endl;
     itemToFill->displayEnchantmentInfo();
-    cout << itemToFill->getType();
+    cout << "Type of item: " << itemToFill->getType() << endl;
     cout << "What do you want to update?" << endl;
     cout << "1. Enchantment bonus\n";
     cin >> updateChoice;
@@ -360,10 +412,10 @@ void ItemEditorController::displayStoredItems() {
 void ItemEditorController::displayMenu() {
     int userChoice;
     std::cout << "Welcome to the Item Editor Controller!\n" << std::endl;
-    std::cout << "Please select something:\n1: Create a new item\n2: Update an existing item\n3: Display all stored items\n4: Quit" << std::endl;
+    std::cout << "Please select something:\n1: Create a new item\n2: Update an existing item\n3: Display all stored items\n4: Create a chest\n5: Quit" << std::endl;
     std::cin >> userChoice;
 
-    while (userChoice != 4) {
+    while (userChoice != 5) {
         switch (userChoice) {
             case 1:
                 createItem();
@@ -374,11 +426,14 @@ void ItemEditorController::displayMenu() {
             case 3:
                 displayStoredItems();
                 break;
+            case 4:
+                createChest();
+                break;
             default:
                 std::cerr << "Invalid input, please enter a number between 1 and 4" << std::endl;
                 break;
         }
-        std::cout << "Please select something:\n1: Create a new item\n2: Update an existing item\n3: Display all stored items\n4: Quit" << std::endl;
+        std::cout << "Please select something:\n1: Create a new item\n2: Update an existing item\n3: Display all stored items\n4: Create a chest\n5: Quit" << std::endl;
         std::cin >> userChoice;
     }
     std::cout << "Exiting the Item Editor Controller..." << std::endl;
@@ -408,4 +463,34 @@ Item *ItemEditorController::determineItemType() {
         return new Helmet();
     }
     return nullptr;
+}
+
+void ItemEditorController::createChest() {
+    string chestName;
+    cout << "Select a name for your chest: " << endl;
+    cin >> chestName;
+    cout << "Which items do you want to put in the chest? press x when you want to stop inserting items" << endl;
+    displayStoredItems();
+    string itemName;
+    cin >> itemName;
+    Chest ch = Chest();
+    ch.chestName = chestName;
+    while (itemName != "x") {
+        while (!isValidItemName(itemName)) {
+            std::cerr << "The item name you entered does not exist, please enter a valid one:" << std::endl;
+            cin >> itemName;
+        }
+        ch.itemsNames.push_back(itemName);
+        cin >> itemName;
+    }
+    cout << "Saving the chest...";
+    saveChestToFile(ch, chestName);
+    cout << "Chest saved successfully!" << endl;
+}
+
+void ItemEditorController::saveChestToFile(Chest &chestToSave, const std::string &fileName) {
+    const std::string completeFileName = fileName + ".xml";
+    std::ofstream os(std::filesystem::current_path() / "../ChestsXML/" / completeFileName);
+    cereal::XMLOutputArchive archive(os);
+    archive(chestToSave);
 }
