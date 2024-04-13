@@ -12,13 +12,14 @@
 using std::string;
 using std::vector;
 using std::invalid_argument;
+CEREAL_REGISTER_TYPE(Helmet)
 
 /**
  * \brief This method is used instead of the constructor, it will ensure that the provided enchantment type is valid before calling the constructor
  * \param enchantmentType the enchantment provided for this helmet
  * \return a new instance of a helmet
  */
-Helmet Helmet::createHelmet(const string& enchantmentType) {
+Helmet * Helmet::createHelmet(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"Intelligence","Wisdom","ArmorClass"};
 
     // we search in the validEnchantmentTypes vector list if we have the value given as param (enchantmentType)
@@ -28,7 +29,7 @@ Helmet Helmet::createHelmet(const string& enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType){
-        return Helmet(enchantmentType);
+        return new Helmet(enchantmentType);
     }
     throw invalid_argument("The enchantment type provided does not match with the accepted enchantment types");
 }

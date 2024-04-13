@@ -29,7 +29,7 @@ enum class CellType
     GolemNPC,
     KnightNPC,
     Cursor,
-    End
+    End,
 };
 
 // Define single cell
@@ -37,7 +37,7 @@ class SingleCell
 {
 private:
     CellType type; /**< Type of the cell. */
-
+    // chest of Item pointers??
 public:
     /**
      * @brief Constructor for SingleCell class.

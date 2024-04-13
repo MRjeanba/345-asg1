@@ -16,13 +16,15 @@ void Item::outputInfos() {
 
 
 Item::Item(const string& enchantmentType):WornItemsDecorator() {
-    int randomEnchantBonus = rand() % 5 +1;
-    this->enchantmentDetails = {randomEnchantBonus, enchantmentType};
-    this->enchantmentDetails.enchantmentBonus = randomEnchantBonus;
+    int enchantBonus;
+    cout << "Enter the bonus to assign for this item: ";
+    cin >> enchantBonus;
+    cout << "Crafting the item...";
+    this->enchantmentDetails = {enchantBonus, enchantmentType};
+    this->enchantmentDetails.enchantmentBonus = enchantBonus;
     this->enchantmentDetails.enchantmentType = enchantmentType;
-    this->enchantmentDetails.enchantmentTypeToBonus.insert({enchantmentType,randomEnchantBonus});
-    //std::cout << "Item created, here are the details: ";
-    //this->outputInfos();
+    this->enchantmentDetails.enchantmentTypeToBonus.insert({enchantmentType,enchantBonus});
+    cout << "Item crafted successfully!" << endl;
 }
 
 EnchantmentInfo Item::getEnchantmentInfo() {
@@ -31,4 +33,13 @@ EnchantmentInfo Item::getEnchantmentInfo() {
 
 string Item::getItemName() {
     return this->itemName;
+}
+
+void Item::displayEnchantmentInfo() {
+    cout << "The enchantment type is: " << enchantmentDetails.enchantmentType << endl;
+    cout << "The enchantment bonus is: " << enchantmentDetails.enchantmentBonus << endl;
+}
+
+void Item::setItemName(const string &name) {
+    this->itemName = name;
 }

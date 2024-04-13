@@ -17,6 +17,17 @@ struct  EnchantmentInfo {
     int enchantmentBonus;
     string enchantmentType;
     std::map<string,int> enchantmentTypeToBonus = {};
+
+    /**
+     * \brief Serialize the EnchantmentInfo structure
+     * @tparam Archive
+     * @param archive
+     */
+    template<class Archive>
+    void serialize(Archive &archive)
+    {
+        archive(enchantmentType, enchantmentBonus);
+    }
 };
 
 

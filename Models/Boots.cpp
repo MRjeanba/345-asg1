@@ -11,8 +11,9 @@ using std::string;
 using std::vector;
 using std::invalid_argument;
 using std::cout;
+CEREAL_REGISTER_TYPE(Boots)
 
-Boots Boots::createBoots(const string &enchantmentType) {
+Boots * Boots::createBoots(const string &enchantmentType) {
     vector<string> validEnchantmentTypes = {"ArmorClass", "Dexterity"};
 
     // we search in the validEnchantmentTypes vector list to verify if enchantmentType is valid
@@ -22,11 +23,11 @@ Boots Boots::createBoots(const string &enchantmentType) {
         enchantmentType) != validEnchantmentTypes.end());
 
     if (isValidEnchantmentType)
-        return Boots(enchantmentType, nullptr);
+        return new Boots(enchantmentType);
 
     throw invalid_argument("Invalid enchantment type provided for the Boots creation");
 }
-Boots::Boots(const string &enchantmentType, fighter * decoratedInstancePtr): Item(enchantmentType) {}
+Boots::Boots(const string &enchantmentType): Item(enchantmentType) {}
 
 string Boots::getType() { return "Boots"; }
 

@@ -6,10 +6,10 @@
 
 
 **Team Members:**  
-Jean-Baptiste Garibo 40223491    
-Sarah Amaniss 40213883    
-Steven Lam 40226649    
-Marilyne Nguyen 40228396    
+Jean-Baptiste Garibo    
+Sarah Amaniss    
+Steven Lam    
+Marilyne Nguyen    
 
 ## project requirement
 - IDE preferred: CLion    
