@@ -29,6 +29,8 @@ public:
      */
     explicit Belt(const string &enchantmentType);
 
+    Belt() = default;
+
     string getType() override;
 
     string getTypes() override;

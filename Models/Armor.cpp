@@ -13,8 +13,6 @@ using std::cout;
 
 CEREAL_REGISTER_TYPE(Armor)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(Item, Armor)
-CEREAL_REGISTER_DYNAMIC_INIT(Armor)
-
 
 Armor* Armor::createArmor(const string& enchantmentType) {
     vector<string> validEnchantmentTypes = {"ArmorClass"};

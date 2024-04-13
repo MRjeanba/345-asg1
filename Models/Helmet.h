@@ -29,6 +29,8 @@ public:
      */
     explicit Helmet(const string &enchantmentType);
 
+    Helmet() = default;
+
     string getType() override;
 
     string getTypes() override;

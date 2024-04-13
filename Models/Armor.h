@@ -26,7 +26,7 @@ public:
      * \param decoratedInstancePtr
      */
     explicit Armor(const std::string &enchantmentType);
-
+    Armor() = default;
     string getType() override;
 
     string getTypes() override;

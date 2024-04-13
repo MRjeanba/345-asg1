@@ -48,6 +48,14 @@ public:
      */
     void loadItem(Item& itemToFill, const string& itemName);
 
+    Item * determineItemType();
+
+    /**
+     * Load the item type from the xml file
+     * @param itemType the string that will hold the item type
+     * @param itemName the name of the file in which we will find the item type
+     */
+    void loadItemType(string& itemType, const string& itemName);
     /**
      * Save the item given as parameter to a xml file with the same name as the item
      * @param itemToSave the instance of the item we want to save

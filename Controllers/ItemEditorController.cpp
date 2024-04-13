@@ -34,7 +34,7 @@ void ItemEditorController::initializeStoredItems() {
             string base_filename = path.substr(path.find_last_of("/\\") + 1);
             string::size_type const p(base_filename.find_last_of('.'));
             string file_without_extension = base_filename.substr(0, p);
-            if (file_without_extension.length() > 1) {
+            if (!file_without_extension.empty()) {
                 storedItemNames.push_back(file_without_extension);
             }
         }
@@ -89,7 +89,7 @@ void ItemEditorController::createItem() {
                 cin >> enchantType;
             }
             enchantmentType = "ArmorClass";
-            tempItem = Armor::createArmor(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Armor::createArmor(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -101,7 +101,6 @@ void ItemEditorController::createItem() {
             saveItem(*tempItem, itemName);
             storedItemNames.push_back(itemName);
             delete tempItem;
-            tempItem = nullptr;
             break;
         case 2:
             cout << "Select an enchantment type for the belt:" << endl;
@@ -116,7 +115,7 @@ void ItemEditorController::createItem() {
             } else {
                 enchantmentType = "Constitution";
             }
-            tempItem = Belt::createBelt(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Belt::createBelt(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -139,7 +138,7 @@ void ItemEditorController::createItem() {
                 cin >> enchantType;
             }
             enchantmentType = "ArmorClass";
-            tempItem = Shield::createShield(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Shield::createShield(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -166,7 +165,7 @@ void ItemEditorController::createItem() {
             } else {
                 enchantmentType = "AttackBonus";
             }
-            tempItem = Weapon::createWeapon(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Weapon::createWeapon(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -207,7 +206,7 @@ void ItemEditorController::createItem() {
                 default:
                     break;
             }
-            tempItem = Ring::createRing(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Ring::createRing(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -234,7 +233,7 @@ void ItemEditorController::createItem() {
             } else {
                 enchantmentType = "ArmorClass";
             }
-            tempItem = Boots::createBoots(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Boots::createBoots(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -264,7 +263,7 @@ void ItemEditorController::createItem() {
             } else {
                 enchantmentType = "Intelligence";
             }
-            tempItem = Helmet::createHelmet(enchantmentType); // TODO : delete the pointer once finished
+            tempItem = Helmet::createHelmet(enchantmentType);
             cout << "Enter the name for this new item: ";
             cin >> itemName;
             while (isValidItemName(itemName)) {
@@ -283,7 +282,6 @@ void ItemEditorController::createItem() {
             std::cerr << "Invalid input, please enter a number between 1 and 11" << std::endl;
             break;
     }
-
 }
 
 void ItemEditorController::loadItem(Item& itemToFill, const string &itemName) {
@@ -294,6 +292,7 @@ void ItemEditorController::loadItem(Item& itemToFill, const string &itemName) {
         const std::string completeFileName = itemName + ".xml";
         std::ifstream is(std::filesystem::current_path() / "../ItemsXML/" / completeFileName);
         cereal::XMLInputArchive archive(is);
+        // Load the itemType from the XML file
         archive(itemToFill);
     } catch (const std::filesystem::filesystem_error &e) {
         std::cerr << "File system error: " << e.what() << std::endl;
@@ -302,10 +301,25 @@ void ItemEditorController::loadItem(Item& itemToFill, const string &itemName) {
     }
 }
 
+void ItemEditorController::loadItemType(std::string &itemType, const std::string &itemName) {
+        try {
+        const std::string completeFileName = itemName + ".xml";
+        std::ifstream is(std::filesystem::current_path() / "../ItemsXML/" / completeFileName);
+        cereal::XMLInputArchive archive(is);
+        archive(cereal::make_nvp("itemType", itemType));
+    } catch (const std::filesystem::filesystem_error &e) {
+        std::cerr << "File system error: " << e.what() << std::endl;
+    } catch (const std::runtime_error &e) {
+        std::cerr << "Runtime error: " << e.what() << std::endl;
+    }
+}
+
 void ItemEditorController::updateItem() {
-    Item * itemToFill;
     string itemName;
     int updateChoice;
+    Item * itemToFill = nullptr;
+    itemToFill = new Armor();
+
     cout << "Here are all your stored items" << endl;
     displayStoredItems();
     cout << "Enter the name of the item you want to update: ";
@@ -314,9 +328,12 @@ void ItemEditorController::updateItem() {
         std::cerr << "The item name you entered does not exist, please enter a valid one:" << std::endl;
         cin >> itemName;
     }
-    loadItem(reinterpret_cast<Item &>(itemToFill), itemName);
+    cout << "What was the type of the item? (Armor, Belt, Shield, Weapon, Ring, Boots, Helmet)" << endl;
+    itemToFill = determineItemType();
+    loadItem(*itemToFill, itemName);
     cout << "Here are the characteristics for your item:" << endl;
     itemToFill->displayEnchantmentInfo();
+    cout << itemToFill->getType();
     cout << "What do you want to update?" << endl;
     cout << "1. Enchantment bonus\n";
     cin >> updateChoice;
@@ -331,7 +348,6 @@ void ItemEditorController::updateItem() {
     cout << "Updating the item...";
     saveItem(*itemToFill, itemName);
     delete itemToFill;
-    itemToFill = nullptr;
     cout << "Item updated successfully!" << endl;
 }
 
@@ -368,3 +384,28 @@ void ItemEditorController::displayMenu() {
     std::cout << "Exiting the Item Editor Controller..." << std::endl;
 }
 
+Item *ItemEditorController::determineItemType() {
+    string itemType;
+    cout << "Enter the type of the item you want to update: ";
+    cin >> itemType;
+    while (itemType != "Armor" && itemType != "Belt" && itemType != "Shield" && itemType != "Weapon" && itemType != "Ring" && itemType != "Boots" && itemType != "Helmet") {
+        std::cerr << "Invalid input, please enter a valid item type (Armor, Belt, Shield, Weapon, Ring, Boots, Helmet)" << std::endl;
+        cin >> itemType;
+    }
+    if (itemType == "Armor") {
+        return new Armor();
+    } else if (itemType == "Belt") {
+        return new Belt();
+    } else if (itemType == "Shield") {
+        return new Shield();
+    } else if (itemType == "Weapon") {
+        return new Weapon();
+    } else if (itemType == "Ring") {
+        return new Ring();
+    } else if (itemType == "Boots") {
+        return new Boots();
+    } else if (itemType == "Helmet") {
+        return new Helmet();
+    }
+    return nullptr;
+}

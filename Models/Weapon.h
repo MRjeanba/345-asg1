@@ -26,6 +26,7 @@ public:
      */
     explicit Weapon(const string& enchantmentType);
 
+    Weapon() = default;
     string getType() override;
 
     string getTypes() override;

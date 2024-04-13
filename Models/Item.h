@@ -7,12 +7,14 @@
 
 #include "EnchantmentInfo.h"
 #include "WornItemsDecorator.h"
-
+#include <string>
+#include <cereal/types/polymorphic.hpp>
 /**
  * \brief Base class for the different items in the game, items have an enchantment bonus and type
  */
 class Item : public WornItemsDecorator {
 public:
+    string itemType;
     vector<string> validEnchantmentTypes;
     virtual ~Item() = default;
 
@@ -21,6 +23,8 @@ public:
         * @param enchantType the enchantmentType provided by the user
         */
     explicit Item(const std::string &enchantType);
+
+    Item() = default;
 
 /**
  * Get the enchantmentDetails structure inside the item, holding the info about enchantmentBonus and type
@@ -61,8 +65,11 @@ public:
     void setItemName(const string& name);
 
     template<class Archive>
-    void serialize(Archive &archive) {
-        archive(enchantmentDetails, itemName); // serialize members of class by passing them to the archive
+     void serialize(Archive &archive) {
+        archive(cereal::make_nvp("enchantmentDetails", enchantmentDetails),
+                cereal::make_nvp("itemName", itemName),
+                cereal::make_nvp("itemType", this->getType())
+        );
     }
 
 private:

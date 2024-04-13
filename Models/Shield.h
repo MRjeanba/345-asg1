@@ -26,6 +26,7 @@ public:
      */
     explicit Shield(const string& enchantmentType);
 
+    Shield() = default;
     string getType() override;
 
     string getTypes() override;

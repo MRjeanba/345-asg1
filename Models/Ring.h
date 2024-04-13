@@ -27,6 +27,7 @@ public:
      */
     explicit Ring(const string& enchantmentType);
 
+    Ring() = default;
     string getType() override;
 
     string getTypes() override;

@@ -26,6 +26,7 @@ public:
      */
     explicit Boots(const string& enchantmentType);
 
+    Boots() = default;
     string getType() override;
 
     string getTypes() override;
