@@ -128,7 +128,6 @@ void gameController::startGame() {
                     Chest ch = currMap.getChest(characterRow, characterCol);
                     currMap.setCellType(characterRow, characterCol, CellType::Character);
                     player->addItemsToInventory(ch.itemsNames);
-                    cout << "here" << endl;
                     ch.itemsNames.clear();
                 }
                 if (currMap.getCellType(cursorRow, cursorCol) != CellType::Chest ||
